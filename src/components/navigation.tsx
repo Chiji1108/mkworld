@@ -34,11 +34,8 @@ export function Navigation() {
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <p className="h-6 w-6">🏁</p>
-            <span className="text-xl font-bold text-blue-600">
-              MKWorld Tools
-            </span>
+          <Link href="/" className="flex items-center">
+            <span className="text-xl font-bold">MKWorld Tools</span>
           </Link>
 
           <div className="flex items-center space-x-1">
@@ -53,7 +50,7 @@ export function Navigation() {
                   variant={isActive ? "default" : "ghost"}
                   size="sm"
                   className={cn(
-                    "flex items-center space-x-2",
+                    "flex items-center",
                     isActive && "bg-blue-600 text-white hover:bg-blue-700"
                   )}
                 >
