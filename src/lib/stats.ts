@@ -6,7 +6,7 @@ export type Stats = {
   handling: number;
 };
 
-export const CHARACTERS: Stats[] = [
+export const DRIVERS: Stats[] = [
   {
     name: "ベビィピーチ",
     speed: { smooth: 2, rough: 2, water: 2 },
@@ -359,7 +359,7 @@ export const CHARACTERS: Stats[] = [
   },
 ];
 
-export const VEHICLES: Stats[] = [
+export const MACHINES: Stats[] = [
   {
     name: "スタンダードバイク",
     speed: { smooth: 1, rough: 1, water: 1 },
