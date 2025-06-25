@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# マリオカートワールド カスタムビルダー
 
-## Getting Started
+マリオカートワールドのキャラクターとマシンの組み合わせを選択し、合計ステータスをグラフィカルに表示するWebアプリケーションです。
 
-First, run the development server:
+## 機能
+
+- 🏎️ **キャラクター選択**: 60種類のキャラクターから選択
+- 🚗 **マシン選択**: 52種類のマシン（カート・バイク）から選択
+- 📊 **ステータス表示**: 選択した組み合わせの合計値をグラフィカルに表示
+  - スピード（スムーズ路面）
+  - スピード（ラフ路面）
+  - スピード（水中）
+  - 加速
+  - 重さ
+  - ハンドリング
+- 🎨 **モダンUI**: shadcn/uiを使用した美しいインターフェース
+- 🌓 **ダークモード対応**: ライト/ダークテーマの切り替え
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 15.3.4 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS v4
+- **UIコンポーネント**: shadcn/ui
+- **グラフ**: Recharts
+- **フォーム**: React Hook Form + Zod
+
+## セットアップ
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 依存関係のインストール
+pnpm install
+
+# 開発サーバーの起動
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 でアプリケーションにアクセスできます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 開発
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 開発サーバー（Turbopack使用）
+pnpm dev
 
-## Learn More
+# ビルド
+pnpm build
 
-To learn more about Next.js, take a look at the following resources:
+# プロダクションサーバー
+pnpm start
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# リント
+pnpm lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## プロジェクト構造
 
-## Deploy on Vercel
+```
+src/
+├── app/                # Next.js App Router
+│   ├── layout.tsx     # ルートレイアウト
+│   └── page.tsx       # メインページ（ビルダー）
+├── components/        
+│   ├── ui/            # shadcn/ui コンポーネント
+│   ├── character-selector.tsx  # キャラクター選択
+│   ├── vehicle-selector.tsx    # マシン選択
+│   └── stats-display.tsx       # ステータス表示
+└── lib/
+    ├── stats.ts       # キャラクター・マシンのデータ
+    └── utils.ts       # ユーティリティ関数
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ライセンス
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
