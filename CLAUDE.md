@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-mkworld (マリオカートワールド カスタムビルダー) is a Next.js 15.3.4 application that allows users to build custom driver and machine combinations for Mario Kart World. Users can select from 50 drivers and 40 machines, with the combined stats displayed graphically using charts.
+MKWorld Tools is a Next.js 15.3.4 application that allows users to build custom driver and machine combinations for Mario Kart World. Users can select from 50 drivers and 40 machines, with the combined stats displayed graphically using charts.
 
 The application features three main pages:
 
@@ -61,7 +61,7 @@ pnpm lint
 
 3. **Path Imports**: Use `@/` alias for src directory imports (e.g., `import { Button } from "@/components/ui/button"`).
 
-4. **Data Structure**: Mario Kart stats are defined in `src/lib/stats.ts` with interfaces for drivers and machines, each containing speed attributes (smooth/rough/water), acceleration (かそく), weight (おもさ), and handling (まがり).
+4. **Data Structure**: Mario Kart stats are defined in `src/lib/stats.ts` with interfaces for drivers and machines, each containing speed attributes (smooth/rough/water), acceleration (かそく), weight (おもさ), and handling (まがりやすさ). Display names are: スピード（舗装路）/スピード（未舗装路）/スピード（水上）/かそく/おもさ/まがりやすさ.
 
 5. **Type Safety**: TypeScript strict mode is enabled. Always provide proper types for components and functions.
 
@@ -72,10 +72,10 @@ pnpm lint
 1. **Driver Selection**: Display all 50 drivers with their individual stats
 2. **Machine Selection**: Display all 40 machines (karts and bikes) with their stats
 3. **Stats Calculation**: Sum driver + machine stats for:
-   - Speed (smooth/rough/water surfaces)
+   - Speed (smooth/rough/water surfaces) - displayed as スピード（舗装路）/スピード（未舗装路）/スピード（水上）
    - Acceleration (かそく)
    - Weight (おもさ)
-   - Handling (まがり)
+   - Handling (まがりやすさ)
 4. **Visual Display**: Use Recharts for graphical representation of combined stats
 
 ### UI/UX Considerations
