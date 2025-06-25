@@ -4,9 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-mkworld (マリオカートワールド カスタムビルダー) is a Next.js 15.3.4 application that allows users to build custom driver and machine combinations for Mario Kart World. Users can select from 60 drivers and 52 machines, with the combined stats displayed graphically using charts.
+mkworld (マリオカートワールド カスタムビルダー) is a Next.js 15.3.4 application that allows users to build custom driver and machine combinations for Mario Kart World. Users can select from 50 drivers and 40 machines, with the combined stats displayed graphically using charts.
 
 The application features three main pages:
+
 1. **性能一覧** (Performance List) - Browse all drivers and machines with their stats
 2. **カスタムビルダー** (Custom Builder) - Build custom combinations and view combined stats
 3. **パレート最適** (Pareto Optimization) - Find optimal combinations based on specific criteria
@@ -48,7 +49,9 @@ pnpm lint
   - `machine-selector.tsx` - Machine selection interface
   - `stats-display.tsx` - Graphical stats visualization
 - `src/lib/stats.ts` - Mario Kart driver/machine data structures
-- `public/course/` - 30 course thumbnail images
+- `public/courses/` - 30 course thumbnail images
+- `public/drivers/` - 50 driver character images (PNG format)
+- `public/machines/` - 40 machine/vehicle images (PNG format)
 
 ### Key Development Patterns
 
@@ -66,8 +69,8 @@ pnpm lint
 
 ### Core Features
 
-1. **Driver Selection**: Display all 60 drivers with their individual stats
-2. **Machine Selection**: Display all 52 machines (karts and bikes) with their stats
+1. **Driver Selection**: Display all 50 drivers with their individual stats
+2. **Machine Selection**: Display all 40 machines (karts and bikes) with their stats
 3. **Stats Calculation**: Sum driver + machine stats for:
    - Speed (smooth/rough/water surfaces)
    - Acceleration (かそく)
@@ -78,7 +81,7 @@ pnpm lint
 ### UI/UX Considerations
 
 - Use Select or ComboBox components for driver/machine selection
-- Display driver/machine images if available
+- Display driver/machine images from `public/drivers/` and `public/machines/`
 - Show individual stats and combined totals
 - Use Card components for organized layout
 - Implement responsive design for mobile/tablet/desktop
