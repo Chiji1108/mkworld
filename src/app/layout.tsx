@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
@@ -30,7 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navigation />
-        <main className="min-h-screen bg-background px-4 sm:px-6 lg:px-8">{children}</main>
+        <main className="min-h-screen bg-background px-4 sm:px-6 lg:px-8">
+          {children}
+        </main>
         <footer className="border-t bg-background py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
           © 2025{" "}
           <Link
@@ -42,6 +45,7 @@ export default function RootLayout({
           </Link>
           . All rights reserved.
         </footer>
+        <Analytics />
       </body>
     </html>
   );
