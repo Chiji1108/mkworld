@@ -41,9 +41,9 @@ export default function BuilderPage() {
     if (!combinedStats) return [];
     
     return [
-      { name: "舗装路", value: combinedStats.speed.smooth, category: "スピード" },
-      { name: "未舗装路", value: combinedStats.speed.rough, category: "スピード" },
-      { name: "水上", value: combinedStats.speed.water, category: "スピード" },
+      { name: "滑", value: combinedStats.speed.smooth, category: "スピード" },
+      { name: "荒", value: combinedStats.speed.rough, category: "スピード" },
+      { name: "水", value: combinedStats.speed.water, category: "スピード" },
       { name: "かそく", value: combinedStats.acceleration, category: "その他" },
       { name: "おもさ", value: combinedStats.weight, category: "その他" },
       { name: "まがりやすさ", value: combinedStats.handling, category: "その他" },
@@ -54,9 +54,9 @@ export default function BuilderPage() {
     if (!combinedStats) return [];
     
     return [
-      { subject: "舗装路", value: combinedStats.speed.smooth, fullMark: 20 },
-      { subject: "未舗装路", value: combinedStats.speed.rough, fullMark: 20 },
-      { subject: "水上", value: combinedStats.speed.water, fullMark: 20 },
+      { subject: "滑", value: combinedStats.speed.smooth, fullMark: 20 },
+      { subject: "荒", value: combinedStats.speed.rough, fullMark: 20 },
+      { subject: "水", value: combinedStats.speed.water, fullMark: 20 },
       { subject: "かそく", value: combinedStats.acceleration, fullMark: 20 },
       { subject: "おもさ", value: combinedStats.weight, fullMark: 20 },
       { subject: "まがりやすさ", value: combinedStats.handling, fullMark: 20 },
@@ -113,9 +113,9 @@ export default function BuilderPage() {
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">スピード:</span>
-                    <Badge variant="outline">舗装路 {selectedDriver.speed.smooth}</Badge>
-                    <Badge variant="outline">未舗装路 {selectedDriver.speed.rough}</Badge>
-                    <Badge variant="outline">水上 {selectedDriver.speed.water}</Badge>
+                    <Badge variant="outline">滑 {selectedDriver.speed.smooth}</Badge>
+                    <Badge variant="outline">荒 {selectedDriver.speed.rough}</Badge>
+                    <Badge variant="outline">水 {selectedDriver.speed.water}</Badge>
                   </div>
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">その他:</span>
@@ -171,9 +171,9 @@ export default function BuilderPage() {
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">スピード:</span>
-                    <Badge variant="outline">舗装路 {selectedMachine.speed.smooth}</Badge>
-                    <Badge variant="outline">未舗装路 {selectedMachine.speed.rough}</Badge>
-                    <Badge variant="outline">水上 {selectedMachine.speed.water}</Badge>
+                    <Badge variant="outline">滑 {selectedMachine.speed.smooth}</Badge>
+                    <Badge variant="outline">荒 {selectedMachine.speed.rough}</Badge>
+                    <Badge variant="outline">水 {selectedMachine.speed.water}</Badge>
                   </div>
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">その他:</span>
@@ -200,9 +200,9 @@ export default function BuilderPage() {
               <div className="space-y-4">
                 <div className="flex gap-2">
                   <span className="text-lg font-medium">スピード:</span>
-                  <Badge variant="outline" className="text-lg">舗装路 {combinedStats.speed.smooth}</Badge>
-                  <Badge variant="outline" className="text-lg">未舗装路 {combinedStats.speed.rough}</Badge>
-                  <Badge variant="outline" className="text-lg">水上 {combinedStats.speed.water}</Badge>
+                  <Badge variant="outline" className="text-lg">滑 {combinedStats.speed.smooth}</Badge>
+                  <Badge variant="outline" className="text-lg">荒 {combinedStats.speed.rough}</Badge>
+                  <Badge variant="outline" className="text-lg">水 {combinedStats.speed.water}</Badge>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-lg font-medium">その他:</span>

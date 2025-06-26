@@ -741,3 +741,31 @@ export const MACHINES: Stats[] = [
     color: "#D0826F",
   },
 ];
+
+export type SpeedSpecialization = "smooth" | "rough" | "water" | "balance";
+
+export function analyzeSpeedSpecialization(stats: Stats): SpeedSpecialization {
+  const { smooth, rough, water } = stats.speed;
+
+  const maxSpeed = Math.max(smooth, rough, water);
+  const minSpeed = Math.min(smooth, rough, water);
+  const difference = maxSpeed - minSpeed;
+
+  if (difference <= 1) {
+    return "balance";
+  }
+
+  if (smooth === maxSpeed && smooth > rough && smooth > water) {
+    return "smooth";
+  }
+
+  if (rough === maxSpeed && rough > smooth && rough > water) {
+    return "rough";
+  }
+
+  if (water === maxSpeed && water > smooth && water > rough) {
+    return "water";
+  }
+
+  return "balance";
+}

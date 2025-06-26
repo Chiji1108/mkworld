@@ -34,9 +34,9 @@ export default function PerformancePage() {
           <TableRow>
             <TableHead>画像</TableHead>
             <TableHead>名前</TableHead>
-            <TableHead>スピード（舗装路）</TableHead>
-            <TableHead>スピード（未舗装路）</TableHead>
-            <TableHead>スピード（水上）</TableHead>
+            <TableHead>スピード（滑）</TableHead>
+            <TableHead>スピード（荒）</TableHead>
+            <TableHead>スピード（水）</TableHead>
             <TableHead>かそく</TableHead>
             <TableHead>おもさ</TableHead>
             <TableHead>まがりやすさ</TableHead>

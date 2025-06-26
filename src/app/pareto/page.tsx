@@ -118,7 +118,7 @@ export default function ParetoPage() {
                       onCheckedChange={(checked) => handleCriteriaChange("speedSmooth", !!checked)}
                     />
                     <label htmlFor="speedSmooth" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      舗装路
+                      滑
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -128,7 +128,7 @@ export default function ParetoPage() {
                       onCheckedChange={(checked) => handleCriteriaChange("speedRough", !!checked)}
                     />
                     <label htmlFor="speedRough" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      未舗装路
+                      荒
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -138,7 +138,7 @@ export default function ParetoPage() {
                       onCheckedChange={(checked) => handleCriteriaChange("speedWater", !!checked)}
                     />
                     <label htmlFor="speedWater" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      水上
+                      水
                     </label>
                   </div>
                 </div>
@@ -217,9 +217,9 @@ export default function ParetoPage() {
                     <TableHead>ドライバー</TableHead>
                     <TableHead>マシン</TableHead>
                     <TableHead>合計スコア</TableHead>
-                    <TableHead>スピード（舗装路）</TableHead>
-                    <TableHead>スピード（未舗装路）</TableHead>
-                    <TableHead>スピード（水上）</TableHead>
+                    <TableHead>スピード（滑）</TableHead>
+                    <TableHead>スピード（荒）</TableHead>
+                    <TableHead>スピード（水）</TableHead>
                     <TableHead>かそく</TableHead>
                     <TableHead>おもさ</TableHead>
                     <TableHead>まがりやすさ</TableHead>
