@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { GROUPED_DRIVERS, GROUPED_MACHINES, type GroupedStats } from "@/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -82,26 +81,50 @@ export default function BuilderPage() {
             )}
 
             {selectedDriver && (
-              <div className="mt-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  <Badge variant="outline">
-                    スピード（滑） {selectedDriver.speed.smooth}
-                  </Badge>
-                  <Badge variant="outline">
-                    スピード（荒） {selectedDriver.speed.rough}
-                  </Badge>
-                  <Badge variant="outline">
-                    スピード（水） {selectedDriver.speed.water}
-                  </Badge>
-                  <Badge variant="outline">
-                    かそく {selectedDriver.acceleration}
-                  </Badge>
-                  <Badge variant="outline">
-                    おもさ {selectedDriver.weight}
-                  </Badge>
-                  <Badge variant="outline">
-                    まがりやすさ {selectedDriver.handling}
-                  </Badge>
+              <div className="mt-4 space-y-4">
+                <div className="p-4 rounded-lg border" style={{ backgroundColor: selectedDriver.color }}>
+                  <h4 className="font-medium mb-3">選択中のドライバー</h4>
+                  <div className="space-y-3">
+                    {selectedDriver.names.map((name) => (
+                      <div key={name} className="flex items-center space-x-3">
+                        <div className="w-8 h-8 relative flex-shrink-0">
+                          <Image
+                            src={`/drivers/${name}.png`}
+                            alt={name}
+                            fill
+                            className="object-contain rounded"
+                          />
+                        </div>
+                        <span className="text-sm font-medium">{name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { name: "スピード（滑）", value: selectedDriver.speed.smooth },
+                    { name: "スピード（荒）", value: selectedDriver.speed.rough },
+                    { name: "スピード（水）", value: selectedDriver.speed.water },
+                    { name: "かそく", value: selectedDriver.acceleration },
+                    { name: "おもさ", value: selectedDriver.weight },
+                    { name: "まがりやすさ", value: selectedDriver.handling },
+                  ].map((stat) => {
+                    const percent = (stat.value / 10) * 100;
+                    return (
+                      <div key={stat.name} className="space-y-1">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm font-medium">{stat.name}</span>
+                          <span className="text-sm font-bold">{stat.value}</span>
+                        </div>
+                        <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div 
+                            className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-500 ease-out"
+                            style={{ width: `${Math.min(percent, 100)}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -121,26 +144,50 @@ export default function BuilderPage() {
             )}
 
             {selectedMachine && (
-              <div className="mt-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  <Badge variant="outline">
-                    スピード（滑） {selectedMachine.speed.smooth}
-                  </Badge>
-                  <Badge variant="outline">
-                    スピード（荒） {selectedMachine.speed.rough}
-                  </Badge>
-                  <Badge variant="outline">
-                    スピード（水） {selectedMachine.speed.water}
-                  </Badge>
-                  <Badge variant="outline">
-                    かそく {selectedMachine.acceleration}
-                  </Badge>
-                  <Badge variant="outline">
-                    おもさ {selectedMachine.weight}
-                  </Badge>
-                  <Badge variant="outline">
-                    まがりやすさ {selectedMachine.handling}
-                  </Badge>
+              <div className="mt-4 space-y-4">
+                <div className="p-4 rounded-lg border" style={{ backgroundColor: selectedMachine.color }}>
+                  <h4 className="font-medium mb-3">選択中のマシン</h4>
+                  <div className="space-y-3">
+                    {selectedMachine.names.map((name) => (
+                      <div key={name} className="flex items-center space-x-3">
+                        <div className="w-8 h-8 relative flex-shrink-0">
+                          <Image
+                            src={`/machines/${name}.png`}
+                            alt={name}
+                            fill
+                            className="object-contain rounded"
+                          />
+                        </div>
+                        <span className="text-sm font-medium">{name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { name: "スピード（滑）", value: selectedMachine.speed.smooth },
+                    { name: "スピード（荒）", value: selectedMachine.speed.rough },
+                    { name: "スピード（水）", value: selectedMachine.speed.water },
+                    { name: "かそく", value: selectedMachine.acceleration },
+                    { name: "おもさ", value: selectedMachine.weight },
+                    { name: "まがりやすさ", value: selectedMachine.handling },
+                  ].map((stat) => {
+                    const percent = (stat.value / 10) * 100;
+                    return (
+                      <div key={stat.name} className="space-y-1">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm font-medium">{stat.name}</span>
+                          <span className="text-sm font-bold">{stat.value}</span>
+                        </div>
+                        <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div 
+                            className="absolute left-0 top-0 h-full bg-green-500 transition-all duration-500 ease-out"
+                            style={{ width: `${Math.min(percent, 100)}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
