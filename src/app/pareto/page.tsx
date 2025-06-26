@@ -268,13 +268,24 @@ export default function ParetoPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {paretoOptimalCombinations.map((combo, index) => (
-                    <TableRow
-                      key={`${combo.driver.names.join(
-                        "-"
-                      )}-${combo.machine.names.join("-")}`}
-                    >
-                      <TableCell className="font-medium">{index + 1}</TableCell>
+                  {paretoOptimalCombinations.map((combo, index) => {
+                    // Calculate rank considering ties
+                    let rank = index + 1;
+                    for (let i = index - 1; i >= 0; i--) {
+                      if (paretoOptimalCombinations[i].totalScore === combo.totalScore) {
+                        rank = i + 1;
+                      } else {
+                        break;
+                      }
+                    }
+                    
+                    return (
+                      <TableRow
+                        key={`${combo.driver.names.join(
+                          "-"
+                        )}-${combo.machine.names.join("-")}`}
+                      >
+                        <TableCell className="font-medium">{rank}</TableCell>
                       <TableCell
                         style={{ backgroundColor: combo.driver.color }}
                       >
@@ -365,7 +376,8 @@ export default function ParetoPage() {
                         {combo.combined.handling}
                       </TableCell>
                     </TableRow>
-                  ))}
+                    );
+                  })}
                 </TableBody>
               </Table>
             </CardContent>
