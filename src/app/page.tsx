@@ -9,6 +9,21 @@ import {
 } from "@/components/ui/card";
 import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ホーム",
+  description: "MKWorld Tools - マリオカートワールドの50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。カスタムビルダー、性能一覧、パレート最適化機能をご利用ください。",
+  openGraph: {
+    title: "MKWorld Tools - マリオカートワールド カスタムビルダー",
+    description: "50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。カスタムビルダー、性能一覧、パレート最適化機能付き。",
+    url: "https://mkworld-tools.vercel.app",
+  },
+  twitter: {
+    title: "MKWorld Tools - マリオカートワールド カスタムビルダー",
+    description: "50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。",
+  },
+};
 
 export default function Home() {
   const features = [
