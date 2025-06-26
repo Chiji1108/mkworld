@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,45 +12,79 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { SpeedSpecialization } from "@/lib/stats";
 import {
   GROUPED_DRIVERS,
   GROUPED_MACHINES,
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function PerformancePage() {
   const [driverSearch, setDriverSearch] = useState("");
   const [machineSearch, setMachineSearch] = useState("");
+  const [driverSpecFilter, setDriverSpecFilter] = useState<
+    SpeedSpecialization | "all"
+  >("all");
+  const [machineSpecFilter, setMachineSpecFilter] = useState<
+    SpeedSpecialization | "all"
+  >("all");
 
-  const filteredDrivers = GROUPED_DRIVERS.filter((driver) =>
-    driver.names.some((name) =>
+  const filteredDrivers = GROUPED_DRIVERS.filter((driver) => {
+    const matchesSearch = driver.names.some((name) =>
       name.toLowerCase().includes(driverSearch.toLowerCase())
-    )
-  );
+    );
+    const matchesSpec =
+      driverSpecFilter === "all" ||
+      analyzeSpeedSpecialization(driver) === driverSpecFilter;
+    return matchesSearch && matchesSpec;
+  });
 
-  const filteredMachines = GROUPED_MACHINES.filter((machine) =>
-    machine.names.some((name) =>
+  const filteredMachines = GROUPED_MACHINES.filter((machine) => {
+    const matchesSearch = machine.names.some((name) =>
       name.toLowerCase().includes(machineSearch.toLowerCase())
-    )
-  );
+    );
+    const matchesSpec =
+      machineSpecFilter === "all" ||
+      analyzeSpeedSpecialization(machine) === machineSpecFilter;
+    return matchesSearch && matchesSpec;
+  });
 
   const renderStatsTable = (
     items: GroupedStats[],
     searchValue: string,
     onSearchChange: (value: string) => void,
-    type: "driver" | "machine"
+    type: "driver" | "machine",
+    specFilter: SpeedSpecialization | "all",
+    onSpecFilterChange: (value: SpeedSpecialization | "all") => void
   ) => (
     <div className="space-y-4">
-      <Input
-        placeholder={`${type === "driver" ? "ドライバー" : "マシン"}を検索...`}
-        value={searchValue}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="max-w-sm"
-      />
+      <div className="flex gap-4 items-center">
+        <Input
+          placeholder={`${
+            type === "driver" ? "ドライバー" : "マシン"
+          }を検索...`}
+          value={searchValue}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="max-w-sm"
+        />
+        <Tabs
+          value={specFilter}
+          onValueChange={(value) =>
+            onSpecFilterChange(value as SpeedSpecialization | "all")
+          }
+        >
+          <TabsList>
+            <TabsTrigger value="all">全て</TabsTrigger>
+            <TabsTrigger value="smooth">スピード（滑）</TabsTrigger>
+            <TabsTrigger value="rough">スピード（荒）</TabsTrigger>
+            <TabsTrigger value="water">スピード（水）</TabsTrigger>
+            <TabsTrigger value="balance">バランス</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -109,7 +144,9 @@ export default function PerformancePage() {
                     item.speed.water
                   )}
                 </TableCell>
-                <TableCell className="text-center">{item.acceleration}</TableCell>
+                <TableCell className="text-center">
+                  {item.acceleration}
+                </TableCell>
                 <TableCell className="text-center">{item.weight}</TableCell>
                 <TableCell className="text-center">{item.handling}</TableCell>
               </TableRow>
@@ -149,7 +186,9 @@ export default function PerformancePage() {
                 filteredDrivers,
                 driverSearch,
                 setDriverSearch,
-                "driver"
+                "driver",
+                driverSpecFilter,
+                setDriverSpecFilter
               )}
             </CardContent>
           </Card>
@@ -165,7 +204,9 @@ export default function PerformancePage() {
                 filteredMachines,
                 machineSearch,
                 setMachineSearch,
-                "machine"
+                "machine",
+                machineSpecFilter,
+                setMachineSpecFilter
               )}
             </CardContent>
           </Card>

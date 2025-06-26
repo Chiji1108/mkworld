@@ -1,7 +1,6 @@
 "use client";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -260,13 +259,13 @@ export default function ParetoPage() {
                     <TableHead>順位</TableHead>
                     <TableHead>ドライバー</TableHead>
                     <TableHead>マシン</TableHead>
-                    <TableHead>合計スコア</TableHead>
-                    <TableHead>スピード（滑）</TableHead>
-                    <TableHead>スピード（荒）</TableHead>
-                    <TableHead>スピード（水）</TableHead>
-                    <TableHead>かそく</TableHead>
-                    <TableHead>おもさ</TableHead>
-                    <TableHead>まがりやすさ</TableHead>
+                    <TableHead className="bg-primary/10">合計スコア</TableHead>
+                    <TableHead className={criteria.speedSmooth ? "bg-primary/10" : ""}>スピード（滑）</TableHead>
+                    <TableHead className={criteria.speedRough ? "bg-primary/10" : ""}>スピード（荒）</TableHead>
+                    <TableHead className={criteria.speedWater ? "bg-primary/10" : ""}>スピード（水）</TableHead>
+                    <TableHead className={criteria.acceleration ? "bg-primary/10" : ""}>かそく</TableHead>
+                    <TableHead className={criteria.weight ? "bg-primary/10" : ""}>おもさ</TableHead>
+                    <TableHead className={criteria.handling ? "bg-primary/10" : ""}>まがりやすさ</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -301,54 +300,26 @@ export default function ParetoPage() {
                           <span className="text-sm">{combo.machine.name}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <Badge variant="default" className="text-lg">
-                          {combo.totalScore}
-                        </Badge>
+                      <TableCell className="bg-primary/10 text-center font-bold">
+                        {combo.totalScore}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={criteria.speedSmooth ? "default" : "outline"}
-                        >
-                          {combo.combined.speed.smooth}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.speedSmooth ? "bg-primary/10" : ""}`}>
+                        {combo.combined.speed.smooth}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={criteria.speedRough ? "default" : "outline"}
-                        >
-                          {combo.combined.speed.rough}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.speedRough ? "bg-primary/10" : ""}`}>
+                        {combo.combined.speed.rough}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={criteria.speedWater ? "default" : "outline"}
-                        >
-                          {combo.combined.speed.water}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.speedWater ? "bg-primary/10" : ""}`}>
+                        {combo.combined.speed.water}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={
-                            criteria.acceleration ? "default" : "outline"
-                          }
-                        >
-                          {combo.combined.acceleration}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.acceleration ? "bg-primary/10" : ""}`}>
+                        {combo.combined.acceleration}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={criteria.weight ? "default" : "outline"}
-                        >
-                          {combo.combined.weight}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.weight ? "bg-primary/10" : ""}`}>
+                        {combo.combined.weight}
                       </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={criteria.handling ? "default" : "outline"}
-                        >
-                          {combo.combined.handling}
-                        </Badge>
+                      <TableCell className={`text-center ${criteria.handling ? "bg-primary/10" : ""}`}>
+                        {combo.combined.handling}
                       </TableCell>
                     </TableRow>
                   ))}
