@@ -100,7 +100,7 @@ export default function Home() {
       <div className="mb-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">
-            開発の参考になったツイート
+            {t('home.tweets.title')}
           </h2>
         </div>
 
@@ -127,7 +127,7 @@ export default function Home() {
 
         <div className="text-center mt-8">
           <p className="text-sm text-muted-foreground">
-            ツイートを投稿してくださった皆様に感謝いたします 🙏
+            {t('home.tweets.thanks')}
           </p>
         </div>
       </div>

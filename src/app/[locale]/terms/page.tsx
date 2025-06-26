@@ -1,9 +1,12 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 export default function TermsPage() {
   const t = useTranslations();
+  
   return (
     <div className="container mx-auto py-8 max-w-4xl">
       <div className="mb-8">
@@ -12,142 +15,139 @@ export default function TermsPage() {
       </div>
 
       <div className="space-y-6">
+        {/* Article 1: Permitted Use */}
         <Card>
           <CardHeader>
-            <CardTitle>第1条　許可される利用</CardTitle>
+            <CardTitle>{t('terms.sections.permitted.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">
-                ✅ 以下の利用は許可されています
+                {t('terms.sections.permitted.subtitle')}
               </h4>
               <ul className="list-disc ml-6 space-y-2">
                 <li>
-                  <strong>商用利用（動画収益化など）</strong>:
-                  YouTube、Twitch等での収益化配信での利用可能
+                  <strong>{t('terms.sections.permitted.commercial')}</strong>:
+                  {' '}{t('terms.sections.permitted.commercialDesc')}
                 </li>
                 <li>
-                  <strong>SNS・動画配信・ブログでの公開</strong>:
-                  Twitter、Instagram、TikTok、ブログ記事等での利用可能
+                  <strong>{t('terms.sections.permitted.social')}</strong>:
+                  {' '}{t('terms.sections.permitted.socialDesc')}
                 </li>
                 <li>
-                  <strong>スクリーンショット・画面録画</strong>:
-                  本ツールの画面を撮影・録画しての共有可能
+                  <strong>{t('terms.sections.permitted.screenshot')}</strong>:
+                  {' '}{t('terms.sections.permitted.screenshotDesc')}
                 </li>
                 <li>
-                  <strong>教育・解説目的での利用</strong>:
-                  攻略記事や解説動画での利用可能
+                  <strong>{t('terms.sections.permitted.education')}</strong>:
+                  {' '}{t('terms.sections.permitted.educationDesc')}
                 </li>
                 <li>
-                  <strong>個人・法人問わず利用可能</strong>:
-                  営利・非営利問わず自由に利用可能
+                  <strong>{t('terms.sections.permitted.anyUser')}</strong>:
+                  {' '}{t('terms.sections.permitted.anyUserDesc')}
                 </li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 2: Prohibited Activities */}
         <Card>
           <CardHeader>
-            <CardTitle>第2条　禁止事項</CardTitle>
+            <CardTitle>{t('terms.sections.prohibited.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div>
               <h4 className="font-semibold mb-2">
-                ❌ 以下の行為は禁止されています
+                {t('terms.sections.prohibited.subtitle')}
               </h4>
               <ul className="list-disc ml-6 space-y-2">
-                <li>本ツールを複製・再配布・販売すること</li>
-                <li>本ツールのソースコードを無断で利用すること</li>
-                <li>本ツールに過度な負荷をかける行為</li>
-                <li>他者に迷惑をかける目的での利用</li>
-                <li>法令に違反する目的での利用</li>
+                <li>{t('terms.sections.prohibited.redistribute')}</li>
+                <li>{t('terms.sections.prohibited.sourceCode')}</li>
+                <li>{t('terms.sections.prohibited.overload')}</li>
+                <li>{t('terms.sections.prohibited.harassment')}</li>
+                <li>{t('terms.sections.prohibited.illegal')}</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 3: Copyright */}
         <Card>
           <CardHeader>
-            <CardTitle>第3条　著作権について</CardTitle>
+            <CardTitle>{t('terms.sections.copyright.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <p className="mb-4">
-                本ツールで使用されているゲーム関連の画像、データ、名称等は、
-                すべて任天堂株式会社の著作物です。
+                {t('terms.sections.copyright.description')}
               </p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>本ツールは非公式のファンツールです</li>
-                <li>任天堂株式会社とは一切関係ありません</li>
+                <li>{t('terms.sections.copyright.unofficial')}</li>
+                <li>{t('terms.sections.copyright.noAffiliation')}</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 4: Disclaimer */}
         <Card>
           <CardHeader>
-            <CardTitle>第4条　免責事項</CardTitle>
+            <CardTitle>{t('terms.sections.disclaimer.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <ul className="list-disc ml-6 space-y-2">
-                <li>
-                  本ツールの利用により生じたいかなる損害についても、
-                  開発者は一切の責任を負いません
-                </li>
-                <li>
-                  表示されるデータの正確性について保証するものではありません
-                </li>
-                <li>サービスの継続性について保証するものではありません</li>
-                <li>予告なくサービスを停止・変更する場合があります</li>
-                <li>他のWebサイトへのリンクについて責任を負いません</li>
+                <li>{t('terms.sections.disclaimer.noDamageResponsibility')}</li>
+                <li>{t('terms.sections.disclaimer.noAccuracyGuarantee')}</li>
+                <li>{t('terms.sections.disclaimer.noContinuityGuarantee')}</li>
+                <li>{t('terms.sections.disclaimer.mayChangeService')}</li>
+                <li>{t('terms.sections.disclaimer.noExternalLinkResponsibility')}</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 5: Privacy */}
         <Card>
           <CardHeader>
-            <CardTitle>第5条　プライバシー・データの取り扱い</CardTitle>
+            <CardTitle>{t('terms.sections.privacy.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <ul className="list-disc ml-6 space-y-2">
-                <li>本ツールは個人情報を収集しません</li>
+                <li>{t('terms.sections.privacy.noPersonalData')}</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 6: Changes to Terms */}
         <Card>
           <CardHeader>
-            <CardTitle>第6条　規約の変更</CardTitle>
+            <CardTitle>{t('terms.sections.changes.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <p className="mb-4">
-                本利用規約は予告なく変更される場合があります。
-                変更後の規約は本ページに掲載された時点で効力を生じます。
+                {t('terms.sections.changes.description')}
               </p>
               <p>
-                継続してサービスを利用された場合、
-                変更後の利用規約に同意されたものとみなします。
+                {t('terms.sections.changes.agreement')}
               </p>
             </div>
           </CardContent>
         </Card>
 
+        {/* Article 7: Contact */}
         <Card>
           <CardHeader>
-            <CardTitle>第7条　お問い合わせ</CardTitle>
+            <CardTitle>{t('terms.sections.contact.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <p className="mb-4">
-                本利用規約に関するお問い合わせや、
-                ツールの利用に関するご質問については、
-                以下の方法でお気軽にお問い合わせください。
+                {t('terms.sections.contact.description')}
               </p>
               <ul className="list-disc ml-6 space-y-2">
                 <li>
@@ -156,7 +156,7 @@ export default function TermsPage() {
                     target="_blank"
                     className="text-primary hover:underline"
                   >
-                    X（@chiji1108）
+                    {t('terms.sections.contact.xMain')}
                   </Link>
                 </li>
                 <li>
@@ -165,7 +165,7 @@ export default function TermsPage() {
                     target="_blank"
                     className="text-primary hover:underline"
                   >
-                    技術的な質問: X（@ChijiiwaShingo）
+                    {t('terms.sections.contact.xTech')}
                   </Link>
                 </li>
                 <li>
@@ -174,7 +174,7 @@ export default function TermsPage() {
                     target="_blank"
                     className="text-primary hover:underline line-through"
                   >
-                    大学の質問: X（@Chijidosu）
+                    {t('terms.sections.contact.xUniv')}
                   </Link>
                 </li>
                 <li>
@@ -183,7 +183,7 @@ export default function TermsPage() {
                     target="_blank"
                     className="text-primary hover:underline line-through"
                   >
-                    ブロスタの質問: X（@miririmon）
+                    {t('terms.sections.contact.xBrawl')}
                   </Link>
                 </li>
                 <li>
@@ -192,7 +192,7 @@ export default function TermsPage() {
                     target="_blank"
                     className="text-primary hover:underline line-through"
                   >
-                    整形の質問: X（@shingo_seikei）
+                    {t('terms.sections.contact.xPlastic')}
                   </Link>
                 </li>
               </ul>
@@ -201,8 +201,8 @@ export default function TermsPage() {
         </Card>
 
         <div className="text-center pt-8 text-sm text-muted-foreground">
-          <p>制定日: 2025年6月26日</p>
-          <p>最終更新: 2025年6月26日</p>
+          <p>{t('terms.dates.established')}</p>
+          <p>{t('terms.dates.lastUpdated')}</p>
         </div>
       </div>
     </div>

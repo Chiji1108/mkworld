@@ -1,7 +1,8 @@
 {
   "common": {
     "appName": "MKWorld Tools",
-    "select": "選択"
+    "select": "選択",
+    "language": "言語"
   },
   "navigation": {
     "performance": "性能一覧",
@@ -27,6 +28,10 @@
         "title": "パレート最適",
         "description": "特定の条件で最適な組み合わせを自動で検索"
       }
+    },
+    "tweets": {
+      "title": "開発の参考になったツイート",
+      "thanks": "ツイートを投稿してくださった皆様に感謝いたします 🙏"
     }
   },
   "stats": {
@@ -83,6 +88,67 @@
   "terms": {
     "title": "利用規約 - MKWorld Tools",
     "description": "MKWorld Toolsの利用規約",
-    "pageTitle": "利用規約"
+    "pageTitle": "利用規約",
+    "sections": {
+      "permitted": {
+        "title": "第1条　許可される利用",
+        "subtitle": "✅ 以下の利用は許可されています",
+        "commercial": "商用利用（動画収益化など）",
+        "commercialDesc": "YouTube、Twitch等での収益化配信での利用可能",
+        "social": "SNS・動画配信・ブログでの公開",
+        "socialDesc": "Twitter、Instagram、TikTok、ブログ記事等での利用可能",
+        "screenshot": "スクリーンショット・画面録画",
+        "screenshotDesc": "本ツールの画面を撮影・録画しての共有可能",
+        "education": "教育・解説目的での利用",
+        "educationDesc": "攻略記事や解説動画での利用可能",
+        "anyUser": "個人・法人問わず利用可能",
+        "anyUserDesc": "営利・非営利問わず自由に利用可能"
+      },
+      "prohibited": {
+        "title": "第2条　禁止事項",
+        "subtitle": "❌ 以下の行為は禁止されています",
+        "redistribute": "本ツールを複製・再配布・販売すること",
+        "sourceCode": "本ツールのソースコードを無断で利用すること",
+        "overload": "本ツールに過度な負荷をかける行為",
+        "harassment": "他者に迷惑をかける目的での利用",
+        "illegal": "法令に違反する目的での利用"
+      },
+      "copyright": {
+        "title": "第3条　著作権について",
+        "description": "本ツールで使用されているゲーム関連の画像、データ、名称等は、すべて任天堂株式会社の著作物です。",
+        "unofficial": "本ツールは非公式のファンツールです",
+        "noAffiliation": "任天堂株式会社とは一切関係ありません"
+      },
+      "disclaimer": {
+        "title": "第4条　免責事項",
+        "noDamageResponsibility": "本ツールの利用により生じたいかなる損害についても、開発者は一切の責任を負いません",
+        "noAccuracyGuarantee": "表示されるデータの正確性について保証するものではありません",
+        "noContinuityGuarantee": "サービスの継続性について保証するものではありません",
+        "mayChangeService": "予告なくサービスを停止・変更する場合があります",
+        "noExternalLinkResponsibility": "他のWebサイトへのリンクについて責任を負いません"
+      },
+      "privacy": {
+        "title": "第5条　プライバシー・データの取り扱い",
+        "noPersonalData": "本ツールは個人情報を収集しません"
+      },
+      "changes": {
+        "title": "第6条　規約の変更",
+        "description": "本利用規約は予告なく変更される場合があります。変更後の規約は本ページに掲載された時点で効力を生じます。",
+        "agreement": "継続してサービスを利用された場合、変更後の利用規約に同意されたものとみなします。"
+      },
+      "contact": {
+        "title": "第7条　お問い合わせ",
+        "description": "本利用規約に関するお問い合わせや、ツールの利用に関するご質問については、以下の方法でお気軽にお問い合わせください。",
+        "xMain": "X（@chiji1108）",
+        "xTech": "技術的な質問: X（@ChijiiwaShingo）",
+        "xUniv": "大学の質問: X（@Chijidosu）",
+        "xBrawl": "ブロスタの質問: X（@miririmon）",
+        "xPlastic": "整形の質問: X（@shingo_seikei）"
+      }
+    },
+    "dates": {
+      "established": "制定日: 2025年6月26日",
+      "lastUpdated": "最終更新: 2025年6月26日"
+    }
   }
 }

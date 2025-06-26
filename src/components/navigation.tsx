@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -63,6 +64,7 @@ export function Navigation() {
                 </Button>
               );
             })}
+            <LanguageSwitcher />
           </div>
         </div>
       </div>

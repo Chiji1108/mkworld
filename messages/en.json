@@ -1,7 +1,8 @@
 {
   "common": {
     "appName": "MKWorld Tools",
-    "select": "Select"
+    "select": "Select",
+    "language": "Language"
   },
   "navigation": {
     "performance": "Performance List",
@@ -27,6 +28,10 @@
         "title": "Pareto Optimal",
         "description": "Automatically find optimal combinations for specific criteria"
       }
+    },
+    "tweets": {
+      "title": "Helpful Development References",
+      "thanks": "Thank you to everyone who shared these helpful tweets! 🙏"
     }
   },
   "stats": {
@@ -83,6 +88,67 @@
   "terms": {
     "title": "Terms of Service - MKWorld Tools",
     "description": "Terms of Service for MKWorld Tools",
-    "pageTitle": "Terms of Service"
+    "pageTitle": "Terms of Service",
+    "sections": {
+      "permitted": {
+        "title": "Article 1: Permitted Use",
+        "subtitle": "✅ The following uses are permitted",
+        "commercial": "Commercial use (video monetization, etc.)",
+        "commercialDesc": "Use in monetized streaming on YouTube, Twitch, etc. is allowed",
+        "social": "Social media, video streaming, and blog publication",
+        "socialDesc": "Use on Twitter, Instagram, TikTok, blog articles, etc. is allowed",
+        "screenshot": "Screenshots and screen recordings",
+        "screenshotDesc": "Taking and sharing screenshots/recordings of this tool is allowed",
+        "education": "Educational and explanatory purposes",
+        "educationDesc": "Use in strategy articles and tutorial videos is allowed",
+        "anyUser": "Available for individuals and corporations",
+        "anyUserDesc": "Free to use for both commercial and non-commercial purposes"
+      },
+      "prohibited": {
+        "title": "Article 2: Prohibited Activities",
+        "subtitle": "❌ The following activities are prohibited",
+        "redistribute": "Copying, redistributing, or selling this tool",
+        "sourceCode": "Unauthorized use of this tool's source code",
+        "overload": "Actions that place excessive load on this tool",
+        "harassment": "Use for the purpose of causing trouble to others",
+        "illegal": "Use for purposes that violate laws and regulations"
+      },
+      "copyright": {
+        "title": "Article 3: Copyright",
+        "description": "All game-related images, data, and names used in this tool are copyrighted material of Nintendo Co., Ltd.",
+        "unofficial": "This tool is an unofficial fan tool",
+        "noAffiliation": "It has no affiliation with Nintendo Co., Ltd."
+      },
+      "disclaimer": {
+        "title": "Article 4: Disclaimer",
+        "noDamageResponsibility": "The developer assumes no responsibility for any damages arising from the use of this tool",
+        "noAccuracyGuarantee": "We do not guarantee the accuracy of the displayed data",
+        "noContinuityGuarantee": "We do not guarantee the continuity of the service",
+        "mayChangeService": "We may stop or change the service without notice",
+        "noExternalLinkResponsibility": "We are not responsible for links to other websites"
+      },
+      "privacy": {
+        "title": "Article 5: Privacy and Data Handling",
+        "noPersonalData": "This tool does not collect personal information"
+      },
+      "changes": {
+        "title": "Article 6: Changes to Terms",
+        "description": "These Terms of Service may be changed without notice. The revised terms will take effect when posted on this page.",
+        "agreement": "Continued use of the service after changes constitutes acceptance of the revised Terms of Service."
+      },
+      "contact": {
+        "title": "Article 7: Contact",
+        "description": "For inquiries about these Terms of Service or questions about using the tool, please feel free to contact us through the following methods:",
+        "xMain": "X (@chiji1108)",
+        "xTech": "Technical questions: X (@ChijiiwaShingo)",
+        "xUniv": "University questions: X (@Chijidosu)",
+        "xBrawl": "Brawl Stars questions: X (@miririmon)",
+        "xPlastic": "Plastic surgery questions: X (@shingo_seikei)"
+      }
+    },
+    "dates": {
+      "established": "Established: June 26, 2025",
+      "lastUpdated": "Last Updated: June 26, 2025"
+    }
   }
 }
