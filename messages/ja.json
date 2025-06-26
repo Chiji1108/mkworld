@@ -4,6 +4,11 @@
     "select": "選択",
     "language": "言語"
   },
+  "og": {
+    "title": "MKWorld Tools",
+    "subtitle": "マリオカートワールド カスタムビルダー",
+    "description": "50人のドライバー × 40台のマシン = 最適な組み合わせを見つけよう"
+  },
   "navigation": {
     "performance": "性能一覧",
     "builder": "カスタムビルダー",

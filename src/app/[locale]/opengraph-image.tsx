@@ -1,14 +1,28 @@
 import { ImageResponse } from 'next/og';
+import { getTranslations } from 'next-intl/server';
 
 export const runtime = 'edge';
-export const alt = 'MKWorld Tools - マリオカートワールド カスタムビルダー';
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = 'image/png';
 
-export default async function Image() {
+export async function generateImageMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'og' });
+  
+  return [
+    {
+      id: 'default',
+      alt: `${t('title')} - ${t('subtitle')}`,
+    },
+  ];
+}
+
+export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'og' });
   return new ImageResponse(
     (
       <div
@@ -45,7 +59,7 @@ export default async function Image() {
               textShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
             }}
           >
-            MKWorld Tools
+            {t('title')}
           </h1>
           <p
             style={{
@@ -56,7 +70,7 @@ export default async function Image() {
               lineHeight: '1.4',
             }}
           >
-            マリオカートワールド カスタムビルダー
+            {t('subtitle')}
           </p>
           <p
             style={{
@@ -67,7 +81,7 @@ export default async function Image() {
               lineHeight: '1.3',
             }}
           >
-            50人のドライバー × 40台のマシン = 最適な組み合わせを見つけよう
+            {t('description')}
           </p>
         </div>
       </div>

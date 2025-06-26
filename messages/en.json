@@ -4,6 +4,11 @@
     "select": "Select",
     "language": "Language"
   },
+  "og": {
+    "title": "MKWorld Tools",
+    "subtitle": "Mario Kart World Custom Builder",
+    "description": "50 Drivers × 40 Machines = Find Your Perfect Combination"
+  },
   "navigation": {
     "performance": "Performance List",
     "builder": "Custom Builder",
