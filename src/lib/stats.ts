@@ -10,7 +10,7 @@ export type StatsColor =
   | "#D0826F";
 
 export type BaseStats = {
-  speed: { smooth: number; rough: number; water: number };
+  speed: { hard: number; soft: number; liquid: number };
   acceleration: number;
   weight: number;
   handling: number;
@@ -28,7 +28,7 @@ export type GroupedStats = BaseStats & {
 export const DRIVERS: Stats[] = [
   {
     name: "ベビィピーチ",
-    speed: { smooth: 2, rough: 2, water: 2 },
+    speed: { hard: 2, soft: 2, liquid: 2 },
     acceleration: 10,
     weight: 3,
     handling: 9,
@@ -36,7 +36,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ベビィデイジー",
-    speed: { smooth: 2, rough: 2, water: 2 },
+    speed: { hard: 2, soft: 2, liquid: 2 },
     acceleration: 10,
     weight: 3,
     handling: 9,
@@ -44,7 +44,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "バサバサ",
-    speed: { smooth: 2, rough: 2, water: 2 },
+    speed: { hard: 2, soft: 2, liquid: 2 },
     acceleration: 10,
     weight: 3,
     handling: 9,
@@ -52,7 +52,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "パタテンテン",
-    speed: { smooth: 2, rough: 2, water: 2 },
+    speed: { hard: 2, soft: 2, liquid: 2 },
     acceleration: 10,
     weight: 3,
     handling: 9,
@@ -60,7 +60,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ベビィマリオ",
-    speed: { smooth: 3, rough: 2, water: 2 },
+    speed: { hard: 3, soft: 2, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -68,7 +68,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "クリボー",
-    speed: { smooth: 3, rough: 2, water: 2 },
+    speed: { hard: 3, soft: 2, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -76,7 +76,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ガボン",
-    speed: { smooth: 3, rough: 2, water: 2 },
+    speed: { hard: 3, soft: 2, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -84,7 +84,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ベビィルイージ",
-    speed: { smooth: 2, rough: 3, water: 2 },
+    speed: { hard: 2, soft: 3, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -92,7 +92,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "カロン",
-    speed: { smooth: 2, rough: 3, water: 2 },
+    speed: { hard: 2, soft: 3, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -100,7 +100,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "テレン",
-    speed: { smooth: 2, rough: 3, water: 2 },
+    speed: { hard: 2, soft: 3, liquid: 2 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -108,7 +108,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ベビィロゼッタ",
-    speed: { smooth: 2, rough: 2, water: 3 },
+    speed: { hard: 2, soft: 2, liquid: 3 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -116,7 +116,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "カニ",
-    speed: { smooth: 2, rough: 2, water: 3 },
+    speed: { hard: 2, soft: 2, liquid: 3 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -124,7 +124,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "フィッシュボーン",
-    speed: { smooth: 2, rough: 2, water: 3 },
+    speed: { hard: 2, soft: 2, liquid: 3 },
     acceleration: 9,
     weight: 4,
     handling: 9,
@@ -132,7 +132,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "キノピコ",
-    speed: { smooth: 4, rough: 3, water: 3 },
+    speed: { hard: 4, soft: 3, liquid: 3 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -140,7 +140,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "トッテン",
-    speed: { smooth: 4, rough: 3, water: 3 },
+    speed: { hard: 4, soft: 3, liquid: 3 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -148,7 +148,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "キノピオ",
-    speed: { smooth: 3, rough: 4, water: 3 },
+    speed: { hard: 3, soft: 4, liquid: 3 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -156,7 +156,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ヘイホー",
-    speed: { smooth: 3, rough: 4, water: 3 },
+    speed: { hard: 3, soft: 4, liquid: 3 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -164,7 +164,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ハッチン",
-    speed: { smooth: 3, rough: 4, water: 3 },
+    speed: { hard: 3, soft: 4, liquid: 3 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -172,7 +172,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ノコノコ",
-    speed: { smooth: 3, rough: 3, water: 4 },
+    speed: { hard: 3, soft: 3, liquid: 4 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -180,7 +180,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ジュゲム",
-    speed: { smooth: 3, rough: 3, water: 4 },
+    speed: { hard: 3, soft: 3, liquid: 4 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -188,7 +188,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "プクプク",
-    speed: { smooth: 3, rough: 3, water: 4 },
+    speed: { hard: 3, soft: 3, liquid: 4 },
     acceleration: 8,
     weight: 5,
     handling: 8,
@@ -196,7 +196,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ピーチ",
-    speed: { smooth: 5, rough: 4, water: 4 },
+    speed: { hard: 5, soft: 4, liquid: 4 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -204,7 +204,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "デイジー",
-    speed: { smooth: 5, rough: 4, water: 4 },
+    speed: { hard: 5, soft: 4, liquid: 4 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -212,7 +212,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ガマネー",
-    speed: { smooth: 5, rough: 4, water: 4 },
+    speed: { hard: 5, soft: 4, liquid: 4 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -220,7 +220,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ヨッシー",
-    speed: { smooth: 4, rough: 5, water: 4 },
+    speed: { hard: 4, soft: 5, liquid: 4 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -228,7 +228,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "チョロプー",
-    speed: { smooth: 4, rough: 5, water: 4 },
+    speed: { hard: 4, soft: 5, liquid: 4 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -236,7 +236,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "クッパJr",
-    speed: { smooth: 4, rough: 4, water: 5 },
+    speed: { hard: 4, soft: 4, liquid: 5 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -244,7 +244,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "リフトン",
-    speed: { smooth: 4, rough: 4, water: 5 },
+    speed: { hard: 4, soft: 4, liquid: 5 },
     acceleration: 7,
     weight: 6,
     handling: 7,
@@ -252,7 +252,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "マリオ",
-    speed: { smooth: 6, rough: 5, water: 5 },
+    speed: { hard: 6, soft: 5, liquid: 5 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -260,7 +260,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "プー",
-    speed: { smooth: 6, rough: 5, water: 5 },
+    speed: { hard: 6, soft: 5, liquid: 5 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -268,7 +268,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ルイージ",
-    speed: { smooth: 5, rough: 6, water: 5 },
+    speed: { hard: 5, soft: 6, liquid: 5 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -276,7 +276,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ハンマーブロス",
-    speed: { smooth: 5, rough: 6, water: 5 },
+    speed: { hard: 5, soft: 6, liquid: 5 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -284,7 +284,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "サンボ",
-    speed: { smooth: 5, rough: 6, water: 5 },
+    speed: { hard: 5, soft: 6, liquid: 5 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -292,7 +292,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "キャサリン",
-    speed: { smooth: 5, rough: 5, water: 6 },
+    speed: { hard: 5, soft: 5, liquid: 6 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -300,7 +300,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ペンギン",
-    speed: { smooth: 5, rough: 5, water: 6 },
+    speed: { hard: 5, soft: 5, liquid: 6 },
     acceleration: 6,
     weight: 7,
     handling: 6,
@@ -308,7 +308,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ポリーン",
-    speed: { smooth: 7, rough: 6, water: 6 },
+    speed: { hard: 7, soft: 6, liquid: 6 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -316,7 +316,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "パックンフラワー",
-    speed: { smooth: 7, rough: 6, water: 6 },
+    speed: { hard: 7, soft: 6, liquid: 6 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -324,7 +324,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ゆきだるま",
-    speed: { smooth: 7, rough: 6, water: 6 },
+    speed: { hard: 7, soft: 6, liquid: 6 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -332,7 +332,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "キングテレサ",
-    speed: { smooth: 6, rough: 7, water: 6 },
+    speed: { hard: 6, soft: 7, liquid: 6 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -340,7 +340,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ツッコンドル",
-    speed: { smooth: 6, rough: 7, water: 6 },
+    speed: { hard: 6, soft: 7, liquid: 6 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -348,7 +348,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ロゼッタ",
-    speed: { smooth: 6, rough: 6, water: 7 },
+    speed: { hard: 6, soft: 6, liquid: 7 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -356,7 +356,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ポイハナ",
-    speed: { smooth: 6, rough: 6, water: 7 },
+    speed: { hard: 6, soft: 6, liquid: 7 },
     acceleration: 5,
     weight: 8,
     handling: 5,
@@ -364,7 +364,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ワリオ",
-    speed: { smooth: 8, rough: 7, water: 7 },
+    speed: { hard: 8, soft: 7, liquid: 7 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -372,7 +372,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ハナチャン",
-    speed: { smooth: 8, rough: 7, water: 7 },
+    speed: { hard: 8, soft: 7, liquid: 7 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -380,7 +380,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ドンキーコング",
-    speed: { smooth: 7, rough: 8, water: 7 },
+    speed: { hard: 7, soft: 8, liquid: 7 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -388,7 +388,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ウシ",
-    speed: { smooth: 7, rough: 8, water: 7 },
+    speed: { hard: 7, soft: 8, liquid: 7 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -396,7 +396,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ブル",
-    speed: { smooth: 7, rough: 8, water: 7 },
+    speed: { hard: 7, soft: 8, liquid: 7 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -404,7 +404,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "ワルイージ",
-    speed: { smooth: 7, rough: 7, water: 8 },
+    speed: { hard: 7, soft: 7, liquid: 8 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -412,7 +412,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "モンテ",
-    speed: { smooth: 7, rough: 7, water: 8 },
+    speed: { hard: 7, soft: 7, liquid: 8 },
     acceleration: 4,
     weight: 9,
     handling: 4,
@@ -420,7 +420,7 @@ export const DRIVERS: Stats[] = [
   },
   {
     name: "クッパ",
-    speed: { smooth: 8, rough: 8, water: 8 },
+    speed: { hard: 8, soft: 8, liquid: 8 },
     acceleration: 3,
     weight: 10,
     handling: 3,
@@ -431,7 +431,7 @@ export const DRIVERS: Stats[] = [
 export const MACHINES: Stats[] = [
   {
     name: "スタンダードバイク",
-    speed: { smooth: 1, rough: 1, water: 1 },
+    speed: { hard: 1, soft: 1, liquid: 1 },
     acceleration: 9,
     weight: 0,
     handling: 6,
@@ -439,7 +439,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "カラフルスクーター",
-    speed: { smooth: 1, rough: 1, water: 1 },
+    speed: { hard: 1, soft: 1, liquid: 1 },
     acceleration: 9,
     weight: 0,
     handling: 6,
@@ -447,7 +447,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "レディオライド",
-    speed: { smooth: 1, rough: 1, water: 1 },
+    speed: { hard: 1, soft: 1, liquid: 1 },
     acceleration: 9,
     weight: 0,
     handling: 6,
@@ -455,7 +455,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "こいのぼり",
-    speed: { smooth: 0, rough: 0, water: 5 },
+    speed: { hard: 0, soft: 0, liquid: 5 },
     acceleration: 8,
     weight: 0,
     handling: 6,
@@ -463,7 +463,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ドルフィンキック",
-    speed: { smooth: 0, rough: 0, water: 5 },
+    speed: { hard: 0, soft: 0, liquid: 5 },
     acceleration: 8,
     weight: 0,
     handling: 6,
@@ -471,7 +471,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ラリーバイク",
-    speed: { smooth: 0, rough: 5, water: 0 },
+    speed: { hard: 0, soft: 5, liquid: 0 },
     acceleration: 8,
     weight: 0,
     handling: 6,
@@ -479,7 +479,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ドカンバイク",
-    speed: { smooth: 0, rough: 5, water: 0 },
+    speed: { hard: 0, soft: 5, liquid: 0 },
     acceleration: 8,
     weight: 0,
     handling: 6,
@@ -487,7 +487,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "スケルトン",
-    speed: { smooth: 2, rough: 0, water: 2 },
+    speed: { hard: 2, soft: 0, liquid: 2 },
     acceleration: 8,
     weight: 1,
     handling: 5,
@@ -495,7 +495,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "パタテンテン",
-    speed: { smooth: 1, rough: 6, water: 1 },
+    speed: { hard: 1, soft: 6, liquid: 1 },
     acceleration: 7,
     weight: 1,
     handling: 5,
@@ -503,7 +503,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "マッハレーサー",
-    speed: { smooth: 6, rough: 1, water: 1 },
+    speed: { hard: 6, soft: 1, liquid: 1 },
     acceleration: 7,
     weight: 0,
     handling: 6,
@@ -511,7 +511,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "FCロボットバイク",
-    speed: { smooth: 6, rough: 1, water: 1 },
+    speed: { hard: 6, soft: 1, liquid: 1 },
     acceleration: 7,
     weight: 0,
     handling: 6,
@@ -519,7 +519,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "スチームバイク",
-    speed: { smooth: 4, rough: 4, water: 4 },
+    speed: { hard: 4, soft: 4, liquid: 4 },
     acceleration: 6,
     weight: 1,
     handling: 5,
@@ -527,7 +527,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "コゲッソー",
-    speed: { smooth: 7, rough: 2, water: 2 },
+    speed: { hard: 7, soft: 2, liquid: 2 },
     acceleration: 6,
     weight: 1,
     handling: 5,
@@ -535,7 +535,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "スタンダードカート",
-    speed: { smooth: 5, rough: 5, water: 5 },
+    speed: { hard: 5, soft: 5, liquid: 5 },
     acceleration: 5,
     weight: 2,
     handling: 4,
@@ -543,7 +543,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "リボンクラシカル",
-    speed: { smooth: 5, rough: 5, water: 5 },
+    speed: { hard: 5, soft: 5, liquid: 5 },
     acceleration: 5,
     weight: 2,
     handling: 4,
@@ -551,7 +551,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "イグニッション",
-    speed: { smooth: 5, rough: 5, water: 5 },
+    speed: { hard: 5, soft: 5, liquid: 5 },
     acceleration: 6,
     weight: 3,
     handling: 2,
@@ -559,7 +559,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ファイアモービル",
-    speed: { smooth: 3, rough: 9, water: 5 },
+    speed: { hard: 3, soft: 9, liquid: 5 },
     acceleration: 3,
     weight: 3,
     handling: 4,
@@ -567,7 +567,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ケロケロード",
-    speed: { smooth: 4, rough: 4, water: 8 },
+    speed: { hard: 4, soft: 4, liquid: 8 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -575,7 +575,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "スーパーカーペット",
-    speed: { smooth: 4, rough: 4, water: 8 },
+    speed: { hard: 4, soft: 4, liquid: 8 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -583,7 +583,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "H2O",
-    speed: { smooth: 4, rough: 4, water: 8 },
+    speed: { hard: 4, soft: 4, liquid: 8 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -591,7 +591,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ドッシーウェーブ",
-    speed: { smooth: 4, rough: 4, water: 8 },
+    speed: { hard: 4, soft: 4, liquid: 8 },
     acceleration: 5,
     weight: 4,
     handling: 1,
@@ -599,7 +599,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "タートルバギー",
-    speed: { smooth: 4, rough: 8, water: 4 },
+    speed: { hard: 4, soft: 8, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -607,7 +607,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ラリーカート",
-    speed: { smooth: 4, rough: 8, water: 4 },
+    speed: { hard: 4, soft: 8, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -615,7 +615,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ファイアチャージャー",
-    speed: { smooth: 8, rough: 4, water: 4 },
+    speed: { hard: 8, soft: 4, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -623,7 +623,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ロイヤルターボ",
-    speed: { smooth: 8, rough: 4, water: 4 },
+    speed: { hard: 8, soft: 4, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -631,7 +631,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "Bダッシュ",
-    speed: { smooth: 8, rough: 4, water: 4 },
+    speed: { hard: 8, soft: 4, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -639,7 +639,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "マッハクイーン",
-    speed: { smooth: 8, rough: 4, water: 4 },
+    speed: { hard: 8, soft: 4, liquid: 4 },
     acceleration: 4,
     weight: 3,
     handling: 3,
@@ -647,7 +647,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "Wチョッパー",
-    speed: { smooth: 7, rough: 7, water: 7 },
+    speed: { hard: 7, soft: 7, liquid: 7 },
     acceleration: 3,
     weight: 2,
     handling: 4,
@@ -655,7 +655,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "サファリカーゴ",
-    speed: { smooth: 9, rough: 6, water: 6 },
+    speed: { hard: 9, soft: 6, liquid: 6 },
     acceleration: 2,
     weight: 5,
     handling: 2,
@@ -663,7 +663,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "キラーヘッド",
-    speed: { smooth: 9, rough: 6, water: 6 },
+    speed: { hard: 9, soft: 6, liquid: 6 },
     acceleration: 2,
     weight: 5,
     handling: 2,
@@ -671,7 +671,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ラリーゲイター",
-    speed: { smooth: 9, rough: 6, water: 6 },
+    speed: { hard: 9, soft: 6, liquid: 6 },
     acceleration: 3,
     weight: 6,
     handling: 0,
@@ -679,7 +679,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "メカクッパ",
-    speed: { smooth: 7, rough: 7, water: 10 },
+    speed: { hard: 7, soft: 7, liquid: 10 },
     acceleration: 1,
     weight: 5,
     handling: 2,
@@ -687,7 +687,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ローブスター",
-    speed: { smooth: 7, rough: 7, water: 10 },
+    speed: { hard: 7, soft: 7, liquid: 10 },
     acceleration: 2,
     weight: 6,
     handling: 0,
@@ -695,7 +695,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ビッグブル",
-    speed: { smooth: 7, rough: 10, water: 7 },
+    speed: { hard: 7, soft: 10, liquid: 7 },
     acceleration: 1,
     weight: 5,
     handling: 2,
@@ -703,7 +703,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ホットラリー",
-    speed: { smooth: 7, rough: 10, water: 7 },
+    speed: { hard: 7, soft: 10, liquid: 7 },
     acceleration: 1,
     weight: 5,
     handling: 2,
@@ -711,7 +711,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "トイダンプ",
-    speed: { smooth: 7, rough: 10, water: 7 },
+    speed: { hard: 7, soft: 10, liquid: 7 },
     acceleration: 1,
     weight: 5,
     handling: 2,
@@ -719,7 +719,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "バウザーバギー",
-    speed: { smooth: 7, rough: 10, water: 7 },
+    speed: { hard: 7, soft: 10, liquid: 7 },
     acceleration: 1,
     weight: 5,
     handling: 2,
@@ -727,7 +727,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ムービースター",
-    speed: { smooth: 8, rough: 8, water: 8 },
+    speed: { hard: 8, soft: 8, liquid: 8 },
     acceleration: 2,
     weight: 3,
     handling: 3,
@@ -735,7 +735,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "ベルトライク",
-    speed: { smooth: 8, rough: 8, water: 8 },
+    speed: { hard: 8, soft: 8, liquid: 8 },
     acceleration: 3,
     weight: 4,
     handling: 1,
@@ -743,7 +743,7 @@ export const MACHINES: Stats[] = [
   },
   {
     name: "スターモービル",
-    speed: { smooth: 6, rough: 8, water: 11 },
+    speed: { hard: 6, soft: 8, liquid: 11 },
     acceleration: 0,
     weight: 5,
     handling: 2,
@@ -751,31 +751,31 @@ export const MACHINES: Stats[] = [
   },
 ];
 
-export type SpeedSpecialization = "smooth" | "rough" | "water" | "balance";
+export type SpeedSpecialization = "hard" | "soft" | "liquid" | "balance";
 
 export function analyzeSpeedSpecialization(
   stats: BaseStats
 ): SpeedSpecialization {
-  const { smooth, rough, water } = stats.speed;
+  const { hard, soft, liquid } = stats.speed;
 
-  const maxSpeed = Math.max(smooth, rough, water);
-  const minSpeed = Math.min(smooth, rough, water);
+  const maxSpeed = Math.max(hard, soft, liquid);
+  const minSpeed = Math.min(hard, soft, liquid);
   const difference = maxSpeed - minSpeed;
 
   if (difference === 0) {
     return "balance";
   }
 
-  if (smooth === maxSpeed && smooth > rough && smooth > water) {
-    return "smooth";
+  if (hard === maxSpeed && hard > soft && hard > liquid) {
+    return "hard";
   }
 
-  if (rough === maxSpeed && rough > smooth && rough > water) {
-    return "rough";
+  if (soft === maxSpeed && soft > hard && soft > liquid) {
+    return "soft";
   }
 
-  if (water === maxSpeed && water > smooth && water > rough) {
-    return "water";
+  if (liquid === maxSpeed && liquid > hard && liquid > soft) {
+    return "liquid";
   }
 
   return "balance";
@@ -785,7 +785,7 @@ export function groupStatsByIdenticalValues(stats: Stats[]): GroupedStats[] {
   const groups: Map<string, GroupedStats> = new Map();
 
   stats.forEach((stat) => {
-    const key = `${stat.speed.smooth}-${stat.speed.rough}-${stat.speed.water}-${stat.acceleration}-${stat.weight}-${stat.handling}`;
+    const key = `${stat.speed.hard}-${stat.speed.soft}-${stat.speed.liquid}-${stat.acceleration}-${stat.weight}-${stat.handling}`;
 
     if (groups.has(key)) {
       const group = groups.get(key)!;

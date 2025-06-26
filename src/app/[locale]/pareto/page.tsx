@@ -17,6 +17,7 @@ import {
   type GroupedStats,
 } from "@/lib/stats";
 import { Info } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -42,6 +43,7 @@ interface OptimizationCriteria {
 }
 
 export default function ParetoPage() {
+  const t = useTranslations();
   const [criteria, setCriteria] = useState<OptimizationCriteria>({
     speedSmooth: true,
     speedRough: false,
@@ -58,9 +60,9 @@ export default function ParetoPage() {
       GROUPED_MACHINES.forEach((machine) => {
         const combined = {
           speed: {
-            smooth: driver.speed.smooth + machine.speed.smooth,
-            rough: driver.speed.rough + machine.speed.rough,
-            water: driver.speed.water + machine.speed.water,
+            smooth: driver.speed.hard + machine.speed.hard,
+            rough: driver.speed.soft + machine.speed.soft,
+            water: driver.speed.liquid + machine.speed.liquid,
           },
           acceleration: driver.acceleration + machine.acceleration,
           weight: driver.weight + machine.weight,
@@ -106,16 +108,16 @@ export default function ParetoPage() {
   return (
     <div className="container mx-auto py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-blue-600 mb-2">パレート最適</h1>
-        <p className="text-muted-foreground">
-          指定した条件に基づいて最適な組み合わせを見つけます
-        </p>
+        <h1 className="text-4xl font-bold text-blue-600 mb-2">
+          {t("pareto.pageTitle")}
+        </h1>
+        <p className="text-muted-foreground">{t("pareto.description")}</p>
       </div>
 
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>最適化条件</CardTitle>
+            <CardTitle>{t("pareto.optimization.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -131,7 +133,7 @@ export default function ParetoPage() {
                   htmlFor="speedSmooth"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（硬）
+                  {t("stats.speedHard")}
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -146,7 +148,7 @@ export default function ParetoPage() {
                   htmlFor="speedRough"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（柔）
+                  {t("stats.speedSoft")}
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -161,7 +163,7 @@ export default function ParetoPage() {
                   htmlFor="speedWater"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（液）
+                  {t("stats.speedLiquid")}
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -176,7 +178,7 @@ export default function ParetoPage() {
                   htmlFor="acceleration"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  かそく
+                  {t("stats.acceleration")}
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -191,7 +193,7 @@ export default function ParetoPage() {
                   htmlFor="weight"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  おもさ
+                  {t("stats.weight")}
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -206,7 +208,7 @@ export default function ParetoPage() {
                   htmlFor="handling"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  まがりやすさ
+                  {t("stats.handling")}
                 </label>
               </div>
             </div>
@@ -217,7 +219,7 @@ export default function ParetoPage() {
           <Alert>
             <Info className="h-4 w-4" />
             <AlertDescription>
-              最適化条件を1つ以上選択してください。
+              {t("pareto.optimization.description")}
             </AlertDescription>
           </Alert>
         )}
@@ -225,15 +227,21 @@ export default function ParetoPage() {
         {paretoOptimalCombinations.length > 0 && (
           <Card>
             <CardHeader>
-              <CardTitle>最適組み合わせ (上位100組)</CardTitle>
+              <CardTitle>{t("pareto.results.title")} (100)</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-center">合計スコア</TableHead>
-                    <TableHead className="text-center">ドライバー</TableHead>
-                    <TableHead className="text-center">マシン</TableHead>
+                    <TableHead className="text-center">
+                      {t("pareto.results.score")}
+                    </TableHead>
+                    <TableHead className="text-center">
+                      {t("stats.driver")}
+                    </TableHead>
+                    <TableHead className="text-center">
+                      {t("stats.machine")}
+                    </TableHead>
                     <TableHead
                       className={
                         criteria.speedSmooth
@@ -241,7 +249,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（硬）
+                      {t("stats.speedHard")}
                     </TableHead>
                     <TableHead
                       className={
@@ -250,7 +258,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（柔）
+                      {t("stats.speedSoft")}
                     </TableHead>
                     <TableHead
                       className={
@@ -259,7 +267,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（液）
+                      {t("stats.speedLiquid")}
                     </TableHead>
                     <TableHead
                       className={
@@ -268,7 +276,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      かそく
+                      {t("stats.acceleration")}
                     </TableHead>
                     <TableHead
                       className={
@@ -277,7 +285,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      おもさ
+                      {t("stats.weight")}
                     </TableHead>
                     <TableHead
                       className={
@@ -286,7 +294,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      まがりやすさ
+                      {t("stats.handling")}
                     </TableHead>
                   </TableRow>
                 </TableHeader>

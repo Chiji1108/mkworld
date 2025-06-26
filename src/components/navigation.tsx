@@ -5,37 +5,39 @@ import { cn } from "@/lib/utils";
 import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navigationItems = [
-  {
-    name: "カスタムビルダー",
-    href: "/builder",
-    icon: Wrench,
-    description: "組み合わせて性能を確認",
-  },
-  {
-    name: "性能一覧",
-    href: "/performance",
-    icon: BarChart3,
-    description: "全ドライバーとマシンの性能表",
-  },
-  {
-    name: "パレート最適",
-    href: "/pareto",
-    icon: Search,
-    description: "最適な組み合わせを検索",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function Navigation() {
   const pathname = usePathname();
+  const t = useTranslations();
+
+  const navigationItems = [
+    {
+      name: t('navigation.builder'),
+      href: "/builder",
+      icon: Wrench,
+      description: t('home.features.builder.description'),
+    },
+    {
+      name: t('navigation.performance'),
+      href: "/performance",
+      icon: BarChart3,
+      description: t('home.features.performance.description'),
+    },
+    {
+      name: t('navigation.pareto'),
+      href: "/pareto",
+      icon: Search,
+      description: t('home.features.pareto.description'),
+    },
+  ];
 
   return (
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold">MKWorld Tools</span>
+            <span className="text-xl font-bold">{t('common.appName')}</span>
           </Link>
 
           <div className="flex items-center space-x-1">

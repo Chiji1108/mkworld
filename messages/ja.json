@@ -1,6 +1,88 @@
 {
+  "common": {
+    "appName": "MKWorld Tools",
+    "select": "選択"
+  },
+  "navigation": {
+    "performance": "性能一覧",
+    "builder": "カスタムビルダー",
+    "pareto": "パレート最適"
+  },
+  "footer": {
+    "terms": "利用規約"
+  },
   "home": {
-    "title": "MKWorld Tools",
-    "description": "マリオカートワールドの50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。性能データの詳細分析とパレート最適化機能付き。"
+    "title": "MKWorld Tools - マリオカートワールドカスタムビルダー",
+    "description": "マリオカートワールドのドライバーとマシンを組み合わせて、最適なカスタマイズを見つけよう",
+    "features": {
+      "performance": {
+        "title": "性能一覧",
+        "description": "全てのドライバーとマシンの性能を一覧で確認"
+      },
+      "builder": {
+        "title": "カスタムビルダー",
+        "description": "ドライバーとマシンを組み合わせて性能を確認"
+      },
+      "pareto": {
+        "title": "パレート最適",
+        "description": "特定の条件で最適な組み合わせを自動で検索"
+      }
+    }
+  },
+  "stats": {
+    "speedHard": "スピード（硬）",
+    "speedSoft": "スピード（柔）",
+    "speedLiquid": "スピード（液）",
+    "acceleration": "かそく",
+    "weight": "おもさ",
+    "handling": "まがりやすさ",
+    "driver": "ドライバー",
+    "machine": "マシン"
+  },
+  "performance": {
+    "title": "性能一覧 - MKWorld Tools",
+    "description": "マリオカートワールドの全ドライバーとマシンの性能を確認",
+    "pageTitle": "性能一覧",
+    "tabs": {
+      "drivers": "ドライバー",
+      "machines": "マシン"
+    },
+    "search": {
+      "placeholder": "名前で検索..."
+    }
+  },
+  "builder": {
+    "title": "カスタムビルダー - MKWorld Tools",
+    "description": "ドライバーとマシンを組み合わせて最適なカスタマイズを作成",
+    "pageTitle": "カスタムビルダー",
+    "driverSelection": {
+      "title": "ドライバー選択",
+      "placeholder": "ドライバーを選択してください"
+    },
+    "machineSelection": {
+      "title": "マシン選択",
+      "placeholder": "マシンを選択してください"
+    },
+    "statsDisplay": {
+      "title": "合計性能"
+    }
+  },
+  "pareto": {
+    "title": "パレート最適 - MKWorld Tools",
+    "description": "指定条件で最適なドライバーとマシンの組み合わせを検索",
+    "pageTitle": "パレート最適",
+    "optimization": {
+      "title": "最適化条件",
+      "description": "重視したい性能を選択してください"
+    },
+    "results": {
+      "title": "最適な組み合わせ",
+      "score": "スコア"
+    }
+  },
+  "terms": {
+    "title": "利用規約 - MKWorld Tools",
+    "description": "MKWorld Toolsの利用規約",
+    "pageTitle": "利用規約"
   }
 }

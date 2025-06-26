@@ -1,6 +1,88 @@
 {
+  "common": {
+    "appName": "MKWorld Tools",
+    "select": "Select"
+  },
+  "navigation": {
+    "performance": "Performance List",
+    "builder": "Custom Builder",
+    "pareto": "Pareto Optimal"
+  },
+  "footer": {
+    "terms": "Terms of Service"
+  },
   "home": {
-    "title": "MKWorld Tools",
-    "description": "Customize your Mario Kart 8 Deluxe build with our tools"
+    "title": "MKWorld Tools - Mario Kart World Custom Builder",
+    "description": "Find the optimal combination of drivers and machines in Mario Kart World",
+    "features": {
+      "performance": {
+        "title": "Performance List",
+        "description": "View all drivers and machines with their stats"
+      },
+      "builder": {
+        "title": "Custom Builder",
+        "description": "Combine drivers and machines to see total performance"
+      },
+      "pareto": {
+        "title": "Pareto Optimal",
+        "description": "Automatically find optimal combinations for specific criteria"
+      }
+    }
+  },
+  "stats": {
+    "speedHard": "Speed (Hard)",
+    "speedSoft": "Speed (Soft)",
+    "speedLiquid": "Speed (Liquid)",
+    "acceleration": "Acceleration",
+    "weight": "Weight",
+    "handling": "Handling",
+    "driver": "Driver",
+    "machine": "Machine"
+  },
+  "performance": {
+    "title": "Performance List - MKWorld Tools",
+    "description": "View all Mario Kart World drivers and machines performance",
+    "pageTitle": "Performance List",
+    "tabs": {
+      "drivers": "Drivers",
+      "machines": "Machines"
+    },
+    "search": {
+      "placeholder": "Search by name..."
+    }
+  },
+  "builder": {
+    "title": "Custom Builder - MKWorld Tools",
+    "description": "Create optimal customizations by combining drivers and machines",
+    "pageTitle": "Custom Builder",
+    "driverSelection": {
+      "title": "Select Driver",
+      "placeholder": "Please select a driver"
+    },
+    "machineSelection": {
+      "title": "Select Machine",
+      "placeholder": "Please select a machine"
+    },
+    "statsDisplay": {
+      "title": "Total Performance"
+    }
+  },
+  "pareto": {
+    "title": "Pareto Optimal - MKWorld Tools",
+    "description": "Find optimal driver and machine combinations based on specified criteria",
+    "pageTitle": "Pareto Optimal",
+    "optimization": {
+      "title": "Optimization Criteria",
+      "description": "Select the performance aspects you want to prioritize"
+    },
+    "results": {
+      "title": "Optimal Combinations",
+      "score": "Score"
+    }
+  },
+  "terms": {
+    "title": "Terms of Service - MKWorld Tools",
+    "description": "Terms of Service for MKWorld Tools",
+    "pageTitle": "Terms of Service"
   }
 }

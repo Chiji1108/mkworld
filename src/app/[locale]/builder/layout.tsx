@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "カスタムビルダー",
-  description: "マリオカートワールドのドライバーとマシンを組み合わせてカスタムビルドを作成。リアルタイムで性能統計を確認し、最適な組み合わせを見つけましょう。",
-  keywords: ["マリオカート", "カスタムビルダー", "ドライバー", "マシン", "組み合わせ", "性能分析"],
-  openGraph: {
-    title: "カスタムビルダー | MKWorld Tools",
-    description: "ドライバーとマシンを組み合わせてカスタムビルドを作成。リアルタイムで性能統計を確認できます。",
-    url: "https://mkworld-tools.vercel.app/builder",
-  },
-  twitter: {
-    title: "カスタムビルダー | MKWorld Tools",
-    description: "ドライバーとマシンを組み合わせてカスタムビルドを作成。リアルタイムで性能統計を確認できます。",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'builder' });
+  
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: "https://mkworld-tools.vercel.app/builder",
+    },
+    twitter: {
+      title: t('title'),
+      description: t('description'),
+    },
+  };
+}
 
 export default function BuilderLayout({
   children,

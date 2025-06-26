@@ -19,10 +19,12 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function PerformancePage() {
+  const t = useTranslations();
   const [driverSearch, setDriverSearch] = useState("");
   const [machineSearch, setMachineSearch] = useState("");
   const [driverSpecFilter, setDriverSpecFilter] = useState<
@@ -63,9 +65,7 @@ export default function PerformancePage() {
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
         <Input
-          placeholder={`${
-            type === "driver" ? "ドライバー" : "マシン"
-          }を検索...`}
+          placeholder={t("performance.search.placeholder")}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
           className="w-full sm:max-w-sm"
@@ -78,11 +78,21 @@ export default function PerformancePage() {
           className="w-full sm:w-auto"
         >
           <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
-            <TabsTrigger value="all" className="text-xs sm:text-sm">全て</TabsTrigger>
-            <TabsTrigger value="smooth" className="text-xs sm:text-sm">硬</TabsTrigger>
-            <TabsTrigger value="rough" className="text-xs sm:text-sm">柔</TabsTrigger>
-            <TabsTrigger value="water" className="text-xs sm:text-sm">液</TabsTrigger>
-            <TabsTrigger value="balance" className="text-xs sm:text-sm">バランス</TabsTrigger>
+            <TabsTrigger value="all" className="text-xs sm:text-sm">
+              全て
+            </TabsTrigger>
+            <TabsTrigger value="hard" className="text-xs sm:text-sm">
+              硬
+            </TabsTrigger>
+            <TabsTrigger value="soft" className="text-xs sm:text-sm">
+              柔
+            </TabsTrigger>
+            <TabsTrigger value="liquid" className="text-xs sm:text-sm">
+              液
+            </TabsTrigger>
+            <TabsTrigger value="balance" className="text-xs sm:text-sm">
+              バランス
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -90,14 +100,26 @@ export default function PerformancePage() {
         <TableHeader>
           <TableRow>
             <TableHead className="text-center">
-              {type === "driver" ? "ドライバー" : "マシン"}
+              {type === "driver" ? t("stats.driver") : t("stats.machine")}
             </TableHead>
-            <TableHead className="w-1/6 text-center">スピード（硬）</TableHead>
-            <TableHead className="w-1/6 text-center">スピード（柔）</TableHead>
-            <TableHead className="w-1/6 text-center">スピード（液）</TableHead>
-            <TableHead className="w-1/6 text-center">かそく</TableHead>
-            <TableHead className="w-1/6 text-center">おもさ</TableHead>
-            <TableHead className="w-1/6 text-center">まがりやすさ</TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.speedHard")}
+            </TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.speedSoft")}
+            </TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.speedLiquid")}
+            </TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.acceleration")}
+            </TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.weight")}
+            </TableHead>
+            <TableHead className="w-1/6 text-center">
+              {t("stats.handling")}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -125,24 +147,24 @@ export default function PerformancePage() {
                   </div>
                 </TableCell>
                 <TableCell className="text-center">
-                  {specialization === "smooth" ? (
-                    <Badge variant="default">{item.speed.smooth}</Badge>
+                  {specialization === "hard" ? (
+                    <Badge variant="default">{item.speed.hard}</Badge>
                   ) : (
-                    item.speed.smooth
+                    item.speed.hard
                   )}
                 </TableCell>
                 <TableCell className="text-center">
-                  {specialization === "rough" ? (
-                    <Badge variant="default">{item.speed.rough}</Badge>
+                  {specialization === "soft" ? (
+                    <Badge variant="default">{item.speed.soft}</Badge>
                   ) : (
-                    item.speed.rough
+                    item.speed.soft
                   )}
                 </TableCell>
                 <TableCell className="text-center">
-                  {specialization === "water" ? (
-                    <Badge variant="default">{item.speed.water}</Badge>
+                  {specialization === "liquid" ? (
+                    <Badge variant="default">{item.speed.liquid}</Badge>
                   ) : (
-                    item.speed.water
+                    item.speed.liquid
                   )}
                 </TableCell>
                 <TableCell className="text-center">
@@ -161,26 +183,26 @@ export default function PerformancePage() {
   return (
     <div className="container mx-auto py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-blue-600 mb-2">性能一覧</h1>
-        <p className="text-muted-foreground">
-          全ドライバーとマシンの性能を確認できます
-        </p>
+        <h1 className="text-4xl font-bold text-blue-600 mb-2">
+          {t("performance.pageTitle")}
+        </h1>
+        <p className="text-muted-foreground">{t("performance.description")}</p>
       </div>
 
       <Tabs defaultValue="drivers" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="drivers">
-            ドライバー ({GROUPED_DRIVERS.length}グループ)
+            {t("performance.tabs.drivers")} ({GROUPED_DRIVERS.length})
           </TabsTrigger>
           <TabsTrigger value="machines">
-            マシン ({GROUPED_MACHINES.length}グループ)
+            {t("performance.tabs.machines")} ({GROUPED_MACHINES.length})
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="drivers" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>ドライバー性能一覧</CardTitle>
+              <CardTitle>{t("performance.tabs.drivers")}</CardTitle>
             </CardHeader>
             <CardContent>
               {renderStatsTable(
@@ -198,7 +220,7 @@ export default function PerformancePage() {
         <TabsContent value="machines" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>マシン性能一覧</CardTitle>
+              <CardTitle>{t("performance.tabs.machines")}</CardTitle>
             </CardHeader>
             <CardContent>
               {renderStatsTable(

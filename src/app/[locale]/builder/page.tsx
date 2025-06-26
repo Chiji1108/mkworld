@@ -14,10 +14,12 @@ import {
   GROUPED_MACHINES,
   type GroupedStats,
 } from "@/lib/stats";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function BuilderPage() {
+  const t = useTranslations();
   const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(
     null
   );
@@ -73,24 +75,22 @@ export default function BuilderPage() {
     <div className="container mx-auto py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-2">
-          カスタムビルダー
+          {t("builder.pageTitle")}
         </h1>
-        <p className="text-muted-foreground">
-          ドライバーとマシンを組み合わせて性能を確認できます
-        </p>
+        <p className="text-muted-foreground">{t("builder.description")}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card>
           <CardHeader>
-            <CardTitle>ドライバー選択</CardTitle>
+            <CardTitle>{t("builder.driverSelection.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             {renderSelector(
               GROUPED_DRIVERS,
               selectedDriver,
               setSelectedDriver,
-              "ドライバーを選択してください"
+              t("builder.driverSelection.placeholder")
             )}
 
             {selectedDriver && (
@@ -99,7 +99,9 @@ export default function BuilderPage() {
                   className="p-4 rounded-lg border"
                   style={{ backgroundColor: selectedDriver.color }}
                 >
-                  <h4 className="font-medium mb-3">選択中のドライバー</h4>
+                  <h4 className="font-medium mb-3">
+                    {t("builder.driverSelection.title")}
+                  </h4>
                   <div className="space-y-3">
                     {selectedDriver.names.map((name) => (
                       <div key={name} className="flex items-center space-x-3">
@@ -119,20 +121,26 @@ export default function BuilderPage() {
                 <div className="space-y-3">
                   {[
                     {
-                      name: "スピード（硬）",
-                      value: selectedDriver.speed.smooth,
+                      name: t("stats.speedHard"),
+                      value: selectedDriver.speed.hard,
                     },
                     {
-                      name: "スピード（柔）",
-                      value: selectedDriver.speed.rough,
+                      name: t("stats.speedSoft"),
+                      value: selectedDriver.speed.soft,
                     },
                     {
-                      name: "スピード（液）",
-                      value: selectedDriver.speed.water,
+                      name: t("stats.speedLiquid"),
+                      value: selectedDriver.speed.liquid,
                     },
-                    { name: "かそく", value: selectedDriver.acceleration },
-                    { name: "おもさ", value: selectedDriver.weight },
-                    { name: "まがりやすさ", value: selectedDriver.handling },
+                    {
+                      name: t("stats.acceleration"),
+                      value: selectedDriver.acceleration,
+                    },
+                    { name: t("stats.weight"), value: selectedDriver.weight },
+                    {
+                      name: t("stats.handling"),
+                      value: selectedDriver.handling,
+                    },
                   ].map((stat) => {
                     const percent = (stat.value / 10) * 100;
                     return (
@@ -172,14 +180,14 @@ export default function BuilderPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>マシン選択</CardTitle>
+            <CardTitle>{t("builder.machineSelection.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             {renderSelector(
               GROUPED_MACHINES,
               selectedMachine,
               setSelectedMachine,
-              "マシンを選択してください"
+              t("builder.machineSelection.placeholder")
             )}
 
             {selectedMachine && (
@@ -188,7 +196,9 @@ export default function BuilderPage() {
                   className="p-4 rounded-lg border"
                   style={{ backgroundColor: selectedMachine.color }}
                 >
-                  <h4 className="font-medium mb-3">選択中のマシン</h4>
+                  <h4 className="font-medium mb-3">
+                    {t("builder.machineSelection.title")}
+                  </h4>
                   <div className="space-y-3">
                     {selectedMachine.names.map((name) => (
                       <div key={name} className="flex items-center space-x-3">
@@ -208,20 +218,26 @@ export default function BuilderPage() {
                 <div className="space-y-3">
                   {[
                     {
-                      name: "スピード（硬）",
-                      value: selectedMachine.speed.smooth,
+                      name: t("stats.speedHard"),
+                      value: selectedMachine.speed.hard,
                     },
                     {
-                      name: "スピード（柔）",
-                      value: selectedMachine.speed.rough,
+                      name: t("stats.speedSoft"),
+                      value: selectedMachine.speed.soft,
                     },
                     {
-                      name: "スピード（液）",
-                      value: selectedMachine.speed.water,
+                      name: t("stats.speedLiquid"),
+                      value: selectedMachine.speed.liquid,
                     },
-                    { name: "かそく", value: selectedMachine.acceleration },
-                    { name: "おもさ", value: selectedMachine.weight },
-                    { name: "まがりやすさ", value: selectedMachine.handling },
+                    {
+                      name: t("stats.acceleration"),
+                      value: selectedMachine.acceleration,
+                    },
+                    { name: t("stats.weight"), value: selectedMachine.weight },
+                    {
+                      name: t("stats.handling"),
+                      value: selectedMachine.handling,
+                    },
                   ].map((stat) => {
                     const percent = (stat.value / 10) * 100;
                     return (
@@ -266,15 +282,17 @@ export default function BuilderPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="mb-4">合計性能</CardTitle>
+              <CardTitle className="mb-4">
+                {t("builder.statsDisplay.title")}
+              </CardTitle>
               <div className="flex items-center gap-6 text-base w-full justify-center">
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-blue-500 rounded"></div>
-                  <span>ドライバー</span>
+                  <span>{t("stats.driver")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-green-500 rounded"></div>
-                  <span>マシン</span>
+                  <span>{t("stats.machine")}</span>
                 </div>
               </div>
             </CardHeader>
@@ -282,32 +300,32 @@ export default function BuilderPage() {
               <div className="space-y-4">
                 {[
                   {
-                    name: "スピード（硬）",
-                    driver: selectedDriver.speed.smooth,
-                    machine: selectedMachine.speed.smooth,
+                    name: t("stats.speedHard"),
+                    driver: selectedDriver.speed.hard,
+                    machine: selectedMachine.speed.hard,
                   },
                   {
-                    name: "スピード（柔）",
-                    driver: selectedDriver.speed.rough,
-                    machine: selectedMachine.speed.rough,
+                    name: t("stats.speedSoft"),
+                    driver: selectedDriver.speed.soft,
+                    machine: selectedMachine.speed.soft,
                   },
                   {
-                    name: "スピード（液）",
-                    driver: selectedDriver.speed.water,
-                    machine: selectedMachine.speed.water,
+                    name: t("stats.speedLiquid"),
+                    driver: selectedDriver.speed.liquid,
+                    machine: selectedMachine.speed.liquid,
                   },
                   {
-                    name: "かそく",
+                    name: t("stats.acceleration"),
                     driver: selectedDriver.acceleration,
                     machine: selectedMachine.acceleration,
                   },
                   {
-                    name: "おもさ",
+                    name: t("stats.weight"),
                     driver: selectedDriver.weight,
                     machine: selectedMachine.weight,
                   },
                   {
-                    name: "まがりやすさ",
+                    name: t("stats.handling"),
                     driver: selectedDriver.handling,
                     machine: selectedMachine.handling,
                   },

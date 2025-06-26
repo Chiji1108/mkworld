@@ -10,38 +10,46 @@ import {
 import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
-export const metadata: Metadata = {
-  title: "ホーム",
-  description: "MKWorld Tools - マリオカートワールドの50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。カスタムビルダー、性能一覧、パレート最適化機能をご利用ください。",
-  openGraph: {
-    title: "MKWorld Tools - マリオカートワールド カスタムビルダー",
-    description: "50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。カスタムビルダー、性能一覧、パレート最適化機能付き。",
-    url: "https://mkworld-tools.vercel.app",
-  },
-  twitter: {
-    title: "MKWorld Tools - マリオカートワールド カスタムビルダー",
-    description: "50人のドライバーと40台のマシンを組み合わせて最適なカスタムビルドを作成。",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'home' });
+  
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: "https://mkworld-tools.vercel.app",
+    },
+    twitter: {
+      title: t('title'),
+      description: t('description'),
+    },
+  };
+}
 
 export default function Home() {
+  const t = useTranslations();
   const features = [
     {
-      title: "カスタムビルダー",
-      description: "ドライバーとマシンを組み合わせて最適な性能を作成",
+      title: t('home.features.builder.title'),
+      description: t('home.features.builder.description'),
       icon: Wrench,
       href: "/builder",
     },
     {
-      title: "性能一覧",
-      description: "全ドライバーとマシンの詳細な性能データを確認",
+      title: t('home.features.performance.title'),
+      description: t('home.features.performance.description'),
       icon: BarChart3,
       href: "/performance",
     },
     {
-      title: "パレート最適",
-      description: "指定した条件に基づいて最適な組み合わせを自動検索",
+      title: t('home.features.pareto.title'),
+      description: t('home.features.pareto.description'),
       icon: Search,
       href: "/pareto",
     },
@@ -51,7 +59,7 @@ export default function Home() {
     <div className="container mx-auto pb-12">
       <div className="flex justify-center items-center my-24 sm:my-32">
         <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-6xl sm:text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
-          MKWorld Tools
+          {t('common.appName')}
         </span>
       </div>
 
@@ -81,7 +89,7 @@ export default function Home() {
                   asChild
                   className="w-full bg-blue-600 hover:bg-blue-700"
                 >
-                  <Link href={feature.href}>使ってみる</Link>
+                  <Link href={feature.href}>{t('common.select')}</Link>
                 </Button>
               </CardContent>
             </Card>

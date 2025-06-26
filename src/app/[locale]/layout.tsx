@@ -1,11 +1,11 @@
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 import { StructuredData } from "@/components/structured-data";
 import { routing } from "@/i18n/routing";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import "../globals.css";
 
@@ -121,24 +121,7 @@ export default async function RootLayout({
           <main className="min-h-screen bg-background px-4 sm:px-6 lg:px-8">
             {children}
           </main>
-          <footer className="border-t bg-background py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-              <div>
-                © 2025{" "}
-                <Link
-                  href="https://x.com/chiji1108"
-                  target="_blank"
-                  className="text-primary hover:underline"
-                >
-                  Chiji1108
-                </Link>
-                . All rights reserved.
-              </div>
-              <Link href="/terms" className="text-primary hover:underline">
-                利用規約
-              </Link>
-            </div>
-          </footer>
+          <Footer />
         </NextIntlClientProvider>
         <Analytics />
       </body>

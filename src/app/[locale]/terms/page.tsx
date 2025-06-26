@@ -1,12 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function TermsPage() {
+  const t = useTranslations();
   return (
     <div className="container mx-auto py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-blue-600 mb-2">利用規約</h1>
-        <p className="text-muted-foreground">MKWorld Tools利用規約</p>
+        <h1 className="text-4xl font-bold text-blue-600 mb-2">{t('terms.pageTitle')}</h1>
+        <p className="text-muted-foreground">{t('terms.description')}</p>
       </div>
 
       <div className="space-y-6">
