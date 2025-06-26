@@ -5,55 +5,80 @@ import Image from "next/image";
 import { GROUPED_DRIVERS, GROUPED_MACHINES, type GroupedStats } from "@/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 
 export default function BuilderPage() {
   const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(null);
   const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(null);
+  const [driverOpen, setDriverOpen] = useState(false);
+  const [machineOpen, setMachineOpen] = useState(false);
 
 
   const renderSelector = (
     items: GroupedStats[],
     selected: GroupedStats | null,
     onSelect: (item: GroupedStats) => void,
-    type: "driver" | "machine"
+    type: "driver" | "machine",
+    placeholder: string,
+    open: boolean,
+    setOpen: (open: boolean) => void
   ) => (
-    <ScrollArea className="h-[400px] w-full rounded-md border">
-      <div className="grid grid-cols-2 gap-2 p-4">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className={cn(
-              "cursor-pointer rounded-lg border-2 p-2 transition-all",
-              selected === item
-                ? "border-primary bg-primary/10"
-                : "border-transparent hover:border-gray-300",
-              "hover:shadow-md"
-            )}
-            style={{ backgroundColor: selected === item ? undefined : item.color }}
-            onClick={() => onSelect(item)}
-          >
-            <div className="space-y-2">
-              {item.names.map((name) => (
-                <div key={name} className="flex items-center space-x-2">
-                  <div className="w-10 h-10 relative flex-shrink-0">
-                    <Image
-                      src={`/${type === "driver" ? "drivers" : "machines"}/${name}.png`}
-                      alt={name}
-                      fill
-                      className="object-contain rounded"
-                    />
-                  </div>
-                  <span className="text-xs">{name}</span>
-                </div>
-              ))}
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-full justify-between"
+        >
+          {selected ? (
+            <div className="flex items-center space-x-3">
+              <div className="w-4 h-4 rounded" style={{ backgroundColor: selected.color }}></div>
+              <span>{selected.names.join(", ")}</span>
             </div>
-          </div>
-        ))}
-      </div>
-    </ScrollArea>
+          ) : (
+            placeholder
+          )}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput placeholder={`${type === "driver" ? "ドライバー" : "マシン"}を検索...`} />
+          <CommandList>
+            <CommandEmpty>見つかりません</CommandEmpty>
+            <CommandGroup>
+              {items.map((item, index) => (
+                <CommandItem
+                  key={index}
+                  value={item.names.join(" ")}
+                  onSelect={() => {
+                    onSelect(item);
+                    setOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      selected === item ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  <div className="flex items-center space-x-3">
+                    <div className="w-4 h-4 rounded" style={{ backgroundColor: item.color }}></div>
+                    <span>{item.names.join(", ")}</span>
+                  </div>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 
   return (
@@ -77,7 +102,10 @@ export default function BuilderPage() {
               GROUPED_DRIVERS,
               selectedDriver,
               setSelectedDriver,
-              "driver"
+              "driver",
+              "ドライバーを選択してください",
+              driverOpen,
+              setDriverOpen
             )}
 
             {selectedDriver && (
@@ -140,7 +168,10 @@ export default function BuilderPage() {
               GROUPED_MACHINES,
               selectedMachine,
               setSelectedMachine,
-              "machine"
+              "machine",
+              "マシンを選択してください",
+              machineOpen,
+              setMachineOpen
             )}
 
             {selectedMachine && (
