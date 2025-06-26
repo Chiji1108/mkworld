@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { GROUPED_DRIVERS, GROUPED_MACHINES, type GroupedStats } from "@/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
+import {
+  GROUPED_DRIVERS,
+  GROUPED_MACHINES,
+  type GroupedStats,
+} from "@/lib/stats";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function BuilderPage() {
-  const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(null);
-  const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(null);
-
+  const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(
+    null
+  );
+  const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(
+    null
+  );
 
   const renderSelector = (
     items: GroupedStats[],
@@ -32,7 +44,10 @@ export default function BuilderPage() {
         <SelectValue placeholder={placeholder}>
           {selected && (
             <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 rounded" style={{ backgroundColor: selected.color }}></div>
+              <div
+                className="w-4 h-4 rounded"
+                style={{ backgroundColor: selected.color }}
+              ></div>
               <span>{selected.names.join(", ")}</span>
             </div>
           )}
@@ -42,7 +57,10 @@ export default function BuilderPage() {
         {items.map((item, index) => (
           <SelectItem key={index} value={index.toString()}>
             <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 rounded" style={{ backgroundColor: item.color }}></div>
+              <div
+                className="w-4 h-4 rounded"
+                style={{ backgroundColor: item.color }}
+              ></div>
               <span>{item.names.join(", ")}</span>
             </div>
           </SelectItem>
@@ -77,7 +95,10 @@ export default function BuilderPage() {
 
             {selectedDriver && (
               <div className="mt-4 space-y-4">
-                <div className="p-4 rounded-lg border" style={{ backgroundColor: selectedDriver.color }}>
+                <div
+                  className="p-4 rounded-lg border"
+                  style={{ backgroundColor: selectedDriver.color }}
+                >
                   <h4 className="font-medium mb-3">選択中のドライバー</h4>
                   <div className="space-y-3">
                     {selectedDriver.names.map((name) => (
@@ -97,9 +118,18 @@ export default function BuilderPage() {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { name: "スピード（滑）", value: selectedDriver.speed.smooth },
-                    { name: "スピード（荒）", value: selectedDriver.speed.rough },
-                    { name: "スピード（水）", value: selectedDriver.speed.water },
+                    {
+                      name: "スピード（滑）",
+                      value: selectedDriver.speed.smooth,
+                    },
+                    {
+                      name: "スピード（荒）",
+                      value: selectedDriver.speed.rough,
+                    },
+                    {
+                      name: "スピード（水）",
+                      value: selectedDriver.speed.water,
+                    },
                     { name: "かそく", value: selectedDriver.acceleration },
                     { name: "おもさ", value: selectedDriver.weight },
                     { name: "まがりやすさ", value: selectedDriver.handling },
@@ -108,14 +138,28 @@ export default function BuilderPage() {
                     return (
                       <div key={stat.name} className="space-y-1">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-medium">{stat.name}</span>
-                          <span className="text-sm font-bold">{stat.value}</span>
+                          <span className="text-sm font-medium">
+                            {stat.name}
+                          </span>
+                          <span className="text-sm font-bold">
+                            {stat.value}
+                          </span>
                         </div>
                         <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
-                          <div 
+                          <div
                             className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-500 ease-out"
                             style={{ width: `${Math.min(percent, 100)}%` }}
                           ></div>
+                          {/* Scale markers */}
+                          <div className="absolute inset-0 flex">
+                            {[2.5, 5, 7.5].map((marker) => (
+                              <div
+                                key={marker}
+                                className="absolute top-0 bottom-0 w-px bg-white/70"
+                                style={{ left: `${(marker / 10) * 100}%` }}
+                              ></div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     );
@@ -140,7 +184,10 @@ export default function BuilderPage() {
 
             {selectedMachine && (
               <div className="mt-4 space-y-4">
-                <div className="p-4 rounded-lg border" style={{ backgroundColor: selectedMachine.color }}>
+                <div
+                  className="p-4 rounded-lg border"
+                  style={{ backgroundColor: selectedMachine.color }}
+                >
                   <h4 className="font-medium mb-3">選択中のマシン</h4>
                   <div className="space-y-3">
                     {selectedMachine.names.map((name) => (
@@ -160,9 +207,18 @@ export default function BuilderPage() {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { name: "スピード（滑）", value: selectedMachine.speed.smooth },
-                    { name: "スピード（荒）", value: selectedMachine.speed.rough },
-                    { name: "スピード（水）", value: selectedMachine.speed.water },
+                    {
+                      name: "スピード（滑）",
+                      value: selectedMachine.speed.smooth,
+                    },
+                    {
+                      name: "スピード（荒）",
+                      value: selectedMachine.speed.rough,
+                    },
+                    {
+                      name: "スピード（水）",
+                      value: selectedMachine.speed.water,
+                    },
                     { name: "かそく", value: selectedMachine.acceleration },
                     { name: "おもさ", value: selectedMachine.weight },
                     { name: "まがりやすさ", value: selectedMachine.handling },
@@ -171,14 +227,28 @@ export default function BuilderPage() {
                     return (
                       <div key={stat.name} className="space-y-1">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-medium">{stat.name}</span>
-                          <span className="text-sm font-bold">{stat.value}</span>
+                          <span className="text-sm font-medium">
+                            {stat.name}
+                          </span>
+                          <span className="text-sm font-bold">
+                            {stat.value}
+                          </span>
                         </div>
                         <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
-                          <div 
+                          <div
                             className="absolute left-0 top-0 h-full bg-green-500 transition-all duration-500 ease-out"
                             style={{ width: `${Math.min(percent, 100)}%` }}
                           ></div>
+                          {/* Scale markers */}
+                          <div className="absolute inset-0 flex">
+                            {[2.5, 5, 7.5].map((marker) => (
+                              <div
+                                key={marker}
+                                className="absolute top-0 bottom-0 w-px bg-white/70"
+                                style={{ left: `${(marker / 10) * 100}%` }}
+                              ></div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     );
@@ -193,10 +263,10 @@ export default function BuilderPage() {
       {selectedDriver && selectedMachine && (
         <div className="mt-8">
           <Separator className="mb-8" />
-          
+
           <Card>
             <CardHeader>
-              <CardTitle>合計性能</CardTitle>
+              <CardTitle className="mb-4">合計性能</CardTitle>
               <div className="flex items-center gap-6 text-base w-full justify-center">
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-blue-500 rounded"></div>
@@ -211,39 +281,70 @@ export default function BuilderPage() {
             <CardContent>
               <div className="space-y-4">
                 {[
-                  { name: "スピード（滑）", driver: selectedDriver.speed.smooth, machine: selectedMachine.speed.smooth },
-                  { name: "スピード（荒）", driver: selectedDriver.speed.rough, machine: selectedMachine.speed.rough },
-                  { name: "スピード（水）", driver: selectedDriver.speed.water, machine: selectedMachine.speed.water },
-                  { name: "かそく", driver: selectedDriver.acceleration, machine: selectedMachine.acceleration },
-                  { name: "おもさ", driver: selectedDriver.weight, machine: selectedMachine.weight },
-                  { name: "まがりやすさ", driver: selectedDriver.handling, machine: selectedMachine.handling },
+                  {
+                    name: "スピード（滑）",
+                    driver: selectedDriver.speed.smooth,
+                    machine: selectedMachine.speed.smooth,
+                  },
+                  {
+                    name: "スピード（荒）",
+                    driver: selectedDriver.speed.rough,
+                    machine: selectedMachine.speed.rough,
+                  },
+                  {
+                    name: "スピード（水）",
+                    driver: selectedDriver.speed.water,
+                    machine: selectedMachine.speed.water,
+                  },
+                  {
+                    name: "かそく",
+                    driver: selectedDriver.acceleration,
+                    machine: selectedMachine.acceleration,
+                  },
+                  {
+                    name: "おもさ",
+                    driver: selectedDriver.weight,
+                    machine: selectedMachine.weight,
+                  },
+                  {
+                    name: "まがりやすさ",
+                    driver: selectedDriver.handling,
+                    machine: selectedMachine.handling,
+                  },
                 ].map((stat) => {
                   const total = stat.driver + stat.machine;
                   const driverPercent = (stat.driver / 20) * 100;
                   const machinePercent = (stat.machine / 20) * 100;
-                  
+
                   return (
                     <div key={stat.name} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">{stat.name}</span>
                         <div className="flex items-center gap-3 text-base">
-                          <span className="text-blue-600 font-medium">{stat.driver}</span>
+                          <span className="text-blue-600 font-medium">
+                            {stat.driver}
+                          </span>
                           <span className="text-gray-400">+</span>
-                          <span className="text-green-600 font-medium">{stat.machine}</span>
+                          <span className="text-green-600 font-medium">
+                            {stat.machine}
+                          </span>
                           <span className="text-gray-400">=</span>
                           <span className="font-bold">{total}</span>
                         </div>
                       </div>
-                      <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden">
-                        <div 
+                      <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                        <div
                           className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-500 ease-out"
                           style={{ width: `${Math.min(driverPercent, 100)}%` }}
                         ></div>
-                        <div 
+                        <div
                           className="absolute top-0 h-full bg-green-500 transition-all duration-500 ease-out"
-                          style={{ 
+                          style={{
                             left: `${Math.min(driverPercent, 100)}%`,
-                            width: `${Math.min(machinePercent, 100 - Math.min(driverPercent, 100))}%`
+                            width: `${Math.min(
+                              machinePercent,
+                              100 - Math.min(driverPercent, 100)
+                            )}%`,
                           }}
                         ></div>
                         {/* Scale markers */}
