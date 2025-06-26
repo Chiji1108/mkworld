@@ -13,16 +13,16 @@ import Link from "next/link";
 export default function Home() {
   const features = [
     {
-      title: "性能一覧",
-      description: "全ドライバーとマシンの詳細な性能データを確認",
-      icon: BarChart3,
-      href: "/performance",
-    },
-    {
       title: "カスタムビルダー",
       description: "ドライバーとマシンを組み合わせて最適な性能を作成",
       icon: Wrench,
       href: "/builder",
+    },
+    {
+      title: "性能一覧",
+      description: "全ドライバーとマシンの詳細な性能データを確認",
+      icon: BarChart3,
+      href: "/performance",
     },
     {
       title: "パレート最適",

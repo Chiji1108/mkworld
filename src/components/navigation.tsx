@@ -8,16 +8,16 @@ import { usePathname } from "next/navigation";
 
 const navigationItems = [
   {
-    name: "性能一覧",
-    href: "/performance",
-    icon: BarChart3,
-    description: "全ドライバーとマシンの性能表",
-  },
-  {
     name: "カスタムビルダー",
     href: "/builder",
     icon: Wrench,
     description: "組み合わせて性能を確認",
+  },
+  {
+    name: "性能一覧",
+    href: "/performance",
+    icon: BarChart3,
+    description: "全ドライバーとマシンの性能表",
   },
   {
     name: "パレート最適",
