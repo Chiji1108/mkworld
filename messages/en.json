@@ -59,6 +59,28 @@
     },
     "search": {
       "placeholder": "Search by name..."
+    },
+    "filters": {
+      "all": "All",
+      "hard": "Hard",
+      "soft": "Soft", 
+      "liquid": "Liquid",
+      "balance": "Balance"
+    },
+    "speedInfo": {
+      "title": "About Speed Types",
+      "hard": {
+        "title": "Speed (Hard)",
+        "description": "Performance on hard surfaces like roads, cobblestone, wood, ice"
+      },
+      "soft": {
+        "title": "Speed (Soft)",
+        "description": "Performance on soft surfaces like sand, dirt, snow"
+      },
+      "liquid": {
+        "title": "Speed (Liquid)",
+        "description": "Performance on liquid surfaces like water, lava"
+      }
     }
   },
   "builder": {

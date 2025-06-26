@@ -59,6 +59,28 @@
     },
     "search": {
       "placeholder": "名前で検索..."
+    },
+    "filters": {
+      "all": "全て",
+      "hard": "硬",
+      "soft": "柔",
+      "liquid": "液",
+      "balance": "バランス"
+    },
+    "speedInfo": {
+      "title": "スピード種類について",
+      "hard": {
+        "title": "スピード（硬）",
+        "description": "道路、石畳、木、氷など硬い路面での性能"
+      },
+      "soft": {
+        "title": "スピード（柔）",
+        "description": "砂地、土上、雪上など柔らかい路面での性能"
+      },
+      "liquid": {
+        "title": "スピード（液）",
+        "description": "水上、溶岩など液状の路面での性能"
+      }
     }
   },
   "builder": {

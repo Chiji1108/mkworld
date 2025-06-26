@@ -8,17 +8,7 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-export async function generateImageMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'og' });
-  
-  return [
-    {
-      id: 'default',
-      alt: `${t('title')} - ${t('subtitle')}`,
-    },
-  ];
-}
+export const alt = 'MKWorld Tools - Mario Kart World Custom Builder';
 
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

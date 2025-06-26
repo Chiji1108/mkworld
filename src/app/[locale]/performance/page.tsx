@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Info, Mountain, Waves, Droplets } from "lucide-react";
 import type { SpeedSpecialization } from "@/lib/stats";
 import {
   GROUPED_DRIVERS,
@@ -79,19 +80,19 @@ export default function PerformancePage() {
         >
           <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
             <TabsTrigger value="all" className="text-xs sm:text-sm">
-              全て
+              {t('performance.filters.all')}
             </TabsTrigger>
             <TabsTrigger value="hard" className="text-xs sm:text-sm">
-              硬
+              {t('performance.filters.hard')}
             </TabsTrigger>
             <TabsTrigger value="soft" className="text-xs sm:text-sm">
-              柔
+              {t('performance.filters.soft')}
             </TabsTrigger>
             <TabsTrigger value="liquid" className="text-xs sm:text-sm">
-              液
+              {t('performance.filters.liquid')}
             </TabsTrigger>
             <TabsTrigger value="balance" className="text-xs sm:text-sm">
-              バランス
+              {t('performance.filters.balance')}
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -188,6 +189,55 @@ export default function PerformancePage() {
         </h1>
         <p className="text-muted-foreground">{t("performance.description")}</p>
       </div>
+
+      {/* Speed Info Section */}
+      <Card className="mb-8 border-blue-200 bg-blue-50/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-700">
+            <Info className="w-5 h-5" />
+            {t("performance.speedInfo.title")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-stone-100 border border-stone-200">
+              <Mountain className="w-5 h-5 text-stone-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-stone-700 mb-1">
+                  {t("performance.speedInfo.hard.title")}
+                </h4>
+                <p className="text-sm text-stone-600">
+                  {t("performance.speedInfo.hard.description")}
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-100 border border-amber-200">
+              <Waves className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-amber-700 mb-1">
+                  {t("performance.speedInfo.soft.title")}
+                </h4>
+                <p className="text-sm text-amber-600">
+                  {t("performance.speedInfo.soft.description")}
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-100 border border-blue-200">
+              <Droplets className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-blue-700 mb-1">
+                  {t("performance.speedInfo.liquid.title")}
+                </h4>
+                <p className="text-sm text-blue-600">
+                  {t("performance.speedInfo.liquid.description")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <Tabs defaultValue="drivers" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
