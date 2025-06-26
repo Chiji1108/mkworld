@@ -34,20 +34,67 @@ const findMachineByKey = (key: string): GroupedStats | null => {
 };
 
 export default async function Image({ 
-  searchParams,
-}: { 
+  searchParams 
+}: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   try {
-    const search = await searchParams;
-
-    // URLパラメータから選択状態を取得
-    const driverKey = typeof search.driver === 'string' ? search.driver : '';
-    const machineKey = typeof search.machine === 'string' ? search.machine : '';
+    // searchParamsをawaitして取得
+    const params = await searchParams;
     
-    // デバッグ情報
-    console.log('Driver Key:', driverKey);
-    console.log('Machine Key:', machineKey);
+    // URLパラメータから選択状態を取得
+    const driverKey = typeof params.driver === 'string' ? params.driver : '';
+    const machineKey = typeof params.machine === 'string' ? params.machine : '';
+    
+    // デバッグ情報を画像に表示
+    const debugInfo = `Params: ${JSON.stringify(params)} | Driver: ${driverKey} | Machine: ${machineKey}`;
+    
+    // デバッグモード：パラメータの詳細を表示
+    if (driverKey === 'debug' || machineKey === 'debug') {
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: 'system-ui, sans-serif',
+              padding: '20px',
+            }}
+          >
+            <h1
+              style={{
+                fontSize: '32px',
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center',
+                marginBottom: '20px',
+              }}
+            >
+              DEBUG MODE
+            </h1>
+            <div
+              style={{
+                fontSize: '12px',
+                color: 'white',
+                textAlign: 'center',
+                wordBreak: 'break-all',
+                maxWidth: '1000px',
+              }}
+            >
+              {debugInfo}
+            </div>
+          </div>
+        ),
+        {
+          ...size,
+        }
+      );
+    }
     
     const selectedDriver = findDriverByKey(driverKey);
     const selectedMachine = findMachineByKey(machineKey);
