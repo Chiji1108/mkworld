@@ -8,91 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, Cell } from "recharts";
 
-interface CombinedStats {
-  speed: { smooth: number; rough: number; water: number };
-  acceleration: number;
-  weight: number;
-  handling: number;
-}
 
 export default function BuilderPage() {
   const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(null);
   const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(null);
 
-  const getCombinedStats = (): CombinedStats | null => {
-    if (!selectedDriver || !selectedMachine) return null;
-    
-    return {
-      speed: {
-        smooth: selectedDriver.speed.smooth + selectedMachine.speed.smooth,
-        rough: selectedDriver.speed.rough + selectedMachine.speed.rough,
-        water: selectedDriver.speed.water + selectedMachine.speed.water,
-      },
-      acceleration: selectedDriver.acceleration + selectedMachine.acceleration,
-      weight: selectedDriver.weight + selectedMachine.weight,
-      handling: selectedDriver.handling + selectedMachine.handling,
-    };
-  };
-
-  const combinedStats = getCombinedStats();
-
-  const getBarChartData = () => {
-    if (!selectedDriver || !selectedMachine) return [];
-    
-    return [
-      { 
-        name: "スピード（滑）", 
-        driver: selectedDriver.speed.smooth, 
-        machine: selectedMachine.speed.smooth,
-        total: selectedDriver.speed.smooth + selectedMachine.speed.smooth
-      },
-      { 
-        name: "スピード（荒）", 
-        driver: selectedDriver.speed.rough, 
-        machine: selectedMachine.speed.rough,
-        total: selectedDriver.speed.rough + selectedMachine.speed.rough
-      },
-      { 
-        name: "スピード（水）", 
-        driver: selectedDriver.speed.water, 
-        machine: selectedMachine.speed.water,
-        total: selectedDriver.speed.water + selectedMachine.speed.water
-      },
-      { 
-        name: "かそく", 
-        driver: selectedDriver.acceleration, 
-        machine: selectedMachine.acceleration,
-        total: selectedDriver.acceleration + selectedMachine.acceleration
-      },
-      { 
-        name: "おもさ", 
-        driver: selectedDriver.weight, 
-        machine: selectedMachine.weight,
-        total: selectedDriver.weight + selectedMachine.weight
-      },
-      { 
-        name: "まがりやすさ", 
-        driver: selectedDriver.handling, 
-        machine: selectedMachine.handling,
-        total: selectedDriver.handling + selectedMachine.handling
-      },
-    ];
-  };
-
-  const getRadarChartData = () => {
-    if (!combinedStats) return [];
-    
-    return [
-      { subject: "スピード（滑）", value: combinedStats.speed.smooth, fullMark: 20 },
-      { subject: "スピード（荒）", value: combinedStats.speed.rough, fullMark: 20 },
-      { subject: "スピード（水）", value: combinedStats.speed.water, fullMark: 20 },
-      { subject: "かそく", value: combinedStats.acceleration, fullMark: 20 },
-      { subject: "おもさ", value: combinedStats.weight, fullMark: 20 },
-      { subject: "まがりやすさ", value: combinedStats.handling, fullMark: 20 },
-    ];
-  };
 
   const renderSelector = (
     items: GroupedStats[],
@@ -227,122 +148,87 @@ export default function BuilderPage() {
         </Card>
       </div>
 
-      {combinedStats && (
-        <div className="space-y-6">
-          <Separator />
-
+      {selectedDriver && selectedMachine && (
+        <div className="mt-8">
+          <Separator className="mb-8" />
+          
           <Card>
             <CardHeader>
               <CardTitle>合計性能</CardTitle>
+              <div className="flex items-center gap-6 text-base w-full justify-center">
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 bg-blue-500 rounded"></div>
+                  <span>ドライバー</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 bg-green-500 rounded"></div>
+                  <span>マシン</span>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <Badge variant="outline" className="text-lg">
-                  スピード（滑） {combinedStats.speed.smooth}
-                </Badge>
-                <Badge variant="outline" className="text-lg">
-                  スピード（荒） {combinedStats.speed.rough}
-                </Badge>
-                <Badge variant="outline" className="text-lg">
-                  スピード（水） {combinedStats.speed.water}
-                </Badge>
-                <Badge variant="outline" className="text-lg">
-                  かそく {combinedStats.acceleration}
-                </Badge>
-                <Badge variant="outline" className="text-lg">
-                  おもさ {combinedStats.weight}
-                </Badge>
-                <Badge variant="outline" className="text-lg">
-                  まがりやすさ {combinedStats.handling}
-                </Badge>
+              <div className="space-y-4">
+                {[
+                  { name: "スピード（滑）", driver: selectedDriver.speed.smooth, machine: selectedMachine.speed.smooth },
+                  { name: "スピード（荒）", driver: selectedDriver.speed.rough, machine: selectedMachine.speed.rough },
+                  { name: "スピード（水）", driver: selectedDriver.speed.water, machine: selectedMachine.speed.water },
+                  { name: "かそく", driver: selectedDriver.acceleration, machine: selectedMachine.acceleration },
+                  { name: "おもさ", driver: selectedDriver.weight, machine: selectedMachine.weight },
+                  { name: "まがりやすさ", driver: selectedDriver.handling, machine: selectedMachine.handling },
+                ].map((stat) => {
+                  const total = stat.driver + stat.machine;
+                  const driverPercent = (stat.driver / 20) * 100;
+                  const machinePercent = (stat.machine / 20) * 100;
+                  
+                  return (
+                    <div key={stat.name} className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">{stat.name}</span>
+                        <div className="flex items-center gap-3 text-base">
+                          <span className="text-blue-600 font-medium">{stat.driver}</span>
+                          <span className="text-gray-400">+</span>
+                          <span className="text-green-600 font-medium">{stat.machine}</span>
+                          <span className="text-gray-400">=</span>
+                          <span className="font-bold">{total}</span>
+                        </div>
+                      </div>
+                      <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-500 ease-out"
+                          style={{ width: `${Math.min(driverPercent, 100)}%` }}
+                        ></div>
+                        <div 
+                          className="absolute top-0 h-full bg-green-500 transition-all duration-500 ease-out"
+                          style={{ 
+                            left: `${Math.min(driverPercent, 100)}%`,
+                            width: `${Math.min(machinePercent, 100 - Math.min(driverPercent, 100))}%`
+                          }}
+                        ></div>
+                        {/* Scale markers */}
+                        <div className="absolute inset-0 flex">
+                          {[5, 10, 15].map((marker) => (
+                            <div
+                              key={marker}
+                              className="absolute top-0 bottom-0 w-px bg-white/70"
+                              style={{ left: `${(marker / 20) * 100}%` }}
+                            ></div>
+                          ))}
+                        </div>
+                        {/* Scale labels */}
+                        <div className="absolute inset-x-0 -bottom-8 flex justify-between text-sm text-gray-500">
+                          <span>0</span>
+                          <span>5</span>
+                          <span>10</span>
+                          <span>15</span>
+                          <span>20</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>性能グラフ (棒グラフ)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={400}>
-                  <BarChart
-                    data={getBarChartData()}
-                    layout="horizontal"
-                    margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      horizontal={true}
-                      vertical={false}
-                    />
-                    <XAxis type="number" domain={[0, 20]} />
-                    <YAxis dataKey="name" type="category" width={90} />
-                    <Tooltip
-                      content={({ active, payload }) => {
-                        if (active && payload && payload.length) {
-                          const data = payload[0].payload;
-                          return (
-                            <div className="bg-white p-2 border rounded shadow-sm">
-                              <p className="font-medium">{data.name}</p>
-                              <p className="text-sm text-blue-600">
-                                ドライバー: {data.driver}
-                              </p>
-                              <p className="text-sm text-green-600">
-                                マシン: {data.machine}
-                              </p>
-                              <p className="text-sm font-medium">
-                                合計: {data.total}
-                              </p>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                    />
-                    <Legend />
-                    <Bar
-                      dataKey="driver"
-                      stackId="a"
-                      fill="#3b82f6"
-                      name="ドライバー"
-                      barSize={20}
-                    />
-                    <Bar
-                      dataKey="machine"
-                      stackId="a"
-                      fill="#10b981"
-                      name="マシン"
-                      barSize={20}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>性能グラフ (レーダーチャート)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={400}>
-                  <RadarChart data={getRadarChartData()}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="subject" />
-                    <PolarRadiusAxis angle={90} domain={[0, 20]} />
-                    <Radar
-                      name="性能"
-                      dataKey="value"
-                      stroke="#3b82f6"
-                      fill="#3b82f6"
-                      fillOpacity={0.3}
-                    />
-                    <Tooltip />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       )}
     </div>
