@@ -319,8 +319,8 @@ export default function BuilderPage() {
                   return (
                     <div key={stat.name} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">{stat.name}</span>
-                        <div className="flex items-center gap-3 text-base">
+                        <span className="text-sm font-medium">{stat.name}</span>
+                        <div className="flex items-center gap-3 text-sm">
                           <span className="text-blue-600 font-medium">
                             {stat.driver}
                           </span>
