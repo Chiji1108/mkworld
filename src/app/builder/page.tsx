@@ -5,80 +5,50 @@ import Image from "next/image";
 import { GROUPED_DRIVERS, GROUPED_MACHINES, type GroupedStats } from "@/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 export default function BuilderPage() {
   const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(null);
   const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(null);
-  const [driverOpen, setDriverOpen] = useState(false);
-  const [machineOpen, setMachineOpen] = useState(false);
 
 
   const renderSelector = (
     items: GroupedStats[],
     selected: GroupedStats | null,
     onSelect: (item: GroupedStats) => void,
-    type: "driver" | "machine",
-    placeholder: string,
-    open: boolean,
-    setOpen: (open: boolean) => void
+    placeholder: string
   ) => (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between"
-        >
-          {selected ? (
+    <Select
+      value={selected ? items.indexOf(selected).toString() : ""}
+      onValueChange={(value) => {
+        const index = parseInt(value);
+        if (index >= 0 && index < items.length) {
+          onSelect(items[index]);
+        }
+      }}
+    >
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder={placeholder}>
+          {selected && (
             <div className="flex items-center space-x-3">
               <div className="w-4 h-4 rounded" style={{ backgroundColor: selected.color }}></div>
               <span>{selected.names.join(", ")}</span>
             </div>
-          ) : (
-            placeholder
           )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
-        <Command>
-          <CommandInput placeholder={`${type === "driver" ? "ドライバー" : "マシン"}を検索...`} />
-          <CommandList>
-            <CommandEmpty>見つかりません</CommandEmpty>
-            <CommandGroup>
-              {items.map((item, index) => (
-                <CommandItem
-                  key={index}
-                  value={item.names.join(" ")}
-                  onSelect={() => {
-                    onSelect(item);
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      selected === item ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  <div className="flex items-center space-x-3">
-                    <div className="w-4 h-4 rounded" style={{ backgroundColor: item.color }}></div>
-                    <span>{item.names.join(", ")}</span>
-                  </div>
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+        </SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        {items.map((item, index) => (
+          <SelectItem key={index} value={index.toString()}>
+            <div className="flex items-center space-x-3">
+              <div className="w-4 h-4 rounded" style={{ backgroundColor: item.color }}></div>
+              <span>{item.names.join(", ")}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 
   return (
@@ -102,10 +72,7 @@ export default function BuilderPage() {
               GROUPED_DRIVERS,
               selectedDriver,
               setSelectedDriver,
-              "driver",
-              "ドライバーを選択してください",
-              driverOpen,
-              setDriverOpen
+              "ドライバーを選択してください"
             )}
 
             {selectedDriver && (
@@ -168,10 +135,7 @@ export default function BuilderPage() {
               GROUPED_MACHINES,
               selectedMachine,
               setSelectedMachine,
-              "machine",
-              "マシンを選択してください",
-              machineOpen,
-              setMachineOpen
+              "マシンを選択してください"
             )}
 
             {selectedMachine && (
