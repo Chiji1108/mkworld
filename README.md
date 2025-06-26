@@ -83,3 +83,9 @@ public/
 ## ライセンス
 
 MIT
+
+## Task
+
+- [ ] SEO最適化
+  - OGPなど
+- [ ] i18n
