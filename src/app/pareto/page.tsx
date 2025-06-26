@@ -231,151 +231,163 @@ export default function ParetoPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>順位</TableHead>
-                    <TableHead>ドライバー</TableHead>
-                    <TableHead>マシン</TableHead>
-                    <TableHead className="bg-primary/10">合計スコア</TableHead>
+                    <TableHead className="text-center">合計スコア</TableHead>
+                    <TableHead className="text-center">ドライバー</TableHead>
+                    <TableHead className="text-center">マシン</TableHead>
                     <TableHead
-                      className={criteria.speedSmooth ? "bg-primary/10" : ""}
+                      className={
+                        criteria.speedSmooth
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       スピード（滑）
                     </TableHead>
                     <TableHead
-                      className={criteria.speedRough ? "bg-primary/10" : ""}
+                      className={
+                        criteria.speedRough
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       スピード（荒）
                     </TableHead>
                     <TableHead
-                      className={criteria.speedWater ? "bg-primary/10" : ""}
+                      className={
+                        criteria.speedWater
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       スピード（水）
                     </TableHead>
                     <TableHead
-                      className={criteria.acceleration ? "bg-primary/10" : ""}
+                      className={
+                        criteria.acceleration
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       かそく
                     </TableHead>
                     <TableHead
-                      className={criteria.weight ? "bg-primary/10" : ""}
+                      className={
+                        criteria.weight
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       おもさ
                     </TableHead>
                     <TableHead
-                      className={criteria.handling ? "bg-primary/10" : ""}
+                      className={
+                        criteria.handling
+                          ? "bg-primary/10 text-center w-1/9"
+                          : "text-center w-1/9"
+                      }
                     >
                       まがりやすさ
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {paretoOptimalCombinations.map((combo, index) => {
-                    // Calculate rank considering ties
-                    let rank = index + 1;
-                    for (let i = index - 1; i >= 0; i--) {
-                      if (paretoOptimalCombinations[i].totalScore === combo.totalScore) {
-                        rank = i + 1;
-                      } else {
-                        break;
-                      }
-                    }
-                    
+                  {paretoOptimalCombinations.map((combo) => {
                     return (
                       <TableRow
                         key={`${combo.driver.names.join(
                           "-"
                         )}-${combo.machine.names.join("-")}`}
                       >
-                        <TableCell className="font-medium">{rank}</TableCell>
-                      <TableCell
-                        style={{ backgroundColor: combo.driver.color }}
-                      >
-                        <div className="space-y-2">
-                          {combo.driver.names.map((name) => (
-                            <div
-                              key={name}
-                              className="flex items-center space-x-2"
-                            >
-                              <div className="w-8 h-8 relative">
-                                <Image
-                                  src={`/drivers/${name}.png`}
-                                  alt={name}
-                                  fill
-                                  className="object-contain rounded"
-                                />
+                        <TableCell className="text-center font-bold">
+                          {combo.totalScore}
+                        </TableCell>
+                        <TableCell
+                          style={{ backgroundColor: combo.driver.color }}
+                        >
+                          <div className="space-y-2">
+                            {combo.driver.names.map((name) => (
+                              <div
+                                key={name}
+                                className="flex items-center space-x-2"
+                              >
+                                <div className="w-8 h-8 relative">
+                                  <Image
+                                    src={`/drivers/${name}.png`}
+                                    alt={name}
+                                    fill
+                                    className="object-contain rounded"
+                                  />
+                                </div>
+                                <span className="text-sm">{name}</span>
                               </div>
-                              <span className="text-sm">{name}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell
-                        style={{ backgroundColor: combo.machine.color }}
-                      >
-                        <div className="space-y-2">
-                          {combo.machine.names.map((name) => (
-                            <div
-                              key={name}
-                              className="flex items-center space-x-2"
-                            >
-                              <div className="w-8 h-8 relative">
-                                <Image
-                                  src={`/machines/${name}.png`}
-                                  alt={name}
-                                  fill
-                                  className="object-contain rounded"
-                                />
+                            ))}
+                          </div>
+                        </TableCell>
+                        <TableCell
+                          style={{ backgroundColor: combo.machine.color }}
+                        >
+                          <div className="space-y-2">
+                            {combo.machine.names.map((name) => (
+                              <div
+                                key={name}
+                                className="flex items-center space-x-2"
+                              >
+                                <div className="w-8 h-8 relative">
+                                  <Image
+                                    src={`/machines/${name}.png`}
+                                    alt={name}
+                                    fill
+                                    className="object-contain rounded"
+                                  />
+                                </div>
+                                <span className="text-sm">{name}</span>
                               </div>
-                              <span className="text-sm">{name}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell className="bg-primary/10 text-center font-bold">
-                        {combo.totalScore}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.speedSmooth ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.speed.smooth}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.speedRough ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.speed.rough}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.speedWater ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.speed.water}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.acceleration ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.acceleration}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.weight ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.weight}
-                      </TableCell>
-                      <TableCell
-                        className={`text-center ${
-                          criteria.handling ? "bg-primary/10" : ""
-                        }`}
-                      >
-                        {combo.combined.handling}
-                      </TableCell>
-                    </TableRow>
+                            ))}
+                          </div>
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.speedSmooth ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.speed.smooth}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.speedRough ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.speed.rough}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.speedWater ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.speed.water}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.acceleration ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.acceleration}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.weight ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.weight}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center ${
+                            criteria.handling ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.handling}
+                        </TableCell>
+                      </TableRow>
                     );
                   })}
                 </TableBody>
