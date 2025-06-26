@@ -45,8 +45,15 @@ export default async function Image({
     const driverKey = typeof search.driver === 'string' ? search.driver : '';
     const machineKey = typeof search.machine === 'string' ? search.machine : '';
     
+    // デバッグ情報
+    console.log('Driver Key:', driverKey);
+    console.log('Machine Key:', machineKey);
+    
     const selectedDriver = findDriverByKey(driverKey);
     const selectedMachine = findMachineByKey(machineKey);
+    
+    console.log('Selected Driver:', selectedDriver?.names[0]);
+    console.log('Selected Machine:', selectedMachine?.names[0]);
 
     // 合計性能を計算
     const getCombinedStats = () => {
@@ -73,6 +80,40 @@ export default async function Image({
     ] : [];
 
     const hasSelection = selectedDriver && selectedMachine;
+
+    // デバッグ: 強制的に選択状態をtrueにしてテスト
+    const testMode = driverKey === 'test' || machineKey === 'test';
+    if (testMode) {
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: 'system-ui, sans-serif',
+            }}
+          >
+            <h1
+              style={{
+                fontSize: '48px',
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center',
+              }}
+            >
+              TEST MODE: {driverKey} / {machineKey}
+            </h1>
+          </div>
+        ),
+        {
+          ...size,
+        }
+      );
+    }
 
   return new ImageResponse(
     (
@@ -313,8 +354,8 @@ export default async function Image({
       ...size,
     }
   );
-  } catch {
-    // エラー時はシンプルな画像を返す
+  } catch (error) {
+    // エラー時はエラー情報を含むシンプルな画像を返す
     return new ImageResponse(
       (
         <div
@@ -323,9 +364,11 @@ export default async function Image({
             width: '100%',
             height: '100%',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             fontFamily: 'system-ui, sans-serif',
+            padding: '40px',
           }}
         >
           <h1
@@ -334,10 +377,20 @@ export default async function Image({
               fontWeight: 'bold',
               color: 'white',
               textAlign: 'center',
+              marginBottom: '20px',
             }}
           >
             MKWorld Tools
           </h1>
+          <p
+            style={{
+              fontSize: '16px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              textAlign: 'center',
+            }}
+          >
+            Error: {error instanceof Error ? error.message : 'Unknown error'}
+          </p>
         </div>
       ),
       {
