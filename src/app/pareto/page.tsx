@@ -13,14 +13,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DRIVERS, MACHINES, type Stats } from "@/lib/stats";
+import { GROUPED_DRIVERS, GROUPED_MACHINES, type GroupedStats } from "@/lib/stats";
 import { Info } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
 interface Combination {
-  driver: Stats;
-  machine: Stats;
+  driver: GroupedStats;
+  machine: GroupedStats;
   combined: {
     speed: { smooth: number; rough: number; water: number };
     acceleration: number;
@@ -53,8 +53,8 @@ export default function ParetoPage() {
   const allCombinations = useMemo(() => {
     const combinations: Combination[] = [];
 
-    DRIVERS.forEach((driver) => {
-      MACHINES.forEach((machine) => {
+    GROUPED_DRIVERS.forEach((driver) => {
+      GROUPED_MACHINES.forEach((machine) => {
         const combined = {
           speed: {
             smooth: driver.speed.smooth + machine.speed.smooth,
@@ -271,33 +271,41 @@ export default function ParetoPage() {
                 <TableBody>
                   {paretoOptimalCombinations.map((combo, index) => (
                     <TableRow
-                      key={`${combo.driver.name}-${combo.machine.name}`}
+                      key={`${combo.driver.names.join("-")}-${combo.machine.names.join("-")}`}
                     >
                       <TableCell className="font-medium">{index + 1}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <div className="w-8 h-8 relative">
-                            <Image
-                              src={`/drivers/${combo.driver.name}.png`}
-                              alt={combo.driver.name}
-                              fill
-                              className="object-contain rounded"
-                            />
-                          </div>
-                          <span className="text-sm">{combo.driver.name}</span>
+                      <TableCell style={{ backgroundColor: combo.driver.color }}>
+                        <div className="space-y-2">
+                          {combo.driver.names.map((name) => (
+                            <div key={name} className="flex items-center space-x-2">
+                              <div className="w-8 h-8 relative">
+                                <Image
+                                  src={`/drivers/${name}.png`}
+                                  alt={name}
+                                  fill
+                                  className="object-contain rounded"
+                                />
+                              </div>
+                              <span className="text-sm">{name}</span>
+                            </div>
+                          ))}
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <div className="w-8 h-8 relative">
-                            <Image
-                              src={`/machines/${combo.machine.name}.png`}
-                              alt={combo.machine.name}
-                              fill
-                              className="object-contain rounded"
-                            />
-                          </div>
-                          <span className="text-sm">{combo.machine.name}</span>
+                      <TableCell style={{ backgroundColor: combo.machine.color }}>
+                        <div className="space-y-2">
+                          {combo.machine.names.map((name) => (
+                            <div key={name} className="flex items-center space-x-2">
+                              <div className="w-8 h-8 relative">
+                                <Image
+                                  src={`/machines/${name}.png`}
+                                  alt={name}
+                                  fill
+                                  className="object-contain rounded"
+                                />
+                              </div>
+                              <span className="text-sm">{name}</span>
+                            </div>
+                          ))}
                         </div>
                       </TableCell>
                       <TableCell className="bg-primary/10 text-center font-bold">
