@@ -12,7 +12,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Info, Mountain, Waves, Droplets } from "lucide-react";
 import type { SpeedSpecialization } from "@/lib/stats";
 import {
   GROUPED_DRIVERS,
@@ -20,6 +19,7 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
+import { Droplets, Info, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
@@ -80,19 +80,22 @@ export default function PerformancePage() {
         >
           <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
             <TabsTrigger value="all" className="text-xs sm:text-sm">
-              {t('performance.filters.all')}
+              {t("performance.filters.all")}
             </TabsTrigger>
             <TabsTrigger value="hard" className="text-xs sm:text-sm">
-              {t('performance.filters.hard')}
+              <Mountain className="w-3 h-3 sm:w-4 sm:h-4" />
+              {t("performance.filters.hard")}
             </TabsTrigger>
             <TabsTrigger value="soft" className="text-xs sm:text-sm">
-              {t('performance.filters.soft')}
+              <Waves className="w-3 h-3 sm:w-4 sm:h-4" />
+              {t("performance.filters.soft")}
             </TabsTrigger>
             <TabsTrigger value="liquid" className="text-xs sm:text-sm">
-              {t('performance.filters.liquid')}
+              <Droplets className="w-3 h-3 sm:w-4 sm:h-4" />
+              {t("performance.filters.liquid")}
             </TabsTrigger>
             <TabsTrigger value="balance" className="text-xs sm:text-sm">
-              {t('performance.filters.balance')}
+              {t("performance.filters.balance")}
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -211,7 +214,7 @@ export default function PerformancePage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-100 border border-amber-200">
               <Waves className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
@@ -223,7 +226,7 @@ export default function PerformancePage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-100 border border-blue-200">
               <Droplets className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
               <div>
