@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { BarChart3, Car, Target } from "lucide-react";
+import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,13 +16,13 @@ const navigationItems = [
   {
     name: "カスタムビルダー",
     href: "/builder",
-    icon: Car,
+    icon: Wrench,
     description: "組み合わせて性能を確認",
   },
   {
     name: "パレート最適",
     href: "/pareto",
-    icon: Target,
+    icon: Search,
     description: "最適な組み合わせを検索",
   },
 ];

@@ -7,8 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DRIVERS, MACHINES } from "@/lib/stats";
-import { BarChart3, Car, Target } from "lucide-react";
+import { BarChart3, Wrench, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -22,13 +21,13 @@ export default function Home() {
     {
       title: "カスタムビルダー",
       description: "ドライバーとマシンを組み合わせて最適な性能を作成",
-      icon: Car,
+      icon: Wrench,
       href: "/builder",
     },
     {
       title: "パレート最適",
       description: "指定した条件に基づいて最適な組み合わせを自動検索",
-      icon: Target,
+      icon: Search,
       href: "/pareto",
     },
   ];
