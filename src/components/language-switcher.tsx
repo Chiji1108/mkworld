@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { Globe } from "lucide-react";
 
@@ -20,12 +20,18 @@ export function LanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const switchLanguage = (newLocale: string) => {
     // Remove the current locale from the pathname and add the new one
     const pathWithoutLocale = pathname.replace(`/${locale}`, "");
     const newPath = `/${newLocale}${pathWithoutLocale}`;
-    router.push(newPath);
+    
+    // Preserve search parameters
+    const queryString = searchParams.toString();
+    const finalPath = queryString ? `${newPath}?${queryString}` : newPath;
+    
+    router.push(finalPath);
   };
 
   const currentLanguage = languages.find((lang) => lang.code === locale);

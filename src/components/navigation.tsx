@@ -7,6 +7,7 @@ import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Suspense } from "react";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -64,7 +65,13 @@ export function Navigation() {
                 </Button>
               );
             })}
-            <LanguageSwitcher />
+            <Suspense fallback={
+              <Button variant="ghost" size="sm" className="gap-2" disabled>
+                <span>...</span>
+              </Button>
+            }>
+              <LanguageSwitcher />
+            </Suspense>
           </div>
         </div>
       </div>

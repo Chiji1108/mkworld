@@ -20,7 +20,8 @@ import { translateDriverName, translateMachineName } from "@/lib/translation-hel
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useQueryState } from "nuqs";
+import { useMemo } from "react";
 
 interface Combination {
   driver: GroupedStats;
@@ -45,14 +46,53 @@ interface OptimizationCriteria {
 
 export default function ParetoPage() {
   const t = useTranslations();
-  const [criteria, setCriteria] = useState<OptimizationCriteria>({
-    speedSmooth: true,
-    speedRough: false,
-    speedWater: false,
-    acceleration: true,
-    weight: false,
-    handling: false,
+
+  // nuqsでURL状態管理 - 各条件を個別のパラメータで管理
+  const [speedSmooth, setSpeedSmooth] = useQueryState('speedSmooth', {
+    defaultValue: true,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
   });
+
+  const [speedRough, setSpeedRough] = useQueryState('speedRough', {
+    defaultValue: false,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
+  });
+
+  const [speedWater, setSpeedWater] = useQueryState('speedWater', {
+    defaultValue: false,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
+  });
+
+  const [acceleration, setAcceleration] = useQueryState('acceleration', {
+    defaultValue: true,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
+  });
+
+  const [weight, setWeight] = useQueryState('weight', {
+    defaultValue: false,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
+  });
+
+  const [handling, setHandling] = useQueryState('handling', {
+    defaultValue: false,
+    parse: (value) => value === 'true',
+    serialize: (value) => String(value),
+  });
+
+  // 従来のcriteria形式に変換（useMemoでメモ化）
+  const criteria: OptimizationCriteria = useMemo(() => ({
+    speedSmooth,
+    speedRough,
+    speedWater,
+    acceleration,
+    weight,
+    handling,
+  }), [speedSmooth, speedRough, speedWater, acceleration, weight, handling]);
 
   const allCombinations = useMemo(() => {
     const combinations: Combination[] = [];
@@ -97,12 +137,6 @@ export default function ParetoPage() {
     return sorted.slice(0, 100);
   }, [allCombinations]);
 
-  const handleCriteriaChange = (
-    key: keyof OptimizationCriteria,
-    checked: boolean
-  ) => {
-    setCriteria((prev) => ({ ...prev, [key]: checked }));
-  };
 
   const criteriaCount = Object.values(criteria).filter(Boolean).length;
 
@@ -125,10 +159,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="speedSmooth"
-                  checked={criteria.speedSmooth}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("speedSmooth", !!checked)
-                  }
+                  checked={speedSmooth}
+                  onCheckedChange={(checked) => setSpeedSmooth(!!checked)}
                 />
                 <label
                   htmlFor="speedSmooth"
@@ -140,10 +172,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="speedRough"
-                  checked={criteria.speedRough}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("speedRough", !!checked)
-                  }
+                  checked={speedRough}
+                  onCheckedChange={(checked) => setSpeedRough(!!checked)}
                 />
                 <label
                   htmlFor="speedRough"
@@ -155,10 +185,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="speedWater"
-                  checked={criteria.speedWater}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("speedWater", !!checked)
-                  }
+                  checked={speedWater}
+                  onCheckedChange={(checked) => setSpeedWater(!!checked)}
                 />
                 <label
                   htmlFor="speedWater"
@@ -170,10 +198,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="acceleration"
-                  checked={criteria.acceleration}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("acceleration", !!checked)
-                  }
+                  checked={acceleration}
+                  onCheckedChange={(checked) => setAcceleration(!!checked)}
                 />
                 <label
                   htmlFor="acceleration"
@@ -185,10 +211,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="weight"
-                  checked={criteria.weight}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("weight", !!checked)
-                  }
+                  checked={weight}
+                  onCheckedChange={(checked) => setWeight(!!checked)}
                 />
                 <label
                   htmlFor="weight"
@@ -200,10 +224,8 @@ export default function ParetoPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="handling"
-                  checked={criteria.handling}
-                  onCheckedChange={(checked) =>
-                    handleCriteriaChange("handling", !!checked)
-                  }
+                  checked={handling}
+                  onCheckedChange={(checked) => setHandling(!!checked)}
                 />
                 <label
                   htmlFor="handling"
@@ -245,7 +267,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.speedSmooth
+                        speedSmooth
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -254,7 +276,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.speedRough
+                        speedRough
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -263,7 +285,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.speedWater
+                        speedWater
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -272,7 +294,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.acceleration
+                        acceleration
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -281,7 +303,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.weight
+                        weight
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -290,7 +312,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        criteria.handling
+                        handling
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -360,42 +382,42 @@ export default function ParetoPage() {
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.speedSmooth ? "bg-primary/10" : ""
+                            speedSmooth ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.smooth}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.speedRough ? "bg-primary/10" : ""
+                            speedRough ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.rough}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.speedWater ? "bg-primary/10" : ""
+                            speedWater ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.water}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.acceleration ? "bg-primary/10" : ""
+                            acceleration ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.acceleration}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.weight ? "bg-primary/10" : ""
+                            weight ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.weight}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            criteria.handling ? "bg-primary/10" : ""
+                            handling ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.handling}

@@ -15,20 +15,70 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
-import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
+import { 
+  translateDriverName, 
+  translateMachineName, 
+  getDriverTranslationKey,
+  getMachineTranslationKey 
+} from "@/lib/translation-helpers";
 import { Droplets, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
+import { useQueryState } from "nuqs";
 
 export default function BuilderPage() {
   const t = useTranslations();
-  const [selectedDriver, setSelectedDriver] = useState<GroupedStats | null>(
-    null
-  );
-  const [selectedMachine, setSelectedMachine] = useState<GroupedStats | null>(
-    null
-  );
+
+  // URL状態管理用のヘルパー関数
+  const findDriverByKey = (key: string): GroupedStats | null => {
+    if (!key || key === "") return null;
+    return GROUPED_DRIVERS.find(driver => 
+      driver.names.some(name => getDriverTranslationKey(name) === key)
+    ) || null;
+  };
+
+  const findMachineByKey = (key: string): GroupedStats | null => {
+    if (!key || key === "") return null;
+    return GROUPED_MACHINES.find(machine => 
+      machine.names.some(name => getMachineTranslationKey(name) === key)
+    ) || null;
+  };
+
+  const getDriverKey = (driver: GroupedStats | null): string => {
+    if (!driver) return "";
+    return getDriverTranslationKey(driver.names[0]);
+  };
+
+  const getMachineKey = (machine: GroupedStats | null): string => {
+    if (!machine) return "";
+    return getMachineTranslationKey(machine.names[0]);
+  };
+
+  // nuqsでURL状態管理
+  const [driverKey, setDriverKey] = useQueryState('driver', {
+    defaultValue: "",
+    parse: (value) => value === "" ? "" : value,
+    serialize: (value) => value,
+  });
+
+  const [machineKey, setMachineKey] = useQueryState('machine', {
+    defaultValue: "",
+    parse: (value) => value === "" ? "" : value,
+    serialize: (value) => value,
+  });
+
+  // URLから状態を復元
+  const selectedDriver = findDriverByKey(driverKey);
+  const selectedMachine = findMachineByKey(machineKey);
+
+  // 選択変更時の処理
+  const handleDriverSelect = (driver: GroupedStats) => {
+    setDriverKey(getDriverKey(driver));
+  };
+
+  const handleMachineSelect = (machine: GroupedStats) => {
+    setMachineKey(getMachineKey(machine));
+  };
 
   const getSpecializationIcon = (item: GroupedStats) => {
     const specialization = analyzeSpeedSpecialization(item);
@@ -123,7 +173,7 @@ export default function BuilderPage() {
             {renderSelector(
               GROUPED_DRIVERS,
               selectedDriver,
-              setSelectedDriver,
+              handleDriverSelect,
               t("builder.driverSelection.placeholder"),
               "driver"
             )}
@@ -223,7 +273,7 @@ export default function BuilderPage() {
             {renderSelector(
               GROUPED_MACHINES,
               selectedMachine,
-              setSelectedMachine,
+              handleMachineSelect,
               t("builder.machineSelection.placeholder"),
               "machine"
             )}

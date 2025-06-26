@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -117,11 +118,13 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <Navigation />
-          <main className="min-h-screen bg-background px-4 sm:px-6 lg:px-8">
-            {children}
-          </main>
-          <Footer />
+          <NuqsAdapter>
+            <Navigation />
+            <main className="min-h-screen bg-background px-4 sm:px-6 lg:px-8">
+              {children}
+            </main>
+            <Footer />
+          </NuqsAdapter>
         </NextIntlClientProvider>
         <Analytics />
       </body>
