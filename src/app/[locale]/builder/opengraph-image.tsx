@@ -1,13 +1,10 @@
 import { ImageResponse } from 'next/og';
-import { getTranslations } from 'next-intl/server';
 import { 
   GROUPED_DRIVERS, 
   GROUPED_MACHINES, 
   type GroupedStats 
 } from '@/lib/stats';
 import { 
-  translateDriverName, 
-  translateMachineName,
   getDriverTranslationKey,
   getMachineTranslationKey 
 } from '@/lib/translation-helpers';
@@ -37,48 +34,45 @@ const findMachineByKey = (key: string): GroupedStats | null => {
 };
 
 export default async function Image({ 
-  params,
   searchParams,
 }: { 
-  params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { locale } = await params;
-  const search = await searchParams;
-  const t = await getTranslations({ locale, namespace: '' });
+  try {
+    const search = await searchParams;
 
-  // URLパラメータから選択状態を取得
-  const driverKey = typeof search.driver === 'string' ? search.driver : '';
-  const machineKey = typeof search.machine === 'string' ? search.machine : '';
-  
-  const selectedDriver = findDriverByKey(driverKey);
-  const selectedMachine = findMachineByKey(machineKey);
-
-  // 合計性能を計算
-  const getCombinedStats = () => {
-    if (!selectedDriver || !selectedMachine) return null;
+    // URLパラメータから選択状態を取得
+    const driverKey = typeof search.driver === 'string' ? search.driver : '';
+    const machineKey = typeof search.machine === 'string' ? search.machine : '';
     
-    return {
-      speedHard: selectedDriver.speed.hard + selectedMachine.speed.hard,
-      speedSoft: selectedDriver.speed.soft + selectedMachine.speed.soft,
-      speedLiquid: selectedDriver.speed.liquid + selectedMachine.speed.liquid,
-      acceleration: selectedDriver.acceleration + selectedMachine.acceleration,
-      weight: selectedDriver.weight + selectedMachine.weight,
-      handling: selectedDriver.handling + selectedMachine.handling,
+    const selectedDriver = findDriverByKey(driverKey);
+    const selectedMachine = findMachineByKey(machineKey);
+
+    // 合計性能を計算
+    const getCombinedStats = () => {
+      if (!selectedDriver || !selectedMachine) return null;
+      
+      return {
+        speedHard: selectedDriver.speed.hard + selectedMachine.speed.hard,
+        speedSoft: selectedDriver.speed.soft + selectedMachine.speed.soft,
+        speedLiquid: selectedDriver.speed.liquid + selectedMachine.speed.liquid,
+        acceleration: selectedDriver.acceleration + selectedMachine.acceleration,
+        weight: selectedDriver.weight + selectedMachine.weight,
+        handling: selectedDriver.handling + selectedMachine.handling,
+      };
     };
-  };
 
-  const combinedStats = getCombinedStats();
-  const stats = combinedStats ? [
-    { name: t('stats.speedHard'), value: combinedStats.speedHard, max: 20 },
-    { name: t('stats.speedSoft'), value: combinedStats.speedSoft, max: 20 },
-    { name: t('stats.speedLiquid'), value: combinedStats.speedLiquid, max: 20 },
-    { name: t('stats.acceleration'), value: combinedStats.acceleration, max: 20 },
-    { name: t('stats.weight'), value: combinedStats.weight, max: 20 },
-    { name: t('stats.handling'), value: combinedStats.handling, max: 20 },
-  ] : [];
+    const combinedStats = getCombinedStats();
+    const stats = combinedStats ? [
+      { name: 'Speed (Hard)', value: combinedStats.speedHard, max: 20 },
+      { name: 'Speed (Soft)', value: combinedStats.speedSoft, max: 20 },
+      { name: 'Speed (Liquid)', value: combinedStats.speedLiquid, max: 20 },
+      { name: 'Acceleration', value: combinedStats.acceleration, max: 20 },
+      { name: 'Weight', value: combinedStats.weight, max: 20 },
+      { name: 'Handling', value: combinedStats.handling, max: 20 },
+    ] : [];
 
-  const hasSelection = selectedDriver && selectedMachine;
+    const hasSelection = selectedDriver && selectedMachine;
 
   return new ImageResponse(
     (
@@ -119,7 +113,7 @@ export default async function Image({
               textAlign: 'center',
             }}
           >
-            {t('builder.pageTitle')}
+            Custom Builder
           </h1>
 
           {hasSelection ? (
@@ -159,7 +153,7 @@ export default async function Image({
                       fontWeight: 'bold',
                     }}
                   >
-                    {t('stats.driver')}
+                    Driver
                   </h3>
                   <div
                     style={{
@@ -168,9 +162,7 @@ export default async function Image({
                       textAlign: 'center',
                     }}
                   >
-                    {selectedDriver.names.map(name => 
-                      translateDriverName(name, (key: string) => t(key))
-                    ).join(', ')}
+                    {selectedDriver.names.join(', ')}
                   </div>
                 </div>
 
@@ -193,7 +185,7 @@ export default async function Image({
                       fontWeight: 'bold',
                     }}
                   >
-                    {t('stats.machine')}
+                    Machine
                   </h3>
                   <div
                     style={{
@@ -202,9 +194,7 @@ export default async function Image({
                       textAlign: 'center',
                     }}
                   >
-                    {selectedMachine.names.map(name => 
-                      translateMachineName(name, (key: string) => t(key))
-                    ).join(', ')}
+                    {selectedMachine.names.join(', ')}
                   </div>
                 </div>
               </div>
@@ -230,7 +220,7 @@ export default async function Image({
                     textAlign: 'center',
                   }}
                 >
-                  {t('builder.statsDisplay.title')}
+                  Total Performance
                 </h3>
                 
                 {stats.map((stat, index) => (
@@ -303,7 +293,7 @@ export default async function Image({
                   marginBottom: '16px',
                 }}
               >
-                {t('builder.description')}
+                Create custom driver and machine combinations
               </p>
               <p
                 style={{
@@ -312,7 +302,7 @@ export default async function Image({
                   textAlign: 'center',
                 }}
               >
-                50 {t('stats.driver')} × 40 {t('stats.machine')}
+                50 Drivers × 40 Machines
               </p>
             </div>
           )}
@@ -323,4 +313,36 @@ export default async function Image({
       ...size,
     }
   );
+  } catch {
+    // エラー時はシンプルな画像を返す
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'system-ui, sans-serif',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '48px',
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            MKWorld Tools
+          </h1>
+        </div>
+      ),
+      {
+        ...size,
+      }
+    );
+  }
 }
