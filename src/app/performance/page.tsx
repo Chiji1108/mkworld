@@ -6,7 +6,6 @@ import { DRIVERS, MACHINES, type Stats } from "@/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 
 export default function PerformancePage() {
@@ -56,24 +55,12 @@ export default function PerformancePage() {
                 </div>
               </TableCell>
               <TableCell className="font-medium">{item.name}</TableCell>
-              <TableCell>
-                <Badge variant="outline">{item.speed.smooth}</Badge>
-              </TableCell>
-              <TableCell>
-                <Badge variant="outline">{item.speed.rough}</Badge>
-              </TableCell>
-              <TableCell>
-                <Badge variant="outline">{item.speed.water}</Badge>
-              </TableCell>
-              <TableCell>
-                <Badge variant="secondary">{item.acceleration}</Badge>
-              </TableCell>
-              <TableCell>
-                <Badge variant="secondary">{item.weight}</Badge>
-              </TableCell>
-              <TableCell>
-                <Badge variant="secondary">{item.handling}</Badge>
-              </TableCell>
+              <TableCell className="text-center">{item.speed.smooth}</TableCell>
+              <TableCell className="text-center">{item.speed.rough}</TableCell>
+              <TableCell className="text-center">{item.speed.water}</TableCell>
+              <TableCell className="text-center">{item.acceleration}</TableCell>
+              <TableCell className="text-center">{item.weight}</TableCell>
+              <TableCell className="text-center">{item.handling}</TableCell>
             </TableRow>
           ))}
         </TableBody>

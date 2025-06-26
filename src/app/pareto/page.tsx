@@ -1,16 +1,23 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import Image from "next/image";
-import { DRIVERS, MACHINES, type Stats } from "@/lib/stats";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { DRIVERS, MACHINES, type Stats } from "@/lib/stats";
 import { Info } from "lucide-react";
+import Image from "next/image";
+import { useMemo, useState } from "react";
 
 interface Combination {
   driver: Stats;
@@ -46,9 +53,9 @@ export default function ParetoPage() {
 
   const allCombinations = useMemo(() => {
     const combinations: Combination[] = [];
-    
-    DRIVERS.forEach(driver => {
-      MACHINES.forEach(machine => {
+
+    DRIVERS.forEach((driver) => {
+      MACHINES.forEach((machine) => {
         const combined = {
           speed: {
             smooth: driver.speed.smooth + machine.speed.smooth,
@@ -82,13 +89,18 @@ export default function ParetoPage() {
 
   const paretoOptimalCombinations = useMemo(() => {
     if (!showResults) return [];
-    
-    const sorted = [...allCombinations].sort((a, b) => b.totalScore - a.totalScore);
+
+    const sorted = [...allCombinations].sort(
+      (a, b) => b.totalScore - a.totalScore
+    );
     return sorted.slice(0, 20);
   }, [allCombinations, showResults]);
 
-  const handleCriteriaChange = (key: keyof OptimizationCriteria, checked: boolean) => {
-    setCriteria(prev => ({ ...prev, [key]: checked }));
+  const handleCriteriaChange = (
+    key: keyof OptimizationCriteria,
+    checked: boolean
+  ) => {
+    setCriteria((prev) => ({ ...prev, [key]: checked }));
     setShowResults(false);
   };
 
@@ -98,7 +110,9 @@ export default function ParetoPage() {
     <div className="container mx-auto py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-2">パレート最適</h1>
-        <p className="text-muted-foreground">指定した条件に基づいて最適な組み合わせを見つけます</p>
+        <p className="text-muted-foreground">
+          指定した条件に基づいて最適な組み合わせを見つけます
+        </p>
       </div>
 
       <div className="space-y-6">
@@ -115,9 +129,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="speedSmooth"
                       checked={criteria.speedSmooth}
-                      onCheckedChange={(checked) => handleCriteriaChange("speedSmooth", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("speedSmooth", !!checked)
+                      }
                     />
-                    <label htmlFor="speedSmooth" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="speedSmooth"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       滑
                     </label>
                   </div>
@@ -125,9 +144,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="speedRough"
                       checked={criteria.speedRough}
-                      onCheckedChange={(checked) => handleCriteriaChange("speedRough", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("speedRough", !!checked)
+                      }
                     />
-                    <label htmlFor="speedRough" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="speedRough"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       荒
                     </label>
                   </div>
@@ -135,9 +159,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="speedWater"
                       checked={criteria.speedWater}
-                      onCheckedChange={(checked) => handleCriteriaChange("speedWater", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("speedWater", !!checked)
+                      }
                     />
-                    <label htmlFor="speedWater" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="speedWater"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       水
                     </label>
                   </div>
@@ -153,9 +182,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="acceleration"
                       checked={criteria.acceleration}
-                      onCheckedChange={(checked) => handleCriteriaChange("acceleration", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("acceleration", !!checked)
+                      }
                     />
-                    <label htmlFor="acceleration" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="acceleration"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       かそく
                     </label>
                   </div>
@@ -163,9 +197,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="weight"
                       checked={criteria.weight}
-                      onCheckedChange={(checked) => handleCriteriaChange("weight", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("weight", !!checked)
+                      }
                     />
-                    <label htmlFor="weight" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="weight"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       おもさ
                     </label>
                   </div>
@@ -173,9 +212,14 @@ export default function ParetoPage() {
                     <Checkbox
                       id="handling"
                       checked={criteria.handling}
-                      onCheckedChange={(checked) => handleCriteriaChange("handling", !!checked)}
+                      onCheckedChange={(checked) =>
+                        handleCriteriaChange("handling", !!checked)
+                      }
                     />
-                    <label htmlFor="handling" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label
+                      htmlFor="handling"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
                       まがりやすさ
                     </label>
                   </div>
@@ -183,7 +227,7 @@ export default function ParetoPage() {
               </div>
 
               <div className="pt-4">
-                <Button 
+                <Button
                   onClick={() => setShowResults(true)}
                   disabled={criteriaCount === 0}
                   className="w-full sm:w-auto"
@@ -227,7 +271,9 @@ export default function ParetoPage() {
                 </TableHeader>
                 <TableBody>
                   {paretoOptimalCombinations.map((combo, index) => (
-                    <TableRow key={`${combo.driver.name}-${combo.machine.name}`}>
+                    <TableRow
+                      key={`${combo.driver.name}-${combo.machine.name}`}
+                    >
                       <TableCell className="font-medium">{index + 1}</TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
@@ -261,32 +307,46 @@ export default function ParetoPage() {
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.speedSmooth ? "default" : "outline"}>
+                        <Badge
+                          variant={criteria.speedSmooth ? "default" : "outline"}
+                        >
                           {combo.combined.speed.smooth}
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.speedRough ? "default" : "outline"}>
+                        <Badge
+                          variant={criteria.speedRough ? "default" : "outline"}
+                        >
                           {combo.combined.speed.rough}
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.speedWater ? "default" : "outline"}>
+                        <Badge
+                          variant={criteria.speedWater ? "default" : "outline"}
+                        >
                           {combo.combined.speed.water}
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.acceleration ? "secondary" : "outline"}>
+                        <Badge
+                          variant={
+                            criteria.acceleration ? "default" : "outline"
+                          }
+                        >
                           {combo.combined.acceleration}
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.weight ? "secondary" : "outline"}>
+                        <Badge
+                          variant={criteria.weight ? "default" : "outline"}
+                        >
                           {combo.combined.weight}
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={criteria.handling ? "secondary" : "outline"}>
+                        <Badge
+                          variant={criteria.handling ? "default" : "outline"}
+                        >
                           {combo.combined.handling}
                         </Badge>
                       </TableCell>
