@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BarChart3, Wrench, Search } from "lucide-react";
+import { BarChart3, Search, Wrench } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -34,8 +34,8 @@ export default function Home() {
 
   return (
     <div className="container mx-auto pb-12">
-      <div className="flex justify-center items-center my-24">
-        <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+      <div className="flex justify-center items-center my-24 sm:my-32">
+        <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-6xl sm:text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
           MKWorld Tools
         </span>
       </div>
