@@ -19,6 +19,7 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
+import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
 import { Droplets, Info, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -36,9 +37,12 @@ export default function PerformancePage() {
   >("all");
 
   const filteredDrivers = GROUPED_DRIVERS.filter((driver) => {
-    const matchesSearch = driver.names.some((name) =>
-      name.toLowerCase().includes(driverSearch.toLowerCase())
-    );
+    const matchesSearch = driver.names.some((name) => {
+      const japaneseName = name.toLowerCase();
+      const translatedName = translateDriverName(name, t).toLowerCase();
+      return japaneseName.includes(driverSearch.toLowerCase()) ||
+             translatedName.includes(driverSearch.toLowerCase());
+    });
     const matchesSpec =
       driverSpecFilter === "all" ||
       analyzeSpeedSpecialization(driver) === driverSpecFilter;
@@ -46,9 +50,12 @@ export default function PerformancePage() {
   });
 
   const filteredMachines = GROUPED_MACHINES.filter((machine) => {
-    const matchesSearch = machine.names.some((name) =>
-      name.toLowerCase().includes(machineSearch.toLowerCase())
-    );
+    const matchesSearch = machine.names.some((name) => {
+      const japaneseName = name.toLowerCase();
+      const translatedName = translateMachineName(name, t).toLowerCase();
+      return japaneseName.includes(machineSearch.toLowerCase()) ||
+             translatedName.includes(machineSearch.toLowerCase());
+    });
     const matchesSpec =
       machineSpecFilter === "all" ||
       analyzeSpeedSpecialization(machine) === machineSpecFilter;
@@ -145,7 +152,12 @@ export default function PerformancePage() {
                             className="object-contain rounded"
                           />
                         </div>
-                        <span className="text-sm">{name}</span>
+                        <span className="text-sm">
+                          {type === "driver" 
+                            ? translateDriverName(name, t) 
+                            : translateMachineName(name, t)
+                          }
+                        </span>
                       </div>
                     ))}
                   </div>

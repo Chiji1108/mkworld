@@ -16,6 +16,7 @@ import {
   GROUPED_MACHINES,
   type GroupedStats,
 } from "@/lib/stats";
+import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -321,12 +322,14 @@ export default function ParetoPage() {
                                 <div className="w-8 h-8 relative">
                                   <Image
                                     src={`/drivers/${name}.png`}
-                                    alt={name}
+                                    alt={translateDriverName(name, t)}
                                     fill
                                     className="object-contain rounded"
                                   />
                                 </div>
-                                <span className="text-sm">{name}</span>
+                                <span className="text-sm">
+                                  {translateDriverName(name, t)}
+                                </span>
                               </div>
                             ))}
                           </div>
@@ -343,12 +346,14 @@ export default function ParetoPage() {
                                 <div className="w-8 h-8 relative">
                                   <Image
                                     src={`/machines/${name}.png`}
-                                    alt={name}
+                                    alt={translateMachineName(name, t)}
                                     fill
                                     className="object-contain rounded"
                                   />
                                 </div>
-                                <span className="text-sm">{name}</span>
+                                <span className="text-sm">
+                                  {translateMachineName(name, t)}
+                                </span>
                               </div>
                             ))}
                           </div>

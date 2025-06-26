@@ -15,6 +15,7 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
+import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
 import { Droplets, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -47,7 +48,8 @@ export default function BuilderPage() {
     items: GroupedStats[],
     selected: GroupedStats | null,
     onSelect: (item: GroupedStats) => void,
-    placeholder: string
+    placeholder: string,
+    type: "driver" | "machine"
   ) => (
     <Select
       value={selected ? items.indexOf(selected).toString() : ""}
@@ -68,7 +70,13 @@ export default function BuilderPage() {
               >
                 {getSpecializationIcon(selected)}
               </div>
-              <span>{selected.names.join(", ")}</span>
+              <span>
+                {selected.names.map(name => 
+                  type === "driver" 
+                    ? translateDriverName(name, t) 
+                    : translateMachineName(name, t)
+                ).join(", ")}
+              </span>
             </div>
           )}
         </SelectValue>
@@ -83,7 +91,13 @@ export default function BuilderPage() {
               >
                 {getSpecializationIcon(item)}
               </div>
-              <span>{item.names.join(", ")}</span>
+              <span>
+                {item.names.map(name => 
+                  type === "driver" 
+                    ? translateDriverName(name, t) 
+                    : translateMachineName(name, t)
+                ).join(", ")}
+              </span>
             </div>
           </SelectItem>
         ))}
@@ -110,7 +124,8 @@ export default function BuilderPage() {
               GROUPED_DRIVERS,
               selectedDriver,
               setSelectedDriver,
-              t("builder.driverSelection.placeholder")
+              t("builder.driverSelection.placeholder"),
+              "driver"
             )}
 
             {selectedDriver && (
@@ -128,12 +143,14 @@ export default function BuilderPage() {
                         <div className="w-8 h-8 relative flex-shrink-0">
                           <Image
                             src={`/drivers/${name}.png`}
-                            alt={name}
+                            alt={translateDriverName(name, t)}
                             fill
                             className="object-contain rounded"
                           />
                         </div>
-                        <span className="text-sm font-medium">{name}</span>
+                        <span className="text-sm font-medium">
+                          {translateDriverName(name, t)}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -207,7 +224,8 @@ export default function BuilderPage() {
               GROUPED_MACHINES,
               selectedMachine,
               setSelectedMachine,
-              t("builder.machineSelection.placeholder")
+              t("builder.machineSelection.placeholder"),
+              "machine"
             )}
 
             {selectedMachine && (
@@ -225,12 +243,14 @@ export default function BuilderPage() {
                         <div className="w-8 h-8 relative flex-shrink-0">
                           <Image
                             src={`/machines/${name}.png`}
-                            alt={name}
+                            alt={translateMachineName(name, t)}
                             fill
                             className="object-contain rounded"
                           />
                         </div>
-                        <span className="text-sm font-medium">{name}</span>
+                        <span className="text-sm font-medium">
+                          {translateMachineName(name, t)}
+                        </span>
                       </div>
                     ))}
                   </div>
