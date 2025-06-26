@@ -16,7 +16,10 @@ import {
   GROUPED_MACHINES,
   type GroupedStats,
 } from "@/lib/stats";
-import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
+import {
+  translateDriverName,
+  translateMachineName,
+} from "@/lib/translation-helpers";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -27,7 +30,7 @@ interface Combination {
   driver: GroupedStats;
   machine: GroupedStats;
   combined: {
-    speed: { smooth: number; rough: number; water: number };
+    speed: { hard: number; soft: number; liquid: number };
     acceleration: number;
     weight: number;
     handling: number;
@@ -36,9 +39,9 @@ interface Combination {
 }
 
 interface OptimizationCriteria {
-  speedSmooth: boolean;
-  speedRough: boolean;
-  speedWater: boolean;
+  speedHard: boolean;
+  speedSoft: boolean;
+  speedLiquid: boolean;
   acceleration: boolean;
   weight: boolean;
   handling: boolean;
@@ -48,51 +51,54 @@ export default function ParetoPage() {
   const t = useTranslations();
 
   // nuqsでURL状態管理 - 各条件を個別のパラメータで管理
-  const [speedSmooth, setSpeedSmooth] = useQueryState('speedSmooth', {
+  const [speedHard, setSpeedHard] = useQueryState("speedHard", {
     defaultValue: true,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
-  const [speedRough, setSpeedRough] = useQueryState('speedRough', {
+  const [speedSoft, setSpeedSoft] = useQueryState("speedSoft", {
     defaultValue: false,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
-  const [speedWater, setSpeedWater] = useQueryState('speedWater', {
+  const [speedLiquid, setSpeedLiquid] = useQueryState("speedLiquid", {
     defaultValue: false,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
-  const [acceleration, setAcceleration] = useQueryState('acceleration', {
+  const [acceleration, setAcceleration] = useQueryState("acceleration", {
     defaultValue: true,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
-  const [weight, setWeight] = useQueryState('weight', {
+  const [weight, setWeight] = useQueryState("weight", {
     defaultValue: false,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
-  const [handling, setHandling] = useQueryState('handling', {
+  const [handling, setHandling] = useQueryState("handling", {
     defaultValue: false,
-    parse: (value) => value === 'true',
+    parse: (value) => value === "true",
     serialize: (value) => String(value),
   });
 
   // 従来のcriteria形式に変換（useMemoでメモ化）
-  const criteria: OptimizationCriteria = useMemo(() => ({
-    speedSmooth,
-    speedRough,
-    speedWater,
-    acceleration,
-    weight,
-    handling,
-  }), [speedSmooth, speedRough, speedWater, acceleration, weight, handling]);
+  const criteria: OptimizationCriteria = useMemo(
+    () => ({
+      speedHard,
+      speedSoft,
+      speedLiquid,
+      acceleration,
+      weight,
+      handling,
+    }),
+    [speedHard, speedSoft, speedLiquid, acceleration, weight, handling]
+  );
 
   const allCombinations = useMemo(() => {
     const combinations: Combination[] = [];
@@ -101,9 +107,9 @@ export default function ParetoPage() {
       GROUPED_MACHINES.forEach((machine) => {
         const combined = {
           speed: {
-            smooth: driver.speed.hard + machine.speed.hard,
-            rough: driver.speed.soft + machine.speed.soft,
-            water: driver.speed.liquid + machine.speed.liquid,
+            hard: driver.speed.hard + machine.speed.hard,
+            soft: driver.speed.soft + machine.speed.soft,
+            liquid: driver.speed.liquid + machine.speed.liquid,
           },
           acceleration: driver.acceleration + machine.acceleration,
           weight: driver.weight + machine.weight,
@@ -111,9 +117,9 @@ export default function ParetoPage() {
         };
 
         let totalScore = 0;
-        if (criteria.speedSmooth) totalScore += combined.speed.smooth;
-        if (criteria.speedRough) totalScore += combined.speed.rough;
-        if (criteria.speedWater) totalScore += combined.speed.water;
+        if (criteria.speedHard) totalScore += combined.speed.hard;
+        if (criteria.speedSoft) totalScore += combined.speed.soft;
+        if (criteria.speedLiquid) totalScore += combined.speed.liquid;
         if (criteria.acceleration) totalScore += combined.acceleration;
         if (criteria.weight) totalScore += combined.weight;
         if (criteria.handling) totalScore += combined.handling;
@@ -137,7 +143,6 @@ export default function ParetoPage() {
     return sorted.slice(0, 100);
   }, [allCombinations]);
 
-
   const criteriaCount = Object.values(criteria).filter(Boolean).length;
 
   return (
@@ -158,12 +163,12 @@ export default function ParetoPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-2">
                 <Checkbox
-                  id="speedSmooth"
-                  checked={speedSmooth}
-                  onCheckedChange={(checked) => setSpeedSmooth(!!checked)}
+                  id="speedHard"
+                  checked={speedHard}
+                  onCheckedChange={(checked) => setSpeedHard(!!checked)}
                 />
                 <label
-                  htmlFor="speedSmooth"
+                  htmlFor="speedHard"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {t("stats.speedHard")}
@@ -171,12 +176,12 @@ export default function ParetoPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox
-                  id="speedRough"
-                  checked={speedRough}
-                  onCheckedChange={(checked) => setSpeedRough(!!checked)}
+                  id="speedSoft"
+                  checked={speedSoft}
+                  onCheckedChange={(checked) => setSpeedSoft(!!checked)}
                 />
                 <label
-                  htmlFor="speedRough"
+                  htmlFor="speedSoft"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {t("stats.speedSoft")}
@@ -184,12 +189,12 @@ export default function ParetoPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox
-                  id="speedWater"
-                  checked={speedWater}
-                  onCheckedChange={(checked) => setSpeedWater(!!checked)}
+                  id="speedLiquid"
+                  checked={speedLiquid}
+                  onCheckedChange={(checked) => setSpeedLiquid(!!checked)}
                 />
                 <label
-                  htmlFor="speedWater"
+                  htmlFor="speedLiquid"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {t("stats.speedLiquid")}
@@ -267,7 +272,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        speedSmooth
+                        speedHard
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -276,7 +281,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        speedRough
+                        speedSoft
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -285,7 +290,7 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        speedWater
+                        speedLiquid
                           ? "bg-primary/10 text-center w-1/9"
                           : "text-center w-1/9"
                       }
@@ -382,24 +387,24 @@ export default function ParetoPage() {
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            speedSmooth ? "bg-primary/10" : ""
+                            speedHard ? "bg-primary/10" : ""
                           }`}
                         >
-                          {combo.combined.speed.smooth}
+                          {combo.combined.speed.hard}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            speedRough ? "bg-primary/10" : ""
+                            speedSoft ? "bg-primary/10" : ""
                           }`}
                         >
-                          {combo.combined.speed.rough}
+                          {combo.combined.speed.soft}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
-                            speedWater ? "bg-primary/10" : ""
+                            speedLiquid ? "bg-primary/10" : ""
                           }`}
                         >
-                          {combo.combined.speed.water}
+                          {combo.combined.speed.liquid}
                         </TableCell>
                         <TableCell
                           className={`text-center ${
