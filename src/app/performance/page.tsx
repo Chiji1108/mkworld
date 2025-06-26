@@ -79,8 +79,8 @@ export default function PerformancePage() {
         >
           <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
             <TabsTrigger value="all" className="text-xs sm:text-sm">全て</TabsTrigger>
-            <TabsTrigger value="smooth" className="text-xs sm:text-sm">滑</TabsTrigger>
-            <TabsTrigger value="rough" className="text-xs sm:text-sm">荒</TabsTrigger>
+            <TabsTrigger value="smooth" className="text-xs sm:text-sm">硬</TabsTrigger>
+            <TabsTrigger value="rough" className="text-xs sm:text-sm">柔</TabsTrigger>
             <TabsTrigger value="water" className="text-xs sm:text-sm">水</TabsTrigger>
             <TabsTrigger value="balance" className="text-xs sm:text-sm">バランス</TabsTrigger>
           </TabsList>
@@ -92,8 +92,8 @@ export default function PerformancePage() {
             <TableHead className="text-center">
               {type === "driver" ? "ドライバー" : "マシン"}
             </TableHead>
-            <TableHead className="w-1/6 text-center">スピード（滑）</TableHead>
-            <TableHead className="w-1/6 text-center">スピード（荒）</TableHead>
+            <TableHead className="w-1/6 text-center">スピード（硬）</TableHead>
+            <TableHead className="w-1/6 text-center">スピード（柔）</TableHead>
             <TableHead className="w-1/6 text-center">スピード（水）</TableHead>
             <TableHead className="w-1/6 text-center">かそく</TableHead>
             <TableHead className="w-1/6 text-center">おもさ</TableHead>

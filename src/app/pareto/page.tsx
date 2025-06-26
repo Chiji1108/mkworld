@@ -131,7 +131,7 @@ export default function ParetoPage() {
                   htmlFor="speedSmooth"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（滑）
+                  スピード（硬）
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -146,7 +146,7 @@ export default function ParetoPage() {
                   htmlFor="speedRough"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（荒）
+                  スピード（柔）
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -241,7 +241,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（滑）
+                      スピード（硬）
                     </TableHead>
                     <TableHead
                       className={
@@ -250,7 +250,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（荒）
+                      スピード（柔）
                     </TableHead>
                     <TableHead
                       className={

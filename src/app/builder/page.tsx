@@ -119,11 +119,11 @@ export default function BuilderPage() {
                 <div className="space-y-3">
                   {[
                     {
-                      name: "スピード（滑）",
+                      name: "スピード（硬）",
                       value: selectedDriver.speed.smooth,
                     },
                     {
-                      name: "スピード（荒）",
+                      name: "スピード（柔）",
                       value: selectedDriver.speed.rough,
                     },
                     {
@@ -208,11 +208,11 @@ export default function BuilderPage() {
                 <div className="space-y-3">
                   {[
                     {
-                      name: "スピード（滑）",
+                      name: "スピード（硬）",
                       value: selectedMachine.speed.smooth,
                     },
                     {
-                      name: "スピード（荒）",
+                      name: "スピード（柔）",
                       value: selectedMachine.speed.rough,
                     },
                     {
@@ -282,12 +282,12 @@ export default function BuilderPage() {
               <div className="space-y-4">
                 {[
                   {
-                    name: "スピード（滑）",
+                    name: "スピード（硬）",
                     driver: selectedDriver.speed.smooth,
                     machine: selectedMachine.speed.smooth,
                   },
                   {
-                    name: "スピード（荒）",
+                    name: "スピード（柔）",
                     driver: selectedDriver.speed.rough,
                     machine: selectedMachine.speed.rough,
                   },
