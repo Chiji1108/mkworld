@@ -18,28 +18,27 @@ export default function Home() {
       description: "全ドライバーとマシンの詳細な性能データを確認",
       icon: BarChart3,
       href: "/performance",
-      stats: `${DRIVERS.length}ドライバー・${MACHINES.length}マシン`,
     },
     {
       title: "カスタムビルダー",
       description: "ドライバーとマシンを組み合わせて最適な性能を作成",
       icon: Car,
       href: "/builder",
-      stats: "無限の組み合わせ",
     },
     {
       title: "パレート最適",
       description: "指定した条件に基づいて最適な組み合わせを自動検索",
       icon: Target,
       href: "/pareto",
-      stats: "AIによる最適化",
     },
   ];
 
   return (
-    <div className="container mx-auto py-12">
-      <div className="flex justify-center items-center mb-6">
-        <h1 className="text-2xl font-bold lg:text-4xl">MKWorld Tools</h1>
+    <div className="container mx-auto pb-12">
+      <div className="flex justify-center items-center my-24">
+        <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+          MKWorld Tools
+        </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -57,9 +56,6 @@ export default function Home() {
                   </div>
                   <div>
                     <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    <p className="text-sm text-blue-600 font-medium">
-                      {feature.stats}
-                    </p>
                   </div>
                 </div>
               </CardHeader>
@@ -81,12 +77,9 @@ export default function Home() {
 
       <div className="mb-16">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4">
             開発の参考になったツイート
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            このWebアプリの開発にあたって参考にさせていただいた、素晴らしいツイートをご紹介します
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">

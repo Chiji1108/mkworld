@@ -4,6 +4,16 @@ export type Stats = {
   acceleration: number;
   weight: number;
   handling: number;
+  color:
+    | "#B8DFFC"
+    | "#BDFDD6"
+    | "#D4FDB1"
+    | "#EEFFC1"
+    | "#FFFDC9"
+    | "#F9D8AA"
+    | "#F4BCA3"
+    | "#EF9D9B"
+    | "#D0826F";
 };
 
 export const DRIVERS: Stats[] = [
@@ -13,6 +23,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 10,
     weight: 3,
     handling: 9,
+    color: "#B8DFFC",
   },
   {
     name: "ベビィデイジー",
@@ -20,6 +31,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 10,
     weight: 3,
     handling: 9,
+    color: "#B8DFFC",
   },
   {
     name: "バサバサ",
@@ -27,6 +39,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 10,
     weight: 3,
     handling: 9,
+    color: "#B8DFFC",
   },
   {
     name: "パタテンテン",
@@ -34,6 +47,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 10,
     weight: 3,
     handling: 9,
+    color: "#B8DFFC",
   },
   {
     name: "ベビィマリオ",
@@ -41,6 +55,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "クリボー",
@@ -48,6 +63,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "ガボン",
@@ -55,6 +71,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "ベビィルイージ",
@@ -62,6 +79,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "カロン",
@@ -69,6 +87,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "テレン",
@@ -76,6 +95,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "ベビィロゼッタ",
@@ -83,6 +103,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "カニ",
@@ -90,6 +111,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "フィッシュボーン",
@@ -97,6 +119,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 9,
     weight: 4,
     handling: 9,
+    color: "#BDFDD6",
   },
   {
     name: "キノピコ",
@@ -104,6 +127,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "トッテン",
@@ -111,6 +135,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "キノピオ",
@@ -118,6 +143,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "ヘイホー",
@@ -125,6 +151,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "ハッチン",
@@ -132,6 +159,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "ノコノコ",
@@ -139,6 +167,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "ジュゲム",
@@ -146,6 +175,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "プクプク",
@@ -153,6 +183,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 8,
     weight: 5,
     handling: 8,
+    color: "#D4FDB1",
   },
   {
     name: "ピーチ",
@@ -160,6 +191,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "デイジー",
@@ -167,6 +199,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "ガマネー",
@@ -174,6 +207,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "ヨッシー",
@@ -181,6 +215,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "チョロプー",
@@ -188,6 +223,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "クッパJr",
@@ -195,6 +231,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "リフトン",
@@ -202,6 +239,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 7,
     weight: 6,
     handling: 7,
+    color: "#EEFFC1",
   },
   {
     name: "マリオ",
@@ -209,6 +247,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "プー",
@@ -216,6 +255,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "ルイージ",
@@ -223,6 +263,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "ハンマーブロス",
@@ -230,6 +271,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "サンボ",
@@ -237,6 +279,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "キャサリン",
@@ -244,6 +287,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "ペンギン",
@@ -251,6 +295,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 6,
     weight: 7,
     handling: 6,
+    color: "#FFFDC9",
   },
   {
     name: "ポリーン",
@@ -258,6 +303,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "パックンフラワー",
@@ -265,6 +311,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "ゆきだるま",
@@ -272,6 +319,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "キングテレサ",
@@ -279,6 +327,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "ツッコンドル",
@@ -286,6 +335,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "ロゼッタ",
@@ -293,6 +343,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "ポイハナ",
@@ -300,6 +351,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 5,
     weight: 8,
     handling: 5,
+    color: "#F9D8AA",
   },
   {
     name: "ワリオ",
@@ -307,6 +359,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "ハナチャン",
@@ -314,6 +367,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "ドンキーコング",
@@ -321,6 +375,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "ウシ",
@@ -328,6 +383,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "ブル",
@@ -335,6 +391,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "ワルイージ",
@@ -342,6 +399,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "モンテ",
@@ -349,6 +407,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 4,
     weight: 9,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "クッパ",
@@ -356,6 +415,7 @@ export const DRIVERS: Stats[] = [
     acceleration: 3,
     weight: 10,
     handling: 3,
+    color: "#EF9D9B",
   },
 ];
 
@@ -366,6 +426,7 @@ export const MACHINES: Stats[] = [
     acceleration: 9,
     weight: 0,
     handling: 6,
+    color: "#B8DFFC",
   },
   {
     name: "カラフルスクーター",
@@ -373,6 +434,7 @@ export const MACHINES: Stats[] = [
     acceleration: 9,
     weight: 0,
     handling: 6,
+    color: "#B8DFFC",
   },
   {
     name: "レディオライド",
@@ -380,6 +442,7 @@ export const MACHINES: Stats[] = [
     acceleration: 9,
     weight: 0,
     handling: 6,
+    color: "#B8DFFC",
   },
   {
     name: "こいのぼり",
@@ -387,6 +450,7 @@ export const MACHINES: Stats[] = [
     acceleration: 8,
     weight: 0,
     handling: 6,
+    color: "#BDFDD6",
   },
   {
     name: "ドルフィンキック",
@@ -394,6 +458,7 @@ export const MACHINES: Stats[] = [
     acceleration: 8,
     weight: 0,
     handling: 6,
+    color: "#BDFDD6",
   },
   {
     name: "ラリーバイク",
@@ -401,6 +466,7 @@ export const MACHINES: Stats[] = [
     acceleration: 8,
     weight: 0,
     handling: 6,
+    color: "#BDFDD6",
   },
   {
     name: "ドカンバイク",
@@ -408,6 +474,7 @@ export const MACHINES: Stats[] = [
     acceleration: 8,
     weight: 0,
     handling: 6,
+    color: "#BDFDD6",
   },
   {
     name: "スケルトン",
@@ -415,6 +482,7 @@ export const MACHINES: Stats[] = [
     acceleration: 8,
     weight: 1,
     handling: 5,
+    color: "#BDFDD6",
   },
   {
     name: "パタテンテン",
@@ -422,6 +490,7 @@ export const MACHINES: Stats[] = [
     acceleration: 7,
     weight: 1,
     handling: 5,
+    color: "#D4FDB1",
   },
   {
     name: "マッハレーサー",
@@ -429,6 +498,7 @@ export const MACHINES: Stats[] = [
     acceleration: 7,
     weight: 0,
     handling: 6,
+    color: "#D4FDB1",
   },
   {
     name: "FCロボットバイク",
@@ -436,6 +506,7 @@ export const MACHINES: Stats[] = [
     acceleration: 7,
     weight: 0,
     handling: 6,
+    color: "#D4FDB1",
   },
   {
     name: "スチームバイク",
@@ -443,6 +514,7 @@ export const MACHINES: Stats[] = [
     acceleration: 6,
     weight: 1,
     handling: 5,
+    color: "#EEFFC1",
   },
   {
     name: "コゲッソー",
@@ -450,6 +522,7 @@ export const MACHINES: Stats[] = [
     acceleration: 6,
     weight: 1,
     handling: 5,
+    color: "#EEFFC1",
   },
   {
     name: "スタンダードカート",
@@ -457,6 +530,7 @@ export const MACHINES: Stats[] = [
     acceleration: 5,
     weight: 2,
     handling: 4,
+    color: "#FFFDC9",
   },
   {
     name: "リボンクラシカル",
@@ -464,6 +538,7 @@ export const MACHINES: Stats[] = [
     acceleration: 5,
     weight: 2,
     handling: 4,
+    color: "#FFFDC9",
   },
   {
     name: "イグニッション",
@@ -471,6 +546,7 @@ export const MACHINES: Stats[] = [
     acceleration: 6,
     weight: 3,
     handling: 2,
+    color: "#FFFDC9",
   },
   {
     name: "ファイアモービル",
@@ -478,6 +554,7 @@ export const MACHINES: Stats[] = [
     acceleration: 3,
     weight: 3,
     handling: 4,
+    color: "#F9D8AA",
   },
   {
     name: "ケロケロード",
@@ -485,6 +562,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "スーパーカーペット",
@@ -492,6 +570,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "H2O",
@@ -499,6 +578,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "ドッシーウェーブ",
@@ -506,6 +586,7 @@ export const MACHINES: Stats[] = [
     acceleration: 5,
     weight: 4,
     handling: 1,
+    color: "#F9D8AA",
   },
   {
     name: "タートルバギー",
@@ -513,6 +594,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "ラリーカート",
@@ -520,6 +602,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "ファイアチャージャー",
@@ -527,6 +610,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "ロイヤルターボ",
@@ -534,6 +618,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "Bダッシュ",
@@ -541,6 +626,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "マッハクイーン",
@@ -548,6 +634,7 @@ export const MACHINES: Stats[] = [
     acceleration: 4,
     weight: 3,
     handling: 3,
+    color: "#F9D8AA",
   },
   {
     name: "Wチョッパー",
@@ -555,6 +642,7 @@ export const MACHINES: Stats[] = [
     acceleration: 3,
     weight: 2,
     handling: 4,
+    color: "#F4BCA3",
   },
   {
     name: "サファリカーゴ",
@@ -562,6 +650,7 @@ export const MACHINES: Stats[] = [
     acceleration: 2,
     weight: 5,
     handling: 2,
+    color: "#F4BCA3",
   },
   {
     name: "キラーヘッド",
@@ -569,6 +658,7 @@ export const MACHINES: Stats[] = [
     acceleration: 2,
     weight: 5,
     handling: 2,
+    color: "#F4BCA3",
   },
   {
     name: "ラリーゲイター",
@@ -576,6 +666,7 @@ export const MACHINES: Stats[] = [
     acceleration: 3,
     weight: 6,
     handling: 0,
+    color: "#F4BCA3",
   },
   {
     name: "メカクッパ",
@@ -583,6 +674,7 @@ export const MACHINES: Stats[] = [
     acceleration: 1,
     weight: 5,
     handling: 2,
+    color: "#EF9D9B",
   },
   {
     name: "ローブスター",
@@ -590,6 +682,7 @@ export const MACHINES: Stats[] = [
     acceleration: 2,
     weight: 6,
     handling: 0,
+    color: "#EF9D9B",
   },
   {
     name: "ビッグブル",
@@ -597,6 +690,7 @@ export const MACHINES: Stats[] = [
     acceleration: 1,
     weight: 5,
     handling: 2,
+    color: "#EF9D9B",
   },
   {
     name: "ホットラリー",
@@ -604,6 +698,7 @@ export const MACHINES: Stats[] = [
     acceleration: 1,
     weight: 5,
     handling: 2,
+    color: "#EF9D9B",
   },
   {
     name: "トイダンプ",
@@ -611,6 +706,7 @@ export const MACHINES: Stats[] = [
     acceleration: 1,
     weight: 5,
     handling: 2,
+    color: "#EF9D9B",
   },
   {
     name: "バウザーバギー",
@@ -618,6 +714,7 @@ export const MACHINES: Stats[] = [
     acceleration: 1,
     weight: 5,
     handling: 2,
+    color: "#EF9D9B",
   },
   {
     name: "ムービースター",
@@ -625,6 +722,7 @@ export const MACHINES: Stats[] = [
     acceleration: 2,
     weight: 3,
     handling: 3,
+    color: "#EF9D9B",
   },
   {
     name: "ベルトライク",
@@ -632,6 +730,7 @@ export const MACHINES: Stats[] = [
     acceleration: 3,
     weight: 4,
     handling: 1,
+    color: "#EF9D9B",
   },
   {
     name: "スターモービル",
@@ -639,5 +738,6 @@ export const MACHINES: Stats[] = [
     acceleration: 0,
     weight: 5,
     handling: 2,
+    color: "#D0826F",
   },
 ];
