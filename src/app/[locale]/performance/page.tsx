@@ -23,18 +23,46 @@ import { translateDriverName, translateMachineName } from "@/lib/translation-hel
 import { Droplets, Info, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
+import { useQueryState } from "nuqs";
 
 export default function PerformancePage() {
   const t = useTranslations();
-  const [driverSearch, setDriverSearch] = useState("");
-  const [machineSearch, setMachineSearch] = useState("");
-  const [driverSpecFilter, setDriverSpecFilter] = useState<
-    SpeedSpecialization | "all"
-  >("all");
-  const [machineSpecFilter, setMachineSpecFilter] = useState<
-    SpeedSpecialization | "all"
-  >("all");
+  // nuqsでURL状態管理
+  const [driverSearch, setDriverSearch] = useQueryState("driverSearch", {
+    defaultValue: "",
+    parse: (value) => value === "" ? "" : value,
+    serialize: (value) => value,
+  });
+
+  const [machineSearch, setMachineSearch] = useQueryState("machineSearch", {
+    defaultValue: "",
+    parse: (value) => value === "" ? "" : value,
+    serialize: (value) => value,
+  });
+
+  const [driverSpecFilter, setDriverSpecFilter] = useQueryState(
+    "driverSpecFilter",
+    {
+      defaultValue: "all" as SpeedSpecialization | "all",
+      parse: (value) => value as SpeedSpecialization | "all",
+      serialize: (value) => value,
+    }
+  );
+
+  const [machineSpecFilter, setMachineSpecFilter] = useQueryState(
+    "machineSpecFilter",
+    {
+      defaultValue: "all" as SpeedSpecialization | "all",
+      parse: (value) => value as SpeedSpecialization | "all",
+      serialize: (value) => value,
+    }
+  );
+
+  const [activeTab, setActiveTab] = useQueryState("tab", {
+    defaultValue: "drivers",
+    parse: (value) => value === "machines" ? "machines" : "drivers",
+    serialize: (value) => value,
+  });
 
   const filteredDrivers = GROUPED_DRIVERS.filter((driver) => {
     const matchesSearch = driver.names.some((name) => {
@@ -254,7 +282,7 @@ export default function PerformancePage() {
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="drivers" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="drivers">
             {t("performance.tabs.drivers")} ({GROUPED_DRIVERS.length})
