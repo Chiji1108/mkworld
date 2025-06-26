@@ -45,7 +45,7 @@ export function Navigation() {
           <div className="flex items-center space-x-1">
             {navigationItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = pathname.endsWith(item.href) || (item.href === "/builder" && pathname.includes("/builder")) || (item.href === "/performance" && pathname.includes("/performance")) || (item.href === "/pareto" && pathname.includes("/pareto"));
 
               return (
                 <Button
