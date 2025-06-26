@@ -61,27 +61,28 @@ export default function PerformancePage() {
     onSpecFilterChange: (value: SpeedSpecialization | "all") => void
   ) => (
     <div className="space-y-4">
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
         <Input
           placeholder={`${
             type === "driver" ? "ドライバー" : "マシン"
           }を検索...`}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
         <Tabs
           value={specFilter}
           onValueChange={(value) =>
             onSpecFilterChange(value as SpeedSpecialization | "all")
           }
+          className="w-full sm:w-auto"
         >
-          <TabsList>
-            <TabsTrigger value="all">全て</TabsTrigger>
-            <TabsTrigger value="smooth">スピード（滑）</TabsTrigger>
-            <TabsTrigger value="rough">スピード（荒）</TabsTrigger>
-            <TabsTrigger value="water">スピード（水）</TabsTrigger>
-            <TabsTrigger value="balance">バランス</TabsTrigger>
+          <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
+            <TabsTrigger value="all" className="text-xs sm:text-sm">全て</TabsTrigger>
+            <TabsTrigger value="smooth" className="text-xs sm:text-sm">滑</TabsTrigger>
+            <TabsTrigger value="rough" className="text-xs sm:text-sm">荒</TabsTrigger>
+            <TabsTrigger value="water" className="text-xs sm:text-sm">水</TabsTrigger>
+            <TabsTrigger value="balance" className="text-xs sm:text-sm">バランス</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
