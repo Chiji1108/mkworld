@@ -81,7 +81,7 @@ export default function PerformancePage() {
             <TabsTrigger value="all" className="text-xs sm:text-sm">全て</TabsTrigger>
             <TabsTrigger value="smooth" className="text-xs sm:text-sm">硬</TabsTrigger>
             <TabsTrigger value="rough" className="text-xs sm:text-sm">柔</TabsTrigger>
-            <TabsTrigger value="water" className="text-xs sm:text-sm">水</TabsTrigger>
+            <TabsTrigger value="water" className="text-xs sm:text-sm">液</TabsTrigger>
             <TabsTrigger value="balance" className="text-xs sm:text-sm">バランス</TabsTrigger>
           </TabsList>
         </Tabs>
@@ -94,7 +94,7 @@ export default function PerformancePage() {
             </TableHead>
             <TableHead className="w-1/6 text-center">スピード（硬）</TableHead>
             <TableHead className="w-1/6 text-center">スピード（柔）</TableHead>
-            <TableHead className="w-1/6 text-center">スピード（水）</TableHead>
+            <TableHead className="w-1/6 text-center">スピード（液）</TableHead>
             <TableHead className="w-1/6 text-center">かそく</TableHead>
             <TableHead className="w-1/6 text-center">おもさ</TableHead>
             <TableHead className="w-1/6 text-center">まがりやすさ</TableHead>

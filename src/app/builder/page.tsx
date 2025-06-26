@@ -127,7 +127,7 @@ export default function BuilderPage() {
                       value: selectedDriver.speed.rough,
                     },
                     {
-                      name: "スピード（水）",
+                      name: "スピード（液）",
                       value: selectedDriver.speed.water,
                     },
                     { name: "かそく", value: selectedDriver.acceleration },
@@ -216,7 +216,7 @@ export default function BuilderPage() {
                       value: selectedMachine.speed.rough,
                     },
                     {
-                      name: "スピード（水）",
+                      name: "スピード（液）",
                       value: selectedMachine.speed.water,
                     },
                     { name: "かそく", value: selectedMachine.acceleration },
@@ -292,7 +292,7 @@ export default function BuilderPage() {
                     machine: selectedMachine.speed.rough,
                   },
                   {
-                    name: "スピード（水）",
+                    name: "スピード（液）",
                     driver: selectedDriver.speed.water,
                     machine: selectedMachine.speed.water,
                   },

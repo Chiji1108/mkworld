@@ -161,7 +161,7 @@ export default function ParetoPage() {
                   htmlFor="speedWater"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  スピード（水）
+                  スピード（液）
                 </label>
               </div>
               <div className="flex items-center space-x-2">
@@ -259,7 +259,7 @@ export default function ParetoPage() {
                           : "text-center w-1/9"
                       }
                     >
-                      スピード（水）
+                      スピード（液）
                     </TableHead>
                     <TableHead
                       className={
