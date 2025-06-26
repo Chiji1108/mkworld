@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+
 import { Suspense } from "react";
 import {
   enrichTweet,
@@ -211,11 +212,11 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
       )}
       {!tweet.video &&
         !tweet.photos &&
-        // @ts-ignore
+        // @ts-expect-error TODO: fix this
         tweet?.card?.binding_values?.thumbnail_image_large?.image_value.url && (
           <img
             src={
-              // @ts-ignore
+              // @ts-expect-error TODO: fix this
               tweet.card.binding_values.thumbnail_image_large.image_value.url
             }
             className="h-64 rounded-xl border object-cover shadow-sm"
@@ -228,6 +229,7 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
 
 export const MagicTweet = ({
   tweet,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   components,
   className,
   ...props
