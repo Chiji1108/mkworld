@@ -1,19 +1,28 @@
-export type Stats = {
-  name: string;
+export type StatsColor =
+  | "#B8DFFC"
+  | "#BDFDD6"
+  | "#D4FDB1"
+  | "#EEFFC1"
+  | "#FFFDC9"
+  | "#F9D8AA"
+  | "#F4BCA3"
+  | "#EF9D9B"
+  | "#D0826F";
+
+export type BaseStats = {
   speed: { smooth: number; rough: number; water: number };
   acceleration: number;
   weight: number;
   handling: number;
-  color:
-    | "#B8DFFC"
-    | "#BDFDD6"
-    | "#D4FDB1"
-    | "#EEFFC1"
-    | "#FFFDC9"
-    | "#F9D8AA"
-    | "#F4BCA3"
-    | "#EF9D9B"
-    | "#D0826F";
+  color: StatsColor;
+};
+
+export type Stats = BaseStats & {
+  name: string;
+};
+
+export type GroupedStats = BaseStats & {
+  names: string[];
 };
 
 export const DRIVERS: Stats[] = [
@@ -744,14 +753,16 @@ export const MACHINES: Stats[] = [
 
 export type SpeedSpecialization = "smooth" | "rough" | "water" | "balance";
 
-export function analyzeSpeedSpecialization(stats: Stats): SpeedSpecialization {
+export function analyzeSpeedSpecialization(
+  stats: BaseStats
+): SpeedSpecialization {
   const { smooth, rough, water } = stats.speed;
 
   const maxSpeed = Math.max(smooth, rough, water);
   const minSpeed = Math.min(smooth, rough, water);
   const difference = maxSpeed - minSpeed;
 
-  if (difference <= 1) {
+  if (difference === 0) {
     return "balance";
   }
 
@@ -769,3 +780,47 @@ export function analyzeSpeedSpecialization(stats: Stats): SpeedSpecialization {
 
   return "balance";
 }
+
+export function groupStatsByIdenticalValues(stats: Stats[]): GroupedStats[] {
+  const groups: Map<string, GroupedStats> = new Map();
+
+  stats.forEach((stat) => {
+    const key = `${stat.speed.smooth}-${stat.speed.rough}-${stat.speed.water}-${stat.acceleration}-${stat.weight}-${stat.handling}`;
+
+    if (groups.has(key)) {
+      const group = groups.get(key)!;
+      group.names.push(stat.name);
+    } else {
+      groups.set(key, {
+        names: [stat.name],
+        speed: { ...stat.speed },
+        acceleration: stat.acceleration,
+        weight: stat.weight,
+        handling: stat.handling,
+        color: stat.color,
+      });
+    }
+  });
+
+  // Define color order from #B8DFFC to #D0826F
+  const colorOrder = [
+    "#B8DFFC",
+    "#BDFDD6",
+    "#D4FDB1",
+    "#EEFFC1",
+    "#FFFDC9",
+    "#F9D8AA",
+    "#F4BCA3",
+    "#EF9D9B",
+    "#D0826F",
+  ];
+
+  return Array.from(groups.values()).sort((a, b) => {
+    const aIndex = colorOrder.indexOf(a.color);
+    const bIndex = colorOrder.indexOf(b.color);
+    return aIndex - bIndex;
+  });
+}
+
+export const GROUPED_DRIVERS = groupStatsByIdenticalValues(DRIVERS);
+export const GROUPED_MACHINES = groupStatsByIdenticalValues(MACHINES);
