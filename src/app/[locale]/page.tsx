@@ -104,13 +104,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="flex justify-center">
-            <TweetCard
-              id="1934907959110488460"
-              className="w-full max-w-md shadow-lg hover:shadow-xl transition-shadow duration-300"
-            />
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className="flex justify-center">
             <TweetCard
               id="1937519504999022884"
