@@ -123,7 +123,7 @@
     "info": {
       "title": "What is Pareto Optimal?",
       "description": "Select the stats you want to prioritize, and the combinations with the highest total values will be displayed.",
-      "example": "Example: To maximize 'Speed (Hard)' and 'Acceleration' which are important in VS mode, check these two options and you'll see the popular Toadette + Baby Blooper combination appear at the top."
+      "example": "Example: To maximize 'Speed (Hard)' and 'Acceleration' which are important in VS mode, check these two options and you'll see the popular Toadette + Baby Blooper combination appear at the top score."
     }
   },
   "terms": {
