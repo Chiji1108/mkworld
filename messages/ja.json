@@ -46,6 +46,12 @@
     "acceleration": "かそく",
     "weight": "おもさ",
     "handling": "まがりやすさ",
+    "speedHardShort": "硬",
+    "speedSoftShort": "柔",
+    "speedLiquidShort": "液",
+    "accelerationShort": "加",
+    "weightShort": "重",
+    "handlingShort": "曲",
     "driver": "ドライバー",
     "machine": "マシン"
   },
@@ -81,6 +87,9 @@
         "title": "スピード（液）",
         "description": "水上、溶岩など液状の路面での性能"
       }
+    },
+    "abbreviationInfo": {
+      "title": "ステータス略称"
     }
   },
   "builder": {
@@ -110,6 +119,11 @@
     "results": {
       "title": "最適な組み合わせ",
       "score": "スコア"
+    },
+    "info": {
+      "title": "パレート最適とは",
+      "description": "重視したいステータスを選択すると、その合計値が最も高い組み合わせを表示します。",
+      "example": "例：VSで重要な「スピード（硬）」と「かそく」を最大化したい場合は、この2つにチェックを入れるとみんな大好きキノピココゲッソーの組み合わせが上位に出てきます。"
     }
   },
   "terms": {

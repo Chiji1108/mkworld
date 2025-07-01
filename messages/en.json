@@ -46,6 +46,12 @@
     "acceleration": "Acceleration",
     "weight": "Weight",
     "handling": "Handling",
+    "speedHardShort": "H",
+    "speedSoftShort": "S",
+    "speedLiquidShort": "L",
+    "accelerationShort": "A",
+    "weightShort": "W",
+    "handlingShort": "T",
     "driver": "Driver",
     "machine": "Machine"
   },
@@ -81,6 +87,9 @@
         "title": "Speed (Liquid)",
         "description": "Performance on liquid surfaces like water, lava"
       }
+    },
+    "abbreviationInfo": {
+      "title": "Stat Abbreviations"
     }
   },
   "builder": {
@@ -110,6 +119,11 @@
     "results": {
       "title": "Optimal Combinations",
       "score": "Score"
+    },
+    "info": {
+      "title": "What is Pareto Optimal?",
+      "description": "Select the stats you want to prioritize, and the combinations with the highest total values will be displayed.",
+      "example": "Example: To maximize 'Speed (Hard)' and 'Acceleration' which are important in VS mode, check these two options and you'll see the popular Toadette + Baby Blooper combination appear at the top."
     }
   },
   "terms": {

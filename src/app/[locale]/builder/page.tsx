@@ -15,13 +15,13 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
-import { 
-  translateDriverName, 
-  translateMachineName, 
+import {
   getDriverTranslationKey,
-  getMachineTranslationKey 
+  getMachineTranslationKey,
+  translateDriverName,
+  translateMachineName,
 } from "@/lib/translation-helpers";
-import { Droplets, Mountain, Waves } from "lucide-react";
+import { Droplets, Info, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
@@ -32,16 +32,20 @@ export default function BuilderPage() {
   // URL状態管理用のヘルパー関数
   const findDriverByKey = (key: string): GroupedStats | null => {
     if (!key || key === "") return null;
-    return GROUPED_DRIVERS.find(driver => 
-      driver.names.some(name => getDriverTranslationKey(name) === key)
-    ) || null;
+    return (
+      GROUPED_DRIVERS.find((driver) =>
+        driver.names.some((name) => getDriverTranslationKey(name) === key)
+      ) || null
+    );
   };
 
   const findMachineByKey = (key: string): GroupedStats | null => {
     if (!key || key === "") return null;
-    return GROUPED_MACHINES.find(machine => 
-      machine.names.some(name => getMachineTranslationKey(name) === key)
-    ) || null;
+    return (
+      GROUPED_MACHINES.find((machine) =>
+        machine.names.some((name) => getMachineTranslationKey(name) === key)
+      ) || null
+    );
   };
 
   const getDriverKey = (driver: GroupedStats | null): string => {
@@ -55,15 +59,15 @@ export default function BuilderPage() {
   };
 
   // nuqsでURL状態管理
-  const [driverKey, setDriverKey] = useQueryState('driver', {
+  const [driverKey, setDriverKey] = useQueryState("driver", {
     defaultValue: "",
-    parse: (value) => value === "" ? "" : value,
+    parse: (value) => (value === "" ? "" : value),
     serialize: (value) => value,
   });
 
-  const [machineKey, setMachineKey] = useQueryState('machine', {
+  const [machineKey, setMachineKey] = useQueryState("machine", {
     defaultValue: "",
-    parse: (value) => value === "" ? "" : value,
+    parse: (value) => (value === "" ? "" : value),
     serialize: (value) => value,
   });
 
@@ -121,11 +125,13 @@ export default function BuilderPage() {
                 {getSpecializationIcon(selected)}
               </div>
               <span>
-                {selected.names.map(name => 
-                  type === "driver" 
-                    ? translateDriverName(name, t) 
-                    : translateMachineName(name, t)
-                ).join(", ")}
+                {selected.names
+                  .map((name) =>
+                    type === "driver"
+                      ? translateDriverName(name, t)
+                      : translateMachineName(name, t)
+                  )
+                  .join(", ")}
               </span>
             </div>
           )}
@@ -142,11 +148,13 @@ export default function BuilderPage() {
                 {getSpecializationIcon(item)}
               </div>
               <span>
-                {item.names.map(name => 
-                  type === "driver" 
-                    ? translateDriverName(name, t) 
-                    : translateMachineName(name, t)
-                ).join(", ")}
+                {item.names
+                  .map((name) =>
+                    type === "driver"
+                      ? translateDriverName(name, t)
+                      : translateMachineName(name, t)
+                  )
+                  .join(", ")}
               </span>
             </div>
           </SelectItem>
@@ -163,6 +171,55 @@ export default function BuilderPage() {
         </h1>
         <p className="text-muted-foreground">{t("builder.description")}</p>
       </div>
+
+      {/* Speed Info Section */}
+      <Card className="mb-8 border-blue-200 bg-blue-50/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-700">
+            <Info className="w-5 h-5" />
+            {t("performance.speedInfo.title")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-stone-100 border border-stone-200">
+              <Mountain className="w-5 h-5 text-stone-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-stone-700 mb-1">
+                  {t("performance.speedInfo.hard.title")}
+                </h4>
+                <p className="text-sm text-stone-600">
+                  {t("performance.speedInfo.hard.description")}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-100 border border-amber-200">
+              <Waves className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-amber-700 mb-1">
+                  {t("performance.speedInfo.soft.title")}
+                </h4>
+                <p className="text-sm text-amber-600">
+                  {t("performance.speedInfo.soft.description")}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-100 border border-blue-200">
+              <Droplets className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-semibold text-blue-700 mb-1">
+                  {t("performance.speedInfo.liquid.title")}
+                </h4>
+                <p className="text-sm text-blue-600">
+                  {t("performance.speedInfo.liquid.description")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card>
@@ -347,7 +404,7 @@ export default function BuilderPage() {
                           ></div>
                           {/* Scale markers */}
                           <div className="absolute inset-0 flex">
-                            {[2.5, 5, 7.5].map((marker) => (
+                            {[5].map((marker) => (
                               <div
                                 key={marker}
                                 className="absolute top-0 bottom-0 w-px bg-white/70"

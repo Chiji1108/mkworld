@@ -19,7 +19,10 @@ import {
   type GroupedStats,
   analyzeSpeedSpecialization,
 } from "@/lib/stats";
-import { translateDriverName, translateMachineName } from "@/lib/translation-helpers";
+import {
+  translateDriverName,
+  translateMachineName,
+} from "@/lib/translation-helpers";
 import { Droplets, Info, Mountain, Waves } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -30,13 +33,13 @@ export default function PerformancePage() {
   // nuqsでURL状態管理
   const [driverSearch, setDriverSearch] = useQueryState("driverSearch", {
     defaultValue: "",
-    parse: (value) => value === "" ? "" : value,
+    parse: (value) => (value === "" ? "" : value),
     serialize: (value) => value,
   });
 
   const [machineSearch, setMachineSearch] = useQueryState("machineSearch", {
     defaultValue: "",
-    parse: (value) => value === "" ? "" : value,
+    parse: (value) => (value === "" ? "" : value),
     serialize: (value) => value,
   });
 
@@ -60,7 +63,7 @@ export default function PerformancePage() {
 
   const [activeTab, setActiveTab] = useQueryState("tab", {
     defaultValue: "drivers",
-    parse: (value) => value === "machines" ? "machines" : "drivers",
+    parse: (value) => (value === "machines" ? "machines" : "drivers"),
     serialize: (value) => value,
   });
 
@@ -68,8 +71,10 @@ export default function PerformancePage() {
     const matchesSearch = driver.names.some((name) => {
       const japaneseName = name.toLowerCase();
       const translatedName = translateDriverName(name, t).toLowerCase();
-      return japaneseName.includes(driverSearch.toLowerCase()) ||
-             translatedName.includes(driverSearch.toLowerCase());
+      return (
+        japaneseName.includes(driverSearch.toLowerCase()) ||
+        translatedName.includes(driverSearch.toLowerCase())
+      );
     });
     const matchesSpec =
       driverSpecFilter === "all" ||
@@ -81,8 +86,10 @@ export default function PerformancePage() {
     const matchesSearch = machine.names.some((name) => {
       const japaneseName = name.toLowerCase();
       const translatedName = translateMachineName(name, t).toLowerCase();
-      return japaneseName.includes(machineSearch.toLowerCase()) ||
-             translatedName.includes(machineSearch.toLowerCase());
+      return (
+        japaneseName.includes(machineSearch.toLowerCase()) ||
+        translatedName.includes(machineSearch.toLowerCase())
+      );
     });
     const matchesSpec =
       machineSpecFilter === "all" ||
@@ -114,50 +121,80 @@ export default function PerformancePage() {
           className="w-full sm:w-auto"
         >
           <TabsList className="w-full sm:w-auto grid grid-cols-5 sm:flex">
-            <TabsTrigger value="all" className="text-xs sm:text-sm">
+            <TabsTrigger
+              value="all"
+              className="text-[10px] sm:text-sm px-1 sm:px-3"
+            >
               {t("performance.filters.all")}
             </TabsTrigger>
-            <TabsTrigger value="hard" className="text-xs sm:text-sm">
+            <TabsTrigger
+              value="hard"
+              className="text-[10px] sm:text-sm px-1 sm:px-3"
+            >
               <Mountain className="w-3 h-3 sm:w-4 sm:h-4" />
-              {t("performance.filters.hard")}
+              <span className="hidden sm:inline">
+                {t("performance.filters.hard")}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="soft" className="text-xs sm:text-sm">
+            <TabsTrigger
+              value="soft"
+              className="text-[10px] sm:text-sm px-1 sm:px-3"
+            >
               <Waves className="w-3 h-3 sm:w-4 sm:h-4" />
-              {t("performance.filters.soft")}
+              <span className="hidden sm:inline">
+                {t("performance.filters.soft")}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="liquid" className="text-xs sm:text-sm">
+            <TabsTrigger
+              value="liquid"
+              className="text-[10px] sm:text-sm px-1 sm:px-3"
+            >
               <Droplets className="w-3 h-3 sm:w-4 sm:h-4" />
-              {t("performance.filters.liquid")}
+              <span className="hidden sm:inline">
+                {t("performance.filters.liquid")}
+              </span>
             </TabsTrigger>
-            <TabsTrigger value="balance" className="text-xs sm:text-sm">
+            <TabsTrigger
+              value="balance"
+              className="text-[10px] sm:text-sm px-1 sm:px-3"
+            >
               {t("performance.filters.balance")}
             </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
-      <Table>
-        <TableHeader>
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
           <TableRow>
-            <TableHead className="text-center">
+            <TableHead className="text-center text-[10px] sm:text-sm">
               {type === "driver" ? t("stats.driver") : t("stats.machine")}
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.speedHard")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">{t("stats.speedHard")}</span>
+              <span className="sm:hidden">{t("stats.speedHardShort")}</span>
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.speedSoft")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">{t("stats.speedSoft")}</span>
+              <span className="sm:hidden">{t("stats.speedSoftShort")}</span>
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.speedLiquid")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">{t("stats.speedLiquid")}</span>
+              <span className="sm:hidden">{t("stats.speedLiquidShort")}</span>
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.acceleration")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">
+                {t("stats.acceleration")}
+              </span>
+              <span className="sm:hidden">{t("stats.accelerationShort")}</span>
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.weight")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">{t("stats.weight")}</span>
+              <span className="sm:hidden">{t("stats.weightShort")}</span>
             </TableHead>
-            <TableHead className="w-1/6 text-center">
-              {t("stats.handling")}
+            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+              <span className="hidden sm:inline">{t("stats.handling")}</span>
+              <span className="sm:hidden">{t("stats.handlingShort")}</span>
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -169,8 +206,11 @@ export default function PerformancePage() {
                 <TableCell className="font-medium">
                   <div className="space-y-2">
                     {item.names.map((name) => (
-                      <div key={name} className="flex items-center space-x-3">
-                        <div className="w-10 h-10 relative flex-shrink-0">
+                      <div
+                        key={name}
+                        className="flex items-center space-x-2 sm:space-x-3"
+                      >
+                        <div className="w-6 h-6 sm:w-10 sm:h-10 relative flex-shrink-0">
                           <Image
                             src={`/${
                               type === "driver" ? "drivers" : "machines"
@@ -180,47 +220,66 @@ export default function PerformancePage() {
                             className="object-contain rounded"
                           />
                         </div>
-                        <span className="text-sm">
-                          {type === "driver" 
-                            ? translateDriverName(name, t) 
-                            : translateMachineName(name, t)
-                          }
+                        <span className="text-[11px] sm:text-sm">
+                          {type === "driver"
+                            ? translateDriverName(name, t)
+                            : translateMachineName(name, t)}
                         </span>
                       </div>
                     ))}
                   </div>
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
                   {specialization === "hard" ? (
-                    <Badge variant="default">{item.speed.hard}</Badge>
+                    <Badge
+                      variant="default"
+                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                    >
+                      {item.speed.hard}
+                    </Badge>
                   ) : (
                     item.speed.hard
                   )}
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
                   {specialization === "soft" ? (
-                    <Badge variant="default">{item.speed.soft}</Badge>
+                    <Badge
+                      variant="default"
+                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                    >
+                      {item.speed.soft}
+                    </Badge>
                   ) : (
                     item.speed.soft
                   )}
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
                   {specialization === "liquid" ? (
-                    <Badge variant="default">{item.speed.liquid}</Badge>
+                    <Badge
+                      variant="default"
+                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                    >
+                      {item.speed.liquid}
+                    </Badge>
                   ) : (
                     item.speed.liquid
                   )}
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
                   {item.acceleration}
                 </TableCell>
-                <TableCell className="text-center">{item.weight}</TableCell>
-                <TableCell className="text-center">{item.handling}</TableCell>
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                  {item.weight}
+                </TableCell>
+                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                  {item.handling}
+                </TableCell>
               </TableRow>
             );
           })}
         </TableBody>
       </Table>
+      </div>
     </div>
   );
 
@@ -233,50 +292,59 @@ export default function PerformancePage() {
         <p className="text-muted-foreground">{t("performance.description")}</p>
       </div>
 
-      {/* Speed Info Section */}
+      {/* Stat Abbreviations Info Section */}
       <Card className="mb-8 border-blue-200 bg-blue-50/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-700">
             <Info className="w-5 h-5" />
-            {t("performance.speedInfo.title")}
+            {t("performance.abbreviationInfo.title")}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-stone-100 border border-stone-200">
-              <Mountain className="w-5 h-5 text-stone-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="font-semibold text-stone-700 mb-1">
-                  {t("performance.speedInfo.hard.title")}
-                </h4>
-                <p className="text-sm text-stone-600">
-                  {t("performance.speedInfo.hard.description")}
-                </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.speedHardShort")}
+              </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.speedHard")}
               </div>
             </div>
-
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-100 border border-amber-200">
-              <Waves className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="font-semibold text-amber-700 mb-1">
-                  {t("performance.speedInfo.soft.title")}
-                </h4>
-                <p className="text-sm text-amber-600">
-                  {t("performance.speedInfo.soft.description")}
-                </p>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.speedSoftShort")}
+              </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.speedSoft")}
               </div>
             </div>
-
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-100 border border-blue-200">
-              <Droplets className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="font-semibold text-blue-700 mb-1">
-                  {t("performance.speedInfo.liquid.title")}
-                </h4>
-                <p className="text-sm text-blue-600">
-                  {t("performance.speedInfo.liquid.description")}
-                </p>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.speedLiquidShort")}
               </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.speedLiquid")}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.accelerationShort")}
+              </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.acceleration")}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.weightShort")}
+              </div>
+              <div className="text-sm text-gray-600">{t("stats.weight")}</div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.handlingShort")}
+              </div>
+              <div className="text-sm text-gray-600">{t("stats.handling")}</div>
             </div>
           </div>
         </CardContent>
@@ -293,39 +361,31 @@ export default function PerformancePage() {
         </TabsList>
 
         <TabsContent value="drivers" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t("performance.tabs.drivers")}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {renderStatsTable(
-                filteredDrivers,
-                driverSearch,
-                setDriverSearch,
-                "driver",
-                driverSpecFilter,
-                setDriverSpecFilter
-              )}
-            </CardContent>
-          </Card>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{t("performance.tabs.drivers")}</h2>
+            {renderStatsTable(
+              filteredDrivers,
+              driverSearch,
+              setDriverSearch,
+              "driver",
+              driverSpecFilter,
+              setDriverSpecFilter
+            )}
+          </div>
         </TabsContent>
 
         <TabsContent value="machines" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t("performance.tabs.machines")}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {renderStatsTable(
-                filteredMachines,
-                machineSearch,
-                setMachineSearch,
-                "machine",
-                machineSpecFilter,
-                setMachineSpecFilter
-              )}
-            </CardContent>
-          </Card>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{t("performance.tabs.machines")}</h2>
+            {renderStatsTable(
+              filteredMachines,
+              machineSearch,
+              setMachineSearch,
+              "machine",
+              machineSpecFilter,
+              setMachineSpecFilter
+            )}
+          </div>
         </TabsContent>
       </Tabs>
     </div>

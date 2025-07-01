@@ -154,6 +154,20 @@ export default function ParetoPage() {
         <p className="text-muted-foreground">{t("pareto.description")}</p>
       </div>
 
+      {/* Pareto Info Section */}
+      <Card className="mb-8 border-blue-200 bg-blue-50/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-700">
+            <Info className="w-5 h-5" />
+            {t("pareto.info.title")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p className="text-sm text-gray-600">{t("pareto.info.description")}</p>
+          <p className="text-sm text-blue-600 font-medium">{t("pareto.info.example")}</p>
+        </CardContent>
+      </Card>
+
       <div className="space-y-6">
         <Card>
           <CardHeader>
@@ -253,76 +267,106 @@ export default function ParetoPage() {
         )}
 
         {paretoOptimalCombinations.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>{t("pareto.results.title")} (100)</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">
+              {t("pareto.results.title")} (100)
+            </h2>
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-center">
+                    <TableHead className="text-center text-[10px] sm:text-sm">
                       {t("pareto.results.score")}
                     </TableHead>
-                    <TableHead className="text-center">
+                    <TableHead className="text-center text-[10px] sm:text-sm">
                       {t("stats.driver")}
                     </TableHead>
-                    <TableHead className="text-center">
+                    <TableHead className="text-center text-[10px] sm:text-sm">
                       {t("stats.machine")}
                     </TableHead>
                     <TableHead
                       className={
                         speedHard
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.speedHard")}
+                      <span className="hidden sm:inline">
+                        {t("stats.speedHard")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.speedHardShort")}
+                      </span>
                     </TableHead>
                     <TableHead
                       className={
                         speedSoft
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.speedSoft")}
+                      <span className="hidden sm:inline">
+                        {t("stats.speedSoft")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.speedSoftShort")}
+                      </span>
                     </TableHead>
                     <TableHead
                       className={
                         speedLiquid
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.speedLiquid")}
+                      <span className="hidden sm:inline">
+                        {t("stats.speedLiquid")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.speedLiquidShort")}
+                      </span>
                     </TableHead>
                     <TableHead
                       className={
                         acceleration
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.acceleration")}
+                      <span className="hidden sm:inline">
+                        {t("stats.acceleration")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.accelerationShort")}
+                      </span>
                     </TableHead>
                     <TableHead
                       className={
                         weight
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.weight")}
+                      <span className="hidden sm:inline">
+                        {t("stats.weight")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.weightShort")}
+                      </span>
                     </TableHead>
                     <TableHead
                       className={
                         handling
-                          ? "bg-primary/10 text-center w-1/9"
-                          : "text-center w-1/9"
+                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
-                      {t("stats.handling")}
+                      <span className="hidden sm:inline">
+                        {t("stats.handling")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.handlingShort")}
+                      </span>
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -334,7 +378,7 @@ export default function ParetoPage() {
                           "-"
                         )}-${combo.machine.names.join("-")}`}
                       >
-                        <TableCell className="text-center font-bold">
+                        <TableCell className="text-center font-bold text-[11px] sm:text-sm px-1 sm:px-3">
                           {combo.totalScore}
                         </TableCell>
                         <TableCell
@@ -344,9 +388,9 @@ export default function ParetoPage() {
                             {combo.driver.names.map((name) => (
                               <div
                                 key={name}
-                                className="flex items-center space-x-2"
+                                className="flex items-center space-x-1 sm:space-x-2"
                               >
-                                <div className="w-8 h-8 relative">
+                                <div className="w-6 h-6 sm:w-8 sm:h-8 relative">
                                   <Image
                                     src={`/drivers/${name}.png`}
                                     alt={translateDriverName(name, t)}
@@ -354,7 +398,7 @@ export default function ParetoPage() {
                                     className="object-contain rounded"
                                   />
                                 </div>
-                                <span className="text-sm">
+                                <span className="text-[11px] sm:text-sm">
                                   {translateDriverName(name, t)}
                                 </span>
                               </div>
@@ -368,9 +412,9 @@ export default function ParetoPage() {
                             {combo.machine.names.map((name) => (
                               <div
                                 key={name}
-                                className="flex items-center space-x-2"
+                                className="flex items-center space-x-1 sm:space-x-2"
                               >
-                                <div className="w-8 h-8 relative">
+                                <div className="w-6 h-6 sm:w-8 sm:h-8 relative">
                                   <Image
                                     src={`/machines/${name}.png`}
                                     alt={translateMachineName(name, t)}
@@ -378,7 +422,7 @@ export default function ParetoPage() {
                                     className="object-contain rounded"
                                   />
                                 </div>
-                                <span className="text-sm">
+                                <span className="text-[11px] sm:text-sm">
                                   {translateMachineName(name, t)}
                                 </span>
                               </div>
@@ -386,42 +430,42 @@ export default function ParetoPage() {
                           </div>
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             speedHard ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.hard}
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             speedSoft ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.soft}
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             speedLiquid ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.speed.liquid}
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             acceleration ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.acceleration}
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             weight ? "bg-primary/10" : ""
                           }`}
                         >
                           {combo.combined.weight}
                         </TableCell>
                         <TableCell
-                          className={`text-center ${
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
                             handling ? "bg-primary/10" : ""
                           }`}
                         >
@@ -432,8 +476,8 @@ export default function ParetoPage() {
                   })}
                 </TableBody>
               </Table>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
       </div>
     </div>
