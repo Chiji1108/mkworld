@@ -166,119 +166,176 @@ export default function PerformancePage() {
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-          <TableRow>
-            <TableHead className="text-center text-[10px] sm:text-sm">
-              {type === "driver" ? t("stats.driver") : t("stats.machine")}
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">{t("stats.speedHard")}</span>
-              <span className="sm:hidden">{t("stats.speedHardShort")}</span>
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">{t("stats.speedSoft")}</span>
-              <span className="sm:hidden">{t("stats.speedSoftShort")}</span>
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">{t("stats.speedLiquid")}</span>
-              <span className="sm:hidden">{t("stats.speedLiquidShort")}</span>
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">
-                {t("stats.acceleration")}
-              </span>
-              <span className="sm:hidden">{t("stats.accelerationShort")}</span>
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">{t("stats.weight")}</span>
-              <span className="sm:hidden">{t("stats.weightShort")}</span>
-            </TableHead>
-            <TableHead className="w-1/6 text-center text-[10px] sm:text-sm px-1 sm:px-3">
-              <span className="hidden sm:inline">{t("stats.handling")}</span>
-              <span className="sm:hidden">{t("stats.handlingShort")}</span>
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {items.map((item, index) => {
-            const specialization = analyzeSpeedSpecialization(item);
-            return (
-              <TableRow key={index} style={{ backgroundColor: item.color }}>
-                <TableCell className="font-medium">
-                  <div className="space-y-2">
-                    {item.names.map((name) => (
-                      <div
-                        key={name}
-                        className="flex items-center space-x-2 sm:space-x-3"
-                      >
-                        <div className="w-6 h-6 sm:w-10 sm:h-10 relative flex-shrink-0">
-                          <Image
-                            src={`/${
-                              type === "driver" ? "drivers" : "machines"
-                            }/${name}.png`}
-                            alt={name}
-                            fill
-                            className="object-contain rounded"
-                          />
+            <TableRow>
+              <TableHead className="text-center text-[10px] sm:text-sm">
+                {type === "driver" ? t("stats.driver") : t("stats.machine")}
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">{t("stats.speedHard")}</span>
+                <span className="sm:hidden">{t("stats.speedHardShort")}</span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">{t("stats.speedSoft")}</span>
+                <span className="sm:hidden">{t("stats.speedSoftShort")}</span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">
+                  {t("stats.speedLiquid")}
+                </span>
+                <span className="sm:hidden">{t("stats.speedLiquidShort")}</span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">
+                  {t("stats.acceleration")}
+                </span>
+                <span className="sm:hidden">
+                  {t("stats.accelerationShort")}
+                </span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">{t("stats.weight")}</span>
+                <span className="sm:hidden">{t("stats.weightShort")}</span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">
+                  {t("stats.handlingHard")}
+                </span>
+                <span className="sm:hidden">
+                  {t("stats.handlingHardShort")}
+                </span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">
+                  {t("stats.handlingSoft")}
+                </span>
+                <span className="sm:hidden">
+                  {t("stats.handlingSoftShort")}
+                </span>
+              </TableHead>
+              <TableHead className="flex-1 text-center text-[10px] sm:text-sm px-1 sm:px-3">
+                <span className="hidden sm:inline">
+                  {t("stats.handlingLiquid")}
+                </span>
+                <span className="sm:hidden">
+                  {t("stats.handlingLiquidShort")}
+                </span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {items.map((item, index) => {
+              const specialization = analyzeSpeedSpecialization(item);
+              return (
+                <TableRow key={index} style={{ backgroundColor: item.color }}>
+                  <TableCell className="font-medium">
+                    <div className="space-y-2">
+                      {item.names.map((name) => (
+                        <div
+                          key={name}
+                          className="flex items-center space-x-2 sm:space-x-3"
+                        >
+                          <div className="w-6 h-6 sm:w-10 sm:h-10 relative flex-shrink-0">
+                            <Image
+                              src={`/${
+                                type === "driver" ? "drivers" : "machines"
+                              }/${name}.png`}
+                              alt={name}
+                              fill
+                              className="object-contain rounded"
+                            />
+                          </div>
+                          <span className="text-[11px] sm:text-sm">
+                            {type === "driver"
+                              ? translateDriverName(name, t)
+                              : translateMachineName(name, t)}
+                          </span>
                         </div>
-                        <span className="text-[11px] sm:text-sm">
-                          {type === "driver"
-                            ? translateDriverName(name, t)
-                            : translateMachineName(name, t)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {specialization === "hard" ? (
-                    <Badge
-                      variant="default"
-                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
-                    >
-                      {item.speed.hard}
-                    </Badge>
-                  ) : (
-                    item.speed.hard
-                  )}
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {specialization === "soft" ? (
-                    <Badge
-                      variant="default"
-                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
-                    >
-                      {item.speed.soft}
-                    </Badge>
-                  ) : (
-                    item.speed.soft
-                  )}
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {specialization === "liquid" ? (
-                    <Badge
-                      variant="default"
-                      className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
-                    >
-                      {item.speed.liquid}
-                    </Badge>
-                  ) : (
-                    item.speed.liquid
-                  )}
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {item.acceleration}
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {item.weight}
-                </TableCell>
-                <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
-                  {item.handling}
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+                      ))}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "hard" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.speed.hard}
+                      </Badge>
+                    ) : (
+                      item.speed.hard
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "soft" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.speed.soft}
+                      </Badge>
+                    ) : (
+                      item.speed.soft
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "liquid" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.speed.liquid}
+                      </Badge>
+                    ) : (
+                      item.speed.liquid
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {item.acceleration}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {item.weight}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "hard" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.handling.hard}
+                      </Badge>
+                    ) : (
+                      item.handling.hard
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "soft" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.handling.soft}
+                      </Badge>
+                    ) : (
+                      item.handling.soft
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center text-[11px] sm:text-sm px-1 sm:px-3">
+                    {specialization === "liquid" ? (
+                      <Badge
+                        variant="default"
+                        className="text-[10px] sm:text-xs px-1 sm:px-2 py-0 sm:py-1"
+                      >
+                        {item.handling.liquid}
+                      </Badge>
+                    ) : (
+                      item.handling.liquid
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
@@ -342,9 +399,27 @@ export default function PerformancePage() {
             </div>
             <div className="flex items-center gap-3">
               <div className="text-2xl font-bold text-blue-600">
-                {t("stats.handlingShort")}
+                {t("stats.handlingHardShort")}
               </div>
-              <div className="text-sm text-gray-600">{t("stats.handling")}</div>
+              <div className="text-sm text-gray-600">
+                {t("stats.handlingHard")}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.handlingSoftShort")}
+              </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.handlingSoft")}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold text-blue-600">
+                {t("stats.handlingLiquidShort")}
+              </div>
+              <div className="text-sm text-gray-600">
+                {t("stats.handlingLiquid")}
+              </div>
             </div>
           </div>
         </CardContent>
@@ -362,7 +437,9 @@ export default function PerformancePage() {
 
         <TabsContent value="drivers" className="mt-6">
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{t("performance.tabs.drivers")}</h2>
+            <h2 className="text-2xl font-bold">
+              {t("performance.tabs.drivers")}
+            </h2>
             {renderStatsTable(
               filteredDrivers,
               driverSearch,
@@ -376,7 +453,9 @@ export default function PerformancePage() {
 
         <TabsContent value="machines" className="mt-6">
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{t("performance.tabs.machines")}</h2>
+            <h2 className="text-2xl font-bold">
+              {t("performance.tabs.machines")}
+            </h2>
             {renderStatsTable(
               filteredMachines,
               machineSearch,

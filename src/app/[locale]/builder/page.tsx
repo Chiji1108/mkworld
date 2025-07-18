@@ -282,8 +282,16 @@ export default function BuilderPage() {
                     },
                     { name: t("stats.weight"), value: selectedDriver.weight },
                     {
-                      name: t("stats.handling"),
-                      value: selectedDriver.handling,
+                      name: t("stats.handlingHard"),
+                      value: selectedDriver.handling.hard,
+                    },
+                    {
+                      name: t("stats.handlingSoft"),
+                      value: selectedDriver.handling.soft,
+                    },
+                    {
+                      name: t("stats.handlingLiquid"),
+                      value: selectedDriver.handling.liquid,
                     },
                   ].map((stat) => {
                     const percent = (stat.value / 10) * 100;
@@ -382,8 +390,16 @@ export default function BuilderPage() {
                     },
                     { name: t("stats.weight"), value: selectedMachine.weight },
                     {
-                      name: t("stats.handling"),
-                      value: selectedMachine.handling,
+                      name: t("stats.handlingHard"),
+                      value: selectedMachine.handling.hard,
+                    },
+                    {
+                      name: t("stats.handlingSoft"),
+                      value: selectedMachine.handling.soft,
+                    },
+                    {
+                      name: t("stats.handlingLiquid"),
+                      value: selectedMachine.handling.liquid,
                     },
                   ].map((stat) => {
                     const percent = (stat.value / 10) * 100;
@@ -472,9 +488,19 @@ export default function BuilderPage() {
                     machine: selectedMachine.weight,
                   },
                   {
-                    name: t("stats.handling"),
-                    driver: selectedDriver.handling,
-                    machine: selectedMachine.handling,
+                    name: t("stats.handlingHard"),
+                    driver: selectedDriver.handling.hard,
+                    machine: selectedMachine.handling.hard,
+                  },
+                  {
+                    name: t("stats.handlingSoft"),
+                    driver: selectedDriver.handling.soft,
+                    machine: selectedMachine.handling.soft,
+                  },
+                  {
+                    name: t("stats.handlingLiquid"),
+                    driver: selectedDriver.handling.liquid,
+                    machine: selectedMachine.handling.liquid,
                   },
                 ].map((stat) => {
                   const total = stat.driver + stat.machine;

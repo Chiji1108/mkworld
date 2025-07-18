@@ -33,7 +33,7 @@ interface Combination {
     speed: { hard: number; soft: number; liquid: number };
     acceleration: number;
     weight: number;
-    handling: number;
+    handling: { hard: number; soft: number; liquid: number };
   };
   totalScore: number;
 }
@@ -44,7 +44,9 @@ interface OptimizationCriteria {
   speedLiquid: boolean;
   acceleration: boolean;
   weight: boolean;
-  handling: boolean;
+  handlingHard: boolean;
+  handlingSoft: boolean;
+  handlingLiquid: boolean;
 }
 
 export default function ParetoPage() {
@@ -81,7 +83,19 @@ export default function ParetoPage() {
     serialize: (value) => String(value),
   });
 
-  const [handling, setHandling] = useQueryState("handling", {
+  const [handlingHard, setHandlingHard] = useQueryState("handlingHard", {
+    defaultValue: false,
+    parse: (value) => value === "true",
+    serialize: (value) => String(value),
+  });
+
+  const [handlingSoft, setHandlingSoft] = useQueryState("handlingSoft", {
+    defaultValue: false,
+    parse: (value) => value === "true",
+    serialize: (value) => String(value),
+  });
+
+  const [handlingLiquid, setHandlingLiquid] = useQueryState("handlingLiquid", {
     defaultValue: false,
     parse: (value) => value === "true",
     serialize: (value) => String(value),
@@ -95,9 +109,20 @@ export default function ParetoPage() {
       speedLiquid,
       acceleration,
       weight,
-      handling,
+      handlingHard,
+      handlingSoft,
+      handlingLiquid,
     }),
-    [speedHard, speedSoft, speedLiquid, acceleration, weight, handling]
+    [
+      speedHard,
+      speedSoft,
+      speedLiquid,
+      acceleration,
+      weight,
+      handlingHard,
+      handlingSoft,
+      handlingLiquid,
+    ]
   );
 
   const allCombinations = useMemo(() => {
@@ -113,7 +138,11 @@ export default function ParetoPage() {
           },
           acceleration: driver.acceleration + machine.acceleration,
           weight: driver.weight + machine.weight,
-          handling: driver.handling + machine.handling,
+          handling: {
+            hard: driver.handling.hard + machine.handling.hard,
+            soft: driver.handling.soft + machine.handling.soft,
+            liquid: driver.handling.liquid + machine.handling.liquid,
+          },
         };
 
         let totalScore = 0;
@@ -122,7 +151,9 @@ export default function ParetoPage() {
         if (criteria.speedLiquid) totalScore += combined.speed.liquid;
         if (criteria.acceleration) totalScore += combined.acceleration;
         if (criteria.weight) totalScore += combined.weight;
-        if (criteria.handling) totalScore += combined.handling;
+        if (criteria.handlingHard) totalScore += combined.handling.hard;
+        if (criteria.handlingSoft) totalScore += combined.handling.soft;
+        if (criteria.handlingLiquid) totalScore += combined.handling.liquid;
 
         combinations.push({
           driver,
@@ -163,8 +194,12 @@ export default function ParetoPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          <p className="text-sm text-gray-600">{t("pareto.info.description")}</p>
-          <p className="text-sm text-blue-600 font-medium">{t("pareto.info.example")}</p>
+          <p className="text-sm text-gray-600">
+            {t("pareto.info.description")}
+          </p>
+          <p className="text-sm text-blue-600 font-medium">
+            {t("pareto.info.example")}
+          </p>
         </CardContent>
       </Card>
 
@@ -174,7 +209,7 @@ export default function ParetoPage() {
             <CardTitle>{t("pareto.optimization.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="speedHard"
@@ -242,15 +277,41 @@ export default function ParetoPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox
-                  id="handling"
-                  checked={handling}
-                  onCheckedChange={(checked) => setHandling(!!checked)}
+                  id="handlingHard"
+                  checked={handlingHard}
+                  onCheckedChange={(checked) => setHandlingHard(!!checked)}
                 />
                 <label
-                  htmlFor="handling"
+                  htmlFor="handlingHard"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {t("stats.handling")}
+                  {t("stats.handlingHard")}
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="handlingSoft"
+                  checked={handlingSoft}
+                  onCheckedChange={(checked) => setHandlingSoft(!!checked)}
+                />
+                <label
+                  htmlFor="handlingSoft"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {t("stats.handlingSoft")}
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="handlingLiquid"
+                  checked={handlingLiquid}
+                  onCheckedChange={(checked) => setHandlingLiquid(!!checked)}
+                />
+                <label
+                  htmlFor="handlingLiquid"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {t("stats.handlingLiquid")}
                 </label>
               </div>
             </div>
@@ -287,8 +348,8 @@ export default function ParetoPage() {
                     <TableHead
                       className={
                         speedHard
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
@@ -301,8 +362,8 @@ export default function ParetoPage() {
                     <TableHead
                       className={
                         speedSoft
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
@@ -315,8 +376,8 @@ export default function ParetoPage() {
                     <TableHead
                       className={
                         speedLiquid
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
@@ -329,8 +390,8 @@ export default function ParetoPage() {
                     <TableHead
                       className={
                         acceleration
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
@@ -343,8 +404,8 @@ export default function ParetoPage() {
                     <TableHead
                       className={
                         weight
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
@@ -356,16 +417,44 @@ export default function ParetoPage() {
                     </TableHead>
                     <TableHead
                       className={
-                        handling
-                          ? "bg-primary/10 text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
-                          : "text-center w-1/9 text-[10px] sm:text-sm px-1 sm:px-3"
+                        handlingHard
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
                       }
                     >
                       <span className="hidden sm:inline">
-                        {t("stats.handling")}
+                        {t("stats.handlingHard")}
                       </span>
                       <span className="sm:hidden">
-                        {t("stats.handlingShort")}
+                        {t("stats.handlingHardShort")}
+                      </span>
+                    </TableHead>
+                    <TableHead
+                      className={
+                        handlingSoft
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                      }
+                    >
+                      <span className="hidden sm:inline">
+                        {t("stats.handlingSoft")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.handlingSoftShort")}
+                      </span>
+                    </TableHead>
+                    <TableHead
+                      className={
+                        handlingLiquid
+                          ? "bg-primary/10 text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                          : "text-center text-[10px] sm:text-sm px-1 sm:px-3"
+                      }
+                    >
+                      <span className="hidden sm:inline">
+                        {t("stats.handlingLiquid")}
+                      </span>
+                      <span className="sm:hidden">
+                        {t("stats.handlingLiquidShort")}
                       </span>
                     </TableHead>
                   </TableRow>
@@ -466,10 +555,24 @@ export default function ParetoPage() {
                         </TableCell>
                         <TableCell
                           className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
-                            handling ? "bg-primary/10" : ""
+                            handlingHard ? "bg-primary/10" : ""
                           }`}
                         >
-                          {combo.combined.handling}
+                          {combo.combined.handling.hard}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
+                            handlingSoft ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.handling.soft}
+                        </TableCell>
+                        <TableCell
+                          className={`text-center text-[11px] sm:text-sm px-1 sm:px-3 ${
+                            handlingLiquid ? "bg-primary/10" : ""
+                          }`}
+                        >
+                          {combo.combined.handling.liquid}
                         </TableCell>
                       </TableRow>
                     );

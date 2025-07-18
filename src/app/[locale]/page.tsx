@@ -8,26 +8,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { BarChart3, Search, Wrench } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'home' });
-  
+  const t = await getTranslations({ locale, namespace: "home" });
+
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     openGraph: {
-      title: t('title'),
-      description: t('description'),
+      title: t("title"),
+      description: t("description"),
       url: "https://mkworld-tools.vercel.app",
     },
     twitter: {
-      title: t('title'),
-      description: t('description'),
+      title: t("title"),
+      description: t("description"),
     },
   };
 }
@@ -36,20 +40,20 @@ export default function Home() {
   const t = useTranslations();
   const features = [
     {
-      title: t('home.features.builder.title'),
-      description: t('home.features.builder.description'),
+      title: t("home.features.builder.title"),
+      description: t("home.features.builder.description"),
       icon: Wrench,
       href: "/builder",
     },
     {
-      title: t('home.features.performance.title'),
-      description: t('home.features.performance.description'),
+      title: t("home.features.performance.title"),
+      description: t("home.features.performance.description"),
       icon: BarChart3,
       href: "/performance",
     },
     {
-      title: t('home.features.pareto.title'),
-      description: t('home.features.pareto.description'),
+      title: t("home.features.pareto.title"),
+      description: t("home.features.pareto.description"),
       icon: Search,
       href: "/pareto",
     },
@@ -59,7 +63,7 @@ export default function Home() {
     <div className="container mx-auto pb-12">
       <div className="flex justify-center items-center my-24 sm:my-32">
         <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-6xl sm:text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
-          {t('common.appName')}
+          {t("common.appName")}
         </span>
       </div>
 
@@ -89,7 +93,7 @@ export default function Home() {
                   asChild
                   className="w-full bg-blue-600 hover:bg-blue-700"
                 >
-                  <Link href={feature.href}>{t('common.select')}</Link>
+                  <Link href={feature.href}>{t("common.select")}</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -99,12 +103,16 @@ export default function Home() {
 
       <div className="mb-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">
-            {t('home.tweets.title')}
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">{t("home.tweets.title")}</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="flex justify-center">
+            <TweetCard
+              id="1945212648410251615"
+              className="w-full max-w-md shadow-lg hover:shadow-xl transition-shadow duration-300"
+            />
+          </div>
           <div className="flex justify-center">
             <TweetCard
               id="1937519504999022884"
@@ -121,7 +129,7 @@ export default function Home() {
 
         <div className="text-center mt-8">
           <p className="text-sm text-muted-foreground">
-            {t('home.tweets.thanks')}
+            {t("home.tweets.thanks")}
           </p>
         </div>
       </div>
